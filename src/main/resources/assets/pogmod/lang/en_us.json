@@ -1,0 +1,15 @@
+{
+  "block.pogmod.testblock": "Test Block",
+  "block.pogmod.computer": "Computer",
+  "block.pogmod.uranium": "Block of Uranium",
+  "block.pogmod.diamond_slab": "Diamond Slab",
+  "block.pogmod.flesh": "Block of Flesh",
+  "block.pogmod.test": "Test",
+  
+  "item.pogmod.potato": "Potato",
+  "item.pogmod.uranium_sword": "Uranium Sword",
+  "item.pogmod.uranium_axe": "Uranium Axe",
+  
+  "instrument.pogmod.trumpet": "Trumpet",
+  "instrument.pogmod.french_horn": "French Horn"
+}
