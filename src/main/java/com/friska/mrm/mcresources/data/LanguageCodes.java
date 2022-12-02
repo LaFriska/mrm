@@ -1,8 +1,9 @@
-package com.friska.mrm.mcresources.lang;
+package com.friska.mrm.mcresources.data;
 
 /**
  *Call any static strings to get the file name for your language.
  * **/
+@SuppressWarnings({"unused", "SpellCheckingInspection"})
 public class LanguageCodes {
 
     public static final String AFRIKAANS = "af_za";
@@ -21,7 +22,7 @@ public class LanguageCodes {
     public static final String DANISH = "da_dk";
     public static final String AUSTRIAN_GERMAN = "de_at";
     public static final String SWISS_GERMAN = "de_ch";
-    public static final String GERMAN = "de_De";
+    public static final String GERMAN = "de_de";
     public static final String GREEK = "el_gr";
     public static final String AUSTRALIAN_ENGLISH = "en_au";
     public static final String CANADIAN_ENGLISH = "en_ca";
@@ -73,9 +74,9 @@ public class LanguageCodes {
     public static final String KAZAKH = "kk_kz";
     public static final String KANNADA = "kn_in";
     public static final String KOREAN = "ko_kr";
-    /**Note that KOLSCH and RIPUARIAN are the same language with the same code**/
+    /**Note that KÖLSCH and RIPUARIAN are the same language with the same code**/
     public static final String KOLSCH = "ksh";
-    /**Note that KOLSCH and RIPUARIAN are the same language with the same code**/
+    /**Note that KÖLSCH and RIPUARIAN are the same language with the same code**/
     public static final String RIPUARIAN = "ksh";
     public static final String CORNISH = "kw_gb";
     public static final String LATIN = "la_la";
@@ -90,7 +91,8 @@ public class LanguageCodes {
     public static final String MONGOLIAN = "mn_mn";
     public static final String MALAY = "ms_my";
     public static final String MALTESE = "mt_mt";
-    //public static final String NAHUATL = "nah";
+    @Deprecated
+    public static final String NAHUATL = "nah";
     public static final String LOW_GERMAN = "nds_de";
     public static final String DUTCH_FLEMISH = "nl_be";
     public static final String DUTCH = "nl_nl";
@@ -105,7 +107,8 @@ public class LanguageCodes {
     public static final String ROMANIAN = "ro_ro";
     public static final String PRE_REVOLUTIONARY_RUSSIAN = "rpr";
     public static final String RUSSIAN = "ru_ru";
-    //public static final String RUSYN = "ry_ua";
+    @Deprecated
+    public static final String RUSYN = "ry_ua";
     public static final String NORTHERN_SAMI = "se_no";
     public static final String SLOVAK = "sk_sk";
     public static final String SLOVENIAN = "sl_si";

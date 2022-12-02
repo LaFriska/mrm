@@ -5,7 +5,7 @@ import com.friska.mrm.mcresources.lang.Lang;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
-public class LangRegistry {
+public class LangRegistry{
 
     private static ArrayList<Lang> LANGS = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class LangRegistry {
         String languageCode = lang.getLanguageCode();
         if(uniqueLanguageCodes.contains(languageCode)){
             langWithLanguageCode(languageCode).inject(lang);
-        } else{
+        }else{
             uniqueLanguageCodes.add(languageCode);
             LANGS.add(lang);
         }

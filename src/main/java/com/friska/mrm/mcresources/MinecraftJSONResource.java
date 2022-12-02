@@ -7,8 +7,6 @@ import com.friska.mrm.config.Config;
 import java.util.ArrayList;
 
 public class MinecraftJSONResource {
-
-
     protected ArrayList<JBuilder> builders;
     protected String path;
     protected String name;

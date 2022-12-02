@@ -1,4 +1,4 @@
-package com.friska.mrm.mcresources.lang;
+package com.friska.mrm.mcresources.data;
 
 public class TranslationTypes {
     public static final String ITEM = "item";

@@ -1,5 +1,6 @@
 package com.friska.mrm.mcresources.lang;
 
+import com.friska.mrm.mcresources.data.TranslationTypes;
 import com.friska.mrm.serialiser.builder.JBreak;
 import com.friska.mrm.serialiser.builder.JValue;
 import com.friska.mrm.config.Config;
@@ -64,57 +65,57 @@ public class Lang extends MinecraftJSONResource {
     /**
      * Adding a biome translation, key formatted as biome.MODID.ID.
      * **/
-    public void addBiome(String biomeID, String translation){biomes.add(new Translation(getSimpleKey(TranslationTypes.BIOME, biomeID), translation));}
+    public void addBiome(String biomeID, String translation){biomes.add((new Translation(biomeID, translation)).buildSimpleKey(TranslationTypes.BIOME));}
     public void addBiomes(Translation... translations){List.of(translations).forEach((t) -> biomes.add(t.buildSimpleKey(TranslationTypes.BIOME)));}
 
     /**
      * Adding a stat and stat type translation, key formatted as stat_type.MODID.ID/stat.MODID.ID.
      * **/
-    public void addStatType(String statTypeID, String translation){statTypes.add(new Translation(getSimpleKey(TranslationTypes.STAT_TYPE, statTypeID), translation));}
+    public void addStatType(String statTypeID, String translation){statTypes.add((new Translation(statTypeID, translation)).buildSimpleKey(TranslationTypes.STAT_TYPE));}
     public void addStatTypes(Translation... translations){List.of(translations).forEach((t) -> statTypes.add(t.buildSimpleKey(TranslationTypes.STAT_TYPE)));}
-    public void addStat(String statID, String translation){stats.add(new Translation(getSimpleKey(TranslationTypes.STAT, statID), translation));}
+    public void addStat(String statID, String translation){stats.add((new Translation(statID, translation)).buildSimpleKey(TranslationTypes.STAT));}
     public void addStats(Translation... translations){List.of(translations).forEach((t) -> stats.add(t.buildSimpleKey(TranslationTypes.STAT)));}
 
     /**
      * Adding an enchantment translation, key formatted as enchantment.MODID.ID.
      * **/
-    public void addEnchantment(String enchantmentID, String translation){enchantments.add(new Translation(getSimpleKey(TranslationTypes.ENCHANTMENT, enchantmentID), translation));}
+    public void addEnchantment(String enchantmentID, String translation){enchantments.add((new Translation(enchantmentID, translation)).buildSimpleKey(TranslationTypes.ENCHANTMENT));}
     public void addEnchantments(Translation... translations){List.of(translations).forEach((t) -> enchantments.add(t.buildSimpleKey(TranslationTypes.ENCHANTMENT)));}
 
     /**
      * Adding an event translation, key formatted as event.MODID.ID. An example of an event is the Minecraft raid.
      * **/
-    public void addEvent(String eventID, String translation){events.add(new Translation(getSimpleKey(TranslationTypes.EVENT, eventID), translation));}
+    public void addEvent(String eventID, String translation){events.add((new Translation(eventID, translation)).buildSimpleKey(TranslationTypes.EVENT));}
     public void addEvents(Translation... translations){List.of(translations).forEach((t) -> events.add(t.buildSimpleKey(TranslationTypes.EVENT)));}
 
     /**
      * Adding an effect translation, key formatted as effect.MODID.ID.
      * **/
-    public void addEffect(String effectID, String translation){effects.add(new Translation(getSimpleKey(TranslationTypes.EFFECT, effectID), translation));}
+    public void addEffect(String effectID, String translation){effects.add((new Translation(effectID, translation)).buildSimpleKey(TranslationTypes.EFFECT));}
     public void addEffects(Translation... translations){List.of(translations).forEach((t) -> effects.add(t.buildSimpleKey(TranslationTypes.EFFECT)));}
 
     /**
      * Adding an entity translation, key formatted as entity.MODID.ID(.SUBIDs).
      * **/
-    public void addEntity(String entityID, String translation){entities.add(new Translation(getSimpleKey(TranslationTypes.ENTITY, entityID), translation));}
+    public void addEntity(String entityID, String translation){entities.add((new Translation(entityID, translation)).buildSimpleKey(TranslationTypes.ENTITY));}
     public void addEntities(Translation... translations){List.of(translations).forEach((t) -> entities.add(t.buildSimpleKey(TranslationTypes.ENTITY)));}
 
     /**
      * Adding a block translation, key formatted as instrument.MODID.ID. Do not get it confused with goat horn items, instrument dictates the sound and other special properties of a goat horn.
      * **/
-    public void addInstrument(String instrumentID, String translation){instruments.add(new Translation(getSimpleKey(TranslationTypes.INSTRUMENT, instrumentID), translation));}
+    public void addInstrument(String instrumentID, String translation){instruments.add((new Translation(instrumentID, translation)).buildSimpleKey(TranslationTypes.INSTRUMENT));}
     public void addInstruments(Translation... translations){List.of(translations).forEach((t) -> instruments.add(t.buildSimpleKey(TranslationTypes.INSTRUMENT)));}
 
     /**
      * Adding a block translation, key formatted as block.MODID.ID.
      * **/
-    public void addBlock(String blockID, String translation){blocks.add(new Translation(getSimpleKey(TranslationTypes.BLOCK, blockID), translation));}
+    public void addBlock(String blockID, String translation){blocks.add((new Translation(blockID, translation)).buildSimpleKey(TranslationTypes.BLOCK));}
     public void addBlocks(Translation... translations){List.of(translations).forEach((t) -> blocks.add(t.buildSimpleKey(TranslationTypes.BLOCK)));}
 
     /**
      * Adding an item translation, key formatted as item.MODID.ID.
      * **/
-    public void addItem(String itemID, String translation){items.add(new Translation(getSimpleKey(TranslationTypes.ITEM, itemID), translation));}
+    public void addItem(String itemID, String translation){items.add((new Translation(itemID, translation)).buildSimpleKey(TranslationTypes.ITEM));}
     public void addItems(Translation... translations){
         List.of(translations).forEach((t) -> items.add(t.buildSimpleKey(TranslationTypes.ITEM)));
     }
@@ -124,10 +125,6 @@ public class Lang extends MinecraftJSONResource {
      * **/
     public void addMisc(String key, String translation){misc.add(new Translation(key, translation));}
     public void addMiscs(Translation... translations){misc.addAll(List.of(translations));}
-
-    private String getSimpleKey(String type, String id){
-        return type + "." + Config.getModID() + "." + id;
-    }
 
     /**Builds the language JSON file.**/
     public void build() {
