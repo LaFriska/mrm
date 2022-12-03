@@ -17,6 +17,9 @@ import static com.friska.mrm.config.Config.isPathRootDefined;
  **/
 public class JBuilder extends JObject {
 
+    private boolean overrideExistingFile = true;
+    private int nameNumberChain = 0;
+
     /**
      * The curly braces that encapsulates the entire JSON file, which is needed by all JSONs is by default added, via the instantiation of JObject in the constructor.
      */
@@ -71,11 +74,23 @@ public class JBuilder extends JObject {
     private void createJSON(String path, String name) throws IOException {
         File file = new File(path, name);
         if (!file.createNewFile()) {
-            System.out.println(name + " already exists, updating the file instead.");
+            if(this.overrideExistingFile){
+                System.out.println(name + " already exists, updating file instead.");
+            }else{
+                if(this.nameNumberChain == 0)
+                System.out.println(name + " already exists, creating JSON with another name.");
+                this.nameNumberChain++;
+                createJSON(path, this.name + "_" + nameNumberChain);
+            }
         } else {
+            updateJSON(path, name);
             System.out.println(name + " successfully created.");
         }
-        updateJSON(path, name);
+    }
+
+    public JBuilder dontOverrideExistingFiles(){
+        this.overrideExistingFile = false;
+        return this;
     }
 
     private void updateJSON(String path, String name) {

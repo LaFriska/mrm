@@ -48,7 +48,7 @@ public class CookingRecipe extends Recipe{
      * Should not be directly called from this class, only from child classes.
      **/
     protected void build(){
-        this.getBuilder(0)
+        this.getBuilder(0).dontOverrideExistingFiles()
                 .nest(new JValue<>("type", this.type))
                 .nest(new JObject("ingredient").nest(new JValue<>("item", this.ingredient)))
                 .nest(new JValue<>("result", this.result))

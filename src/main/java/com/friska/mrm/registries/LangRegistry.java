@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class LangRegistry{
 
     private static ArrayList<Lang> LANGS = new ArrayList<>();
-
     private static ArrayList<String> uniqueLanguageCodes = new ArrayList<>();
 
     /**
@@ -33,6 +32,9 @@ public class LangRegistry{
         return null;
     }
 
+    /**
+     * Builds all registered Lang objects.
+     * **/
     public static void build(){
         LANGS.forEach(Lang::build);
     }
