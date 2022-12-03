@@ -20,6 +20,9 @@ public class JBuilder extends JObject {
     private boolean overrideExistingFile = true;
     private int nameNumberChain = 0;
 
+    private String path;
+    private String name;
+
     /**
      * The curly braces that encapsulates the entire JSON file, which is needed by all JSONs is by default added, via the instantiation of JObject in the constructor.
      */
@@ -40,9 +43,6 @@ public class JBuilder extends JObject {
         construct();
         return this;
     }
-
-    private String path;
-    private String name;
 
     public JBuilder compactToOneLine() {
 
@@ -80,7 +80,7 @@ public class JBuilder extends JObject {
                 if(this.nameNumberChain == 0)
                 System.out.println(name + " already exists, creating JSON with another name.");
                 this.nameNumberChain++;
-                createJSON(path, this.name + "_" + nameNumberChain);
+                createJSON(path, getName(false) + "_" + nameNumberChain + ".json");
             }
         } else {
             updateJSON(path, name);
@@ -114,6 +114,18 @@ public class JBuilder extends JObject {
 
     public void setName(String name) {
         this.name = name + ".json";
+    }
+
+    private String getName(boolean withDotJSON) {
+        if(this.name.substring(this.name.length() - 5).equals(".json")){
+            if(withDotJSON){
+                return this.name;
+            }else{
+                return this.name.substring(0, this.name.length() - 5);
+            }
+        }else{
+            return this.name;
+        }
     }
 
     public String getPath() {

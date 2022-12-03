@@ -14,10 +14,13 @@ public class Test {
         SmeltingRecipe smeltingRecipe2 = new SmeltingRecipe(MinecraftID.ACACIA_BOAT, MinecraftID.ACACIA_LOG, 1);
         SmeltingRecipe smeltingRecipe3 = new SmeltingRecipe(MinecraftID.ACACIA_BOAT, MinecraftID.ACACIA_LOG, 1);
 
-        ResourceManager.register(smeltingRecipe);
-        ResourceManager.register(smeltingRecipe1);
-        ResourceManager.register(smeltingRecipe2);
-        ResourceManager.register(smeltingRecipe3);
+        ResourceManager.register(
+                smeltingRecipe,
+                smeltingRecipe1,
+                smeltingRecipe2,
+                smeltingRecipe3
+        );
+
 
         ResourceManager.buildAll();
     }
