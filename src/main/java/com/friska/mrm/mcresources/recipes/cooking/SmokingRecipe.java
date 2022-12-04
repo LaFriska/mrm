@@ -1,10 +1,11 @@
-package com.friska.mrm.mcresources.recipes;
+package com.friska.mrm.mcresources.recipes.cooking;
 
+import com.friska.mrm.mcresources.recipes.cooking.CookingRecipe;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class SmokingRecipe extends CookingRecipe{
+public class SmokingRecipe extends CookingRecipe {
     /**
      *Ingredient is the item ID of what to put in the smoker, and result is the item ID of the output.
      * Experience is the amount of XP you get after the smelting, and to customise cooking time (defaulted to 200),
@@ -12,25 +13,14 @@ public class SmokingRecipe extends CookingRecipe{
      * Cooking time is always in Minecraft ticks. (1/20th of a second).
      * **/
     public SmokingRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
-        super(ingredient, result, experience);
-        cookingTime = 100;
-        setName(this.name + "_" + "smoking");
+        super(ingredient, result, experience, "minecraft:smoking");
+        this.cookingTime = 100;
     }
 
     /**
      *Ingredient is the item ID of what to put in the furnace, and result is the item ID of the output. Experience is the amount of xp you get after the smelting. Cooking time is always in Minecraft ticks. (1/20th of a second).
      * **/
     public SmokingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, @Nonnull Integer cookingTime){
-        super(ingredient, result, experience, cookingTime);
-        setName(this.name + "_" + "smoking");
-    }
-
-    /**
-     * Builds the JSON file.
-     * **/
-    @Override
-    public void build() {
-        this.type = "minecraft:smoking";
-        super.build();
+        super(ingredient, result, experience, cookingTime, "minecraft:smoking");
     }
 }

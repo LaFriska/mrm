@@ -1,5 +1,6 @@
 package com.friska.mrm.mcresources.lang;
 
+import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.data.TranslationTypes;
 import com.friska.mrm.serialiser.builder.JBreak;
 import com.friska.mrm.serialiser.builder.JValue;
@@ -10,14 +11,11 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-* Yet to be added:
-* -Item effects
-* -Normal/Splash/Lingering potion effects
-* -Banners
-* -Colors
-* */
-
+@NeedsRevision("Yet to be added:" +
+        "-Item effects" +
+        "-Normal/Splash/Lingering potion effects" +
+        "-Banners"+
+        "-Colors")
 public class Lang extends MinecraftJSONResource {
     private final String languageCode;
 
@@ -46,8 +44,8 @@ public class Lang extends MinecraftJSONResource {
         setPath("assets/" + Config.getModID() + "/lang");
         this.languageCode = languageCode;
         setName(languageCode);
-        addBuilder();
-        getBuilder(0).setPath(this.path);
+        initiateBuilder();
+        getBuilder().setPath(this.path);
 
         blocks = new ArrayList<>();
         items = new ArrayList<>();
@@ -129,12 +127,12 @@ public class Lang extends MinecraftJSONResource {
     /**Builds the language JSON file.**/
     public void build() {
         all().forEach(this::iterate);
-        getBuilder(0).build();
+        getBuilder().build();
     }
 
     private void iterate(ArrayList<Translation> list){
-        list.forEach((t) -> getBuilder(0).nest(new JValue<>(t.id(), t.translation())));
-        getBuilder(0).nest(new JBreak());
+        list.forEach((t) -> getBuilder().nest(new JValue<>(t.id(), t.translation())));
+        getBuilder().nest(new JBreak());
     }
 
     /**Constructs an ArrayList of all ArrayLists used in the object, i.e. items, blocks, etc. This is used to merge multiple instances of Lang instantiations in LangRegistry.**/
@@ -152,6 +150,7 @@ public class Lang extends MinecraftJSONResource {
         return meta;
     }
 
+    @NeedsRevision("Should be done in a more abstract way, and should be done in registries, not the Lang class itself.")
     public void inject(Lang lang){
         ArrayList<ArrayList<Translation>> all = this.all();
         ArrayList<ArrayList<Translation>> needle = lang.all();

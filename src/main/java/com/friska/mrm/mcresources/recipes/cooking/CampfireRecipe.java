@@ -1,4 +1,4 @@
-package com.friska.mrm.mcresources.recipes;
+package com.friska.mrm.mcresources.recipes.cooking;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,25 +12,14 @@ public class CampfireRecipe extends CookingRecipe{
      * Cooking time is always in Minecraft ticks. (1/20th of a second).
      * **/
     public CampfireRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
-        super(ingredient, result, experience);
-        cookingTime = 600;
-        setName(this.name + "_" + "campfire");
+        super(ingredient, result, experience, "minecraft:campfire_cooking");
+        this.cookingTime = 600;
     }
 
     /**
      *Ingredient is the item ID of what to put in the campfire, and result is the item ID of the output. Experience is the amount of xp you get after the smelting. Cooking time is always in Minecraft ticks. (1/20th of a second).
      * **/
     public CampfireRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, @Nonnull Integer cookingTime){
-        super(ingredient, result, experience, cookingTime);
-        setName(this.name + "_" + "campfire");
-    }
-
-    /**
-     * Builds the JSON file.
-     * **/
-    @Override
-    public void build() {
-        this.type = "minecraft:campfire_cooking";
-        super.build();
+        super(ingredient, result, experience, cookingTime, "minecraft:campfire_cooking");
     }
 }

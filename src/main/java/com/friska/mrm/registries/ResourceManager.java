@@ -2,7 +2,8 @@ package com.friska.mrm.registries;
 
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.mcresources.lang.Lang;
-import com.friska.mrm.mcresources.recipes.CookingRecipe;
+import com.friska.mrm.mcresources.recipes.Recipe;
+import com.friska.mrm.mcresources.recipes.cooking.CookingRecipe;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -17,8 +18,8 @@ public class ResourceManager {
     public static <T extends MinecraftJSONResource> void register(@Nonnull T manager){
         if(manager instanceof Lang){
             LangRegistry.register((Lang) manager);
-        } else if (manager instanceof CookingRecipe){
-            CookingRegistry.register((CookingRecipe) manager);
+        } else if (manager instanceof Recipe){
+            RecipeRegistry.register((Recipe) manager);
         }
     }
 
@@ -34,7 +35,7 @@ public class ResourceManager {
      * **/
     public static void buildAll(){
         LangRegistry.build();
-        CookingRegistry.build();
+        RecipeRegistry.build();
     }
 
 }

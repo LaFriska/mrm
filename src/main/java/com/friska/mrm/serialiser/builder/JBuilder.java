@@ -88,6 +88,7 @@ public class JBuilder extends JObject {
         }
     }
 
+    @Deprecated
     public JBuilder dontOverrideExistingFiles(){
         this.overrideExistingFile = false;
         return this;

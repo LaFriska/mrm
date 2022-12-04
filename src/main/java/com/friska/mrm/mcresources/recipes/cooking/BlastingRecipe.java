@@ -1,4 +1,4 @@
-package com.friska.mrm.mcresources.recipes;
+package com.friska.mrm.mcresources.recipes.cooking;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,26 +13,13 @@ public class BlastingRecipe extends CookingRecipe{
      * Cooking time is always in Minecraft ticks. (1/20th of a second).
      * **/
     public BlastingRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
-        super(ingredient, result, experience);
+        super(ingredient, result, experience, "minecraft:blasting");
         cookingTime = 100;
-        setName(this.name + "_" + "blasting");
     }
-
     /**
      *Ingredient is the item ID of what to put in the blast furnace, and result is the item ID of the output. Experience is the amount of xp you get after the smelting. Cooking time is always in Minecraft ticks. (1/20th of a second).
      * **/
     public BlastingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, @Nonnull Integer cookingTime){
-        super(ingredient, result, experience, cookingTime);
-        setName(this.name + "_" + "blasting");
+        super(ingredient, result, experience, cookingTime, "minecraft:blasting");
     }
-
-    /**
-     * Builds the JSON file.
-     * **/
-    @Override
-    public void build() {
-        this.type = "minecraft:blasting";
-        super.build();
-    }
-
 }

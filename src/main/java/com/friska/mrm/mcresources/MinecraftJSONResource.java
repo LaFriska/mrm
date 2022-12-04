@@ -4,20 +4,15 @@ import com.friska.mrm.exceptions.ResourcePathException;
 import com.friska.mrm.serialiser.builder.JBuilder;
 import com.friska.mrm.config.Config;
 
-import java.util.ArrayList;
-
 public class MinecraftJSONResource {
-    protected ArrayList<JBuilder> builders;
+    protected JBuilder builder;
     protected String path;
     protected String name;
 
     public MinecraftJSONResource(){
-
         if(!Config.isModIDDefined()){
             throw new ResourcePathException("The Mod ID is null, define by calling Config.setModID().");
         }
-
-        this.builders = new ArrayList<>();
     }
 
     public void setPath(String path) {
@@ -37,18 +32,21 @@ public class MinecraftJSONResource {
     }
 
     /**
-     * Adds JSONBuilders.
+     * Initiates JBuilder;
      * **/
-    protected void addBuilder(){
-        this.builders.add(new JBuilder(path, name));
-    }
-    protected void addBuilders(int amount){
-        for(int i = 0; i <= amount - 1; i++){
-            addBuilder();
-        }
+    protected void initiateBuilder(){
+        this.builder = new JBuilder(path, name);
     }
 
-    protected JBuilder getBuilder (int index){
-        return this.builders.get(index);
+    public JBuilder getBuilder(){
+        return this.builder;
+    }
+
+    /**
+     * SetName is only a mutator for the variable "name", once the builder is added, the SetName method will not change the builders' name. Call this method to change the name of the builder.
+     * **/
+    public void changeBuilderName(String newName){
+        setName(newName);
+        getBuilder().setName(newName);
     }
 }
