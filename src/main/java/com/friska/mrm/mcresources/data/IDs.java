@@ -1,9 +1,15 @@
 package com.friska.mrm.mcresources.data;
+
+import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.config.Config;
+import com.friska.mrm.exceptions.CannotFindModIDException;
+
 /**
- *Call any static strings to get the mod ID
+ *Call any static strings to get the item ID.
  * **/
 @SuppressWarnings({"unused", "minecraft:SpellCheckingInspection"})
-public class MinecraftID {
+@ExpectModdersToAccess
+public class IDs {
     public static final String ACACIA_BOAT = "minecraft:acacia_boat";
     public static final String ACACIA_BOAT_WITH_CHEST = "minecraft:acacia_chest_boat";
     public static final String ACACIA_BUTTON = "minecraft:acacia_button";
@@ -1155,4 +1161,15 @@ public class MinecraftID {
     public static final String ZOMBIE_SPAWN_EGG = "minecraft:zombie_spawn_egg";
     public static final String ZOMBIE_VILLAGER_SPAWN_EGG = "minecraft:zombie_villager_spawn_egg";
     public static final String ZOMBIFIED_PIGLIN_SPAWN_EGG = "minecraft:zombified_piglin_spawn_egg";
+
+    /**
+     * Gets a modded item ID. This method clips the mod ID to the name space of an item ID. For example, inputting "uranium" will output modid:uranium, with "modid" being your mod id.
+     * **/
+    public static String getModdedID(String id){
+        if(Config.isModIDDefined()){
+            return Config.getModID() + ":" + id;
+        }else{
+            throw new CannotFindModIDException("Set the Mod ID using Config.setModID().");
+        }
+    }
 }

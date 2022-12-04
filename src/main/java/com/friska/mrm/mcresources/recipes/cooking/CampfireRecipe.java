@@ -1,15 +1,17 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
+import com.friska.mrm.annotations.ExpectModdersToAccess;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-
+@ExpectModdersToAccess
 public class CampfireRecipe extends CookingRecipe{
     /**
-     * Ingredient is the item ID of what to put in the campfire, and result is the item ID of the output.
-     * Experience is the amount of XP you get after the smelting, and to customise cooking time (defaulted to 200),
-     * use the constructor overload with a new Integer cooking time.
-     * Cooking time is always in Minecraft ticks. (1/20th of a second).
+     * This class creates a campfire cooking recipe, used in minecraft campfires.
+     * Use the constructor overload to specify a custom cooking time, or it will be defaulted to 600 ticks.
+     * @param ingredient The item ID of what is being placed on the campfire.
+     * @param result The finished product of the furnace.
+     * @param experience The amount of experience you get.
      * **/
     public CampfireRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
         super(ingredient, result, experience, "minecraft:campfire_cooking");
@@ -17,7 +19,11 @@ public class CampfireRecipe extends CookingRecipe{
     }
 
     /**
-     *Ingredient is the item ID of what to put in the campfire, and result is the item ID of the output. Experience is the amount of xp you get after the smelting. Cooking time is always in Minecraft ticks. (1/20th of a second).
+     * This class creates a campfire cooking recipe, used in minecraft campfires.
+     * @param ingredient The item ID of what is being placed on the campfire.
+     * @param result The finished product of the furnace.
+     * @param experience The amount of experience you get.
+     * @param cookingTime The amount of time in Minecraft ticks (a tick is 1/20th of a second) it takes to smelt.
      * **/
     public CampfireRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, @Nonnull Integer cookingTime){
         super(ingredient, result, experience, cookingTime, "minecraft:campfire_cooking");

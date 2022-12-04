@@ -1,5 +1,10 @@
 package com.friska.mrm.config;
 
+import com.friska.mrm.annotations.ExpectModdersToAccess;
+
+import javax.annotation.Nonnull;
+
+@ExpectModdersToAccess
 public class Config {
 
     private static String MODID = null;
@@ -7,41 +12,61 @@ public class Config {
     private static String PATH_ROOT = "src/main/resources";
 
     /**
-     *Path root is defined as "src/main/resources" by default. You can change this using setPathRoot method.
-     * <p>
-     * <b>DO NOT use absolute path, it will probably not work when building the JAR file for your mod.</b>
+     *Sets the path root for the Minecraft resource location. If this method is not called, it will be defaulted as "src/main/resources".
+     * @param pathRoot This param specifies a new path root. <b>DO NOT USE ABSOLUTE PATH. </b>
      * **/
-    public static void setPathRoot(String pathRoot) {
+    public static void setPathRoot(@Nonnull String pathRoot) {
         PATH_ROOT = pathRoot;
     }
 
+    /**
+     * Returns the path root.
+     * **/
     public static String getPathRoot() {
         return PATH_ROOT;
     }
 
+    /**
+     * Checks to see if the path root is null.
+     * **/
     public static boolean isPathRootDefined(){
         return getPathRoot() != null;
     }
 
-    public static int getJsonIndentSize() {
+    /**
+     * Gets the indent size.
+     * **/
+    public static int getJSONIndentSize() {
         return JSON_INDENT_SIZE;
     }
 
     /**
-     * Set the size of indents when a JSON file is formatted, default is 2.
+     * Sets the size of indents when a JSON file is formatted, default is 2.
+     * @param newIndentSize New indent size.
      * **/
-    public static void setJsonIndentSize(int jsonIndentSize) {
-        JSON_INDENT_SIZE = jsonIndentSize;
+    public static void setJSONIndentSize(int newIndentSize) {
+        JSON_INDENT_SIZE = newIndentSize;
     }
 
+    /**
+     * Returns the mod ID. Use setModID to define it.
+     * **/
     public static String getModID() {
         return MODID;
     }
 
-    public static void setModID(String ModID) {
-        MODID = ModID;
+    /**
+     * Mutator for the mod ID. This method needs to be called before doing anything else related to managing Minecraft resources,
+     * otherwise the program would not know where and how to create all the resources!
+     * @param modID The mod ID.
+     * **/
+    public static void setModID(String modID) {
+        MODID = modID;
     }
 
+    /**
+     * Checks whether the mod ID is null.
+     * **/
     public static boolean isModIDDefined(){
         return MODID != null;
     }

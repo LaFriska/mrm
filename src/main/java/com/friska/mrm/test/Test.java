@@ -2,9 +2,10 @@ package com.friska.mrm.test;
 
 import com.friska.mrm.config.Config;
 import com.friska.mrm.mcresources.data.LanguageCodes;
-import com.friska.mrm.mcresources.data.MinecraftID;
+import com.friska.mrm.mcresources.data.IDs;
 import com.friska.mrm.mcresources.lang.Lang;
 import com.friska.mrm.mcresources.lang.Translation;
+import com.friska.mrm.mcresources.recipes.SmithingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmokingRecipe;
 import com.friska.mrm.registries.ResourceManager;
 
@@ -21,16 +22,19 @@ public class Test {
 
         ResourceManager.register(
 
-                new SmokingRecipe(MinecraftID.POTATO, MinecraftID.BAKED_POTATO, 0.35F, 300),
-                new SmokingRecipe(MinecraftID.POISONOUS_POTATO, MinecraftID.BAKED_POTATO, 0.35F, 300),
-                new SmokingRecipe(MinecraftID.END_PORTAL_FRAME, MinecraftID.BAKED_POTATO, 0.35F, 300),
-                new SmokingRecipe(MinecraftID.IRON_AXE, MinecraftID.BAKED_POTATO, 0.35F, 300),
-                new SmokingRecipe(MinecraftID.ACACIA_BUTTON, MinecraftID.BAKED_POTATO, 0.35F, 300)
+                new SmokingRecipe(IDs.POTATO, IDs.BAKED_POTATO, 0.35F, 300),
+                new SmokingRecipe(IDs.POISONOUS_POTATO, IDs.BAKED_POTATO, 0.35F, 300),
+                new SmokingRecipe(IDs.END_PORTAL_FRAME, IDs.BAKED_POTATO, 0.35F, 300),
+                new SmokingRecipe(IDs.IRON_AXE, IDs.BAKED_POTATO, 0.35F, 300),
+                new SmokingRecipe(IDs.ACACIA_BUTTON, IDs.BAKED_POTATO, 0.35F, 300),
+                new SmokingRecipe(IDs.POTATO, IDs.BAKED_POTATO, 0.35F, 300)
 
                 /*new CampfireRecipe(MinecraftID.POTATO, MinecraftID.BAKED_POTATO, 0.1F),
                 new BlastingRecipe(MinecraftID.IRON_AXE, MinecraftID.BLOCK_OF_IRON, 2),
                 new SmeltingRecipe(MinecraftID.IRON_AXE, MinecraftID.BLOCK_OF_IRON, 2, 25),*/
         );
+
+
 
         ResourceManager.buildAll();
     }

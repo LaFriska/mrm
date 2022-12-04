@@ -1,27 +1,29 @@
 package com.friska.mrm.mcresources.recipes;
 
+import com.friska.mrm.annotations.ExpectModdersToAccess;
 import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-
+@ExpectModdersToAccess
 public class StoneCuttingRecipe extends Recipe{
 
     private String ingredient;
     private int count = 1;
 
     /**
-     * The first param: ingredient, is what to input into the stonecutter, and the second param: result, is the output. Use the constructor overload to specify a custom "count", which is the amount of the result output.
-     * Count is defaulted to 1 if unspecified. The count parameter cannot exceed 64.
+     * @param ingredient The item ID you input into a stonecutter.
+     * @param result The item ID of the output from a stonecutter.
      * **/
     public StoneCuttingRecipe(@Nonnull String ingredient, @Nonnull String result){
         super();
         initialise(ingredient, result);
     }
     /**
-     * The first param: ingredient, is what to input into the stonecutter, and the second param: result, is the output. Use the constructor overload to specify a custom "count", which is the amount of the result output.
-     * Count is defaulted to 1 if unspecified. The count parameter cannot exceed 64.
+     * @param ingredient The item ID you input into a stonecutter.
+     * @param result The item ID of the output from a stonecutter.
+     * @param count The number of result items.
      * **/
     public StoneCuttingRecipe(@Nonnull String ingredient, @Nonnull String result, int count){
         super();

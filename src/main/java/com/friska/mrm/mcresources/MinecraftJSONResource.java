@@ -1,5 +1,6 @@
 package com.friska.mrm.mcresources;
 
+import com.friska.mrm.annotations.ExpectModdersToAccess;
 import com.friska.mrm.exceptions.ResourcePathException;
 import com.friska.mrm.serialiser.builder.JBuilder;
 import com.friska.mrm.config.Config;

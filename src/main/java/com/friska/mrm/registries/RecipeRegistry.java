@@ -26,7 +26,7 @@ public class RecipeRegistry {
     @NeedsRevision("May need to be called in other classes, might need to be moved to an interface with parameters")
 
     /**
-     *Checks for duplicate names, and edit them so they do not overwrite each other.
+     *Checks for duplicate names, and edit them, so they do not overwrite each other.
      */
     private static void updateNames(){
         ArrayList<Recipe> recipes = all();

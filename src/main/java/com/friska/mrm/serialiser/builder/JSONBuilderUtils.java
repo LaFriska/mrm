@@ -33,7 +33,7 @@ public class JSONBuilderUtils {
     private static String getIndentation(){
         if(indentation == null) {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i <= Config.getJsonIndentSize() - 1; i++) {
+            for (int i = 0; i <= Config.getJSONIndentSize() - 1; i++) {
                 sb.append(" ");
             }
             indentation = sb.toString();

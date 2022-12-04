@@ -1,5 +1,6 @@
 package com.friska.mrm.mcresources.lang;
 
+import com.friska.mrm.annotations.ExpectModdersToAccess;
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.data.TranslationTypes;
 import com.friska.mrm.serialiser.builder.JBreak;
@@ -15,7 +16,9 @@ import java.util.List;
         "-Item effects" +
         "-Normal/Splash/Lingering potion effects" +
         "-Banners"+
-        "-Colors")
+        "-Colors" +
+        "-Translation record override.")
+@ExpectModdersToAccess
 public class Lang extends MinecraftJSONResource {
     private final String languageCode;
 
@@ -35,9 +38,9 @@ public class Lang extends MinecraftJSONResource {
 
 
     /**
-     * Use the LanguageCodes static strings, which contains all the language codes in the current version of Minecraft.
-     * <p>
-     * Language codes such as en_us, should be the name of the language json file. The Lang class automatically creates a JSONBuilder of the language code as its name.
+     * This class builds a language JSON file.
+     * @param languageCode The language code for the file, which would also be its name. For example, en_us indicates that the file is American English.
+     *                     <b>Use the LanguageCodes class and call the static strings for the sake of convenience</b>
      * **/
     public Lang(@Nonnull String languageCode){
         super();
@@ -136,6 +139,7 @@ public class Lang extends MinecraftJSONResource {
     }
 
     /**Constructs an ArrayList of all ArrayLists used in the object, i.e. items, blocks, etc. This is used to merge multiple instances of Lang instantiations in LangRegistry.**/
+   @NeedsRevision("May be messy")
     public ArrayList<ArrayList<Translation>> all(){
         ArrayList<ArrayList<Translation>> meta = new ArrayList<>();
         meta.add(blocks);
@@ -150,6 +154,11 @@ public class Lang extends MinecraftJSONResource {
         return meta;
     }
 
+
+    /**
+     * Absorbing another Lang object to combine it into one. This should only be done when the two objects have the same language code.
+     * @param lang The Lang object.
+     * **/
     @NeedsRevision("Should be done in a more abstract way, and should be done in registries, not the Lang class itself.")
     public void inject(Lang lang){
         ArrayList<ArrayList<Translation>> all = this.all();
@@ -159,6 +168,7 @@ public class Lang extends MinecraftJSONResource {
         }
     }
 
+    /**Gets the language code.**/
     public String getLanguageCode() {
         return languageCode;
     }
