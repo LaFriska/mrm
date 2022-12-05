@@ -10,6 +10,7 @@ public class BlastingRecipe extends CookingRecipe{
     /**
      * This class creates a blasting recipe, used in minecraft blast furnaces.
      * Use the constructor overload to specify a custom cooking time, or it will be defaulted to 100 ticks.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being blasted in the blast furnace.
      * @param result The finished product of the blast furnace.
      * @param experience The amount of experience you get.
@@ -20,6 +21,7 @@ public class BlastingRecipe extends CookingRecipe{
     }
     /**
      * This class creates a blasting recipe, used in minecraft blast furnaces.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being blasted in the blast furnace.
      * @param result The finished product of the blast furnace.
      * @param experience The amount of experience you get.

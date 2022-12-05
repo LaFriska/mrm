@@ -10,6 +10,7 @@ public class SmokingRecipe extends CookingRecipe {
     /**
      * This class creates a smoking recipe, used in minecraft smokers.
      * Use the constructor overload to specify a custom cooking time, or it will be defaulted to 100 ticks.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being smoked in the smoker.
      * @param result The finished product of the smoker.
      * @param experience The amount of experience you get. (Most food items have this parameter set to 0.35F).
@@ -21,6 +22,7 @@ public class SmokingRecipe extends CookingRecipe {
 
     /**
      * This class creates a smoking recipe, used in minecraft smokers.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being smoked in the smoker.
      * @param result The finished product of the smoker.
      * @param experience The amount of experience you get. (Most food items have this parameter set to 0.35F).

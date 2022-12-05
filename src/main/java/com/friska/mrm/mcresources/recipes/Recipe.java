@@ -2,6 +2,7 @@ package com.friska.mrm.mcresources.recipes;
 
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.config.Config;
+import com.friska.mrm.exceptions.UnexpectedTagException;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 
 public class Recipe extends MinecraftJSONResource {
@@ -10,6 +11,19 @@ public class Recipe extends MinecraftJSONResource {
 
     protected Recipe(){
         setPath("data/" + Config.getModID() + "/recipes");
+    }
+
+    protected static boolean checkForTags(String ingredient, String result){
+        if(result.charAt(0) == '#'){
+            throw new UnexpectedTagException("Result of a recipe cannot be a tag. You must specify an item.");
+        }
+        if(ingredient.charAt(0) == '#'){
+            return true;
+        }else if(ingredient.contains("#") || result.contains("#")){
+            throw new UnexpectedTagException("Hashtags should be used the prefix the tag ID.");
+        } else{
+            return false;
+        }
     }
 
     @NeedsRevision("May be messy code")

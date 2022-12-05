@@ -1,6 +1,7 @@
 package com.friska.mrm.registries;
 
 import com.friska.mrm.mcresources.lang.Lang;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class LangRegistry{
         }
     }
 
-    private static Lang langWithLanguageCode(String languageCode){
+    private static @Nullable Lang langWithLanguageCode(String languageCode){
         for(Lang lang : LANGS){
             if(lang.getLanguageCode().equals(languageCode)){
                 return lang;

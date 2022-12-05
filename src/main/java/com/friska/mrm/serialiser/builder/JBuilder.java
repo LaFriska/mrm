@@ -76,9 +76,9 @@ public class JBuilder extends JObject {
         if (!file.createNewFile()) {
             if(this.overrideExistingFile){
                 System.out.println(name + " already exists, updating file instead.");
+                updateJSON(path, name);
             }else{
-                if(this.nameNumberChain == 0)
-                System.out.println(name + " already exists, creating JSON with another name.");
+                if(this.nameNumberChain == 0) System.out.println(name + " already exists, creating JSON with another name.");
                 this.nameNumberChain++;
                 createJSON(path, getName(false) + "_" + nameNumberChain + ".json");
             }

@@ -10,6 +10,7 @@ public class SmeltingRecipe extends CookingRecipe {
     /**
      * This class creates a smelting recipe, used in minecraft furnaces.
      * Use the constructor overload to specify a custom cooking time, or it will be defaulted to 200 ticks.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being smelted in the furnace.
      * @param result The finished product of the furnace.
      * @param experience The amount of experience you get.
@@ -21,6 +22,7 @@ public class SmeltingRecipe extends CookingRecipe {
 
     /**
      * This class creates a smelting recipe, used in minecraft furnaces.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being smelted in the furnace.
      * @param result The finished product of the furnace.
      * @param experience The amount of experience you get.

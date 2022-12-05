@@ -11,7 +11,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 @ExpectModdersToAccess
-@NeedsRevision("Javadoc")
 @SuppressWarnings("unused")
 public class ResourceManager {
 

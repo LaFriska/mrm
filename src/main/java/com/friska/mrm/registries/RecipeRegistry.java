@@ -2,11 +2,16 @@ package com.friska.mrm.registries;
 
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.recipes.Recipe;
+import com.friska.mrm.mcresources.recipes.SmithingRecipe;
 import com.friska.mrm.mcresources.recipes.StoneCuttingRecipe;
-import com.friska.mrm.mcresources.recipes.cooking.*;
+import com.friska.mrm.mcresources.recipes.cooking.BlastingRecipe;
+import com.friska.mrm.mcresources.recipes.cooking.CampfireRecipe;
+import com.friska.mrm.mcresources.recipes.cooking.SmeltingRecipe;
+import com.friska.mrm.mcresources.recipes.cooking.SmokingRecipe;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RecipeRegistry {
 
@@ -15,6 +20,7 @@ public class RecipeRegistry {
     private static ArrayList<SmeltingRecipe> SMELTING = new ArrayList<>();
     private static ArrayList<CampfireRecipe> CAMPFIRING = new ArrayList<>();
     private static ArrayList<StoneCuttingRecipe> STONECUTTING = new ArrayList<>();
+    private static ArrayList<SmithingRecipe> SMITHING = new ArrayList<>();
 
     /**
      * Registers any recipe objects.
@@ -59,20 +65,23 @@ public class RecipeRegistry {
             CAMPFIRING.add((CampfireRecipe) recipe);
         }else if(recipe instanceof StoneCuttingRecipe){
             STONECUTTING.add((StoneCuttingRecipe) recipe);
+        }else if(recipe instanceof SmithingRecipe){
+            SMITHING.add((SmithingRecipe) recipe);
         }
     }
 
-    private static ArrayList<Recipe> all(){
+    private static @NotNull ArrayList<Recipe> all(){
         ArrayList<Recipe> arrayList = new ArrayList<>();
         arrayList.addAll(BLASTING);
         arrayList.addAll(SMOKING);
         arrayList.addAll(SMELTING);
         arrayList.addAll(CAMPFIRING);
         arrayList.addAll(STONECUTTING);
+        arrayList.addAll(SMITHING);
         return arrayList;
     }
 
-    private static String[] getAllNames(){
+    private static String @NotNull [] getAllNames(){
         ArrayList<Recipe> recipes = all();
         String[] result = new String[recipes.size()];
         for(int i = 0; i <= result.length - 1; i++){
@@ -91,5 +100,6 @@ public class RecipeRegistry {
         SMOKING.forEach(SmokingRecipe::build);
         CAMPFIRING.forEach(CampfireRecipe::build);
         STONECUTTING.forEach(StoneCuttingRecipe::build);
+        SMITHING.forEach(SmithingRecipe::build);
     }
 }

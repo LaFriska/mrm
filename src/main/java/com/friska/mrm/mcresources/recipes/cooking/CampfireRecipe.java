@@ -9,6 +9,7 @@ public class CampfireRecipe extends CookingRecipe{
     /**
      * This class creates a campfire cooking recipe, used in minecraft campfires.
      * Use the constructor overload to specify a custom cooking time, or it will be defaulted to 600 ticks.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being placed on the campfire.
      * @param result The finished product of the furnace.
      * @param experience The amount of experience you get.
@@ -20,6 +21,7 @@ public class CampfireRecipe extends CookingRecipe{
 
     /**
      * This class creates a campfire cooking recipe, used in minecraft campfires.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
      * @param ingredient The item ID of what is being placed on the campfire.
      * @param result The finished product of the furnace.
      * @param experience The amount of experience you get.

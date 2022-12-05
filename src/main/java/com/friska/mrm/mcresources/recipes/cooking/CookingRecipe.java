@@ -14,6 +14,7 @@ public class CookingRecipe extends Recipe {
     protected String ingredient;
     protected float experience;
     protected int cookingTime;
+    protected String ingredientType;
 
     protected CookingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, @Nonnull String type){
         super();
@@ -29,7 +30,15 @@ public class CookingRecipe extends Recipe {
 
     private void initialise(@NotNull String ingredient, @NotNull String result, float experience, @Nonnull String type) {
         this.type = type;
-        this.ingredient = ingredient;
+
+        if(checkForTags(ingredient, result)){
+            this.ingredientType = "tag";
+            this.ingredient = ingredient.substring(1);
+        }else{
+            this.ingredientType = "item";
+            this.ingredient = ingredient;
+        }
+
         this.result = result;
         this.experience = experience;
         setName(result);
@@ -49,10 +58,9 @@ public class CookingRecipe extends Recipe {
     public void build(){
         this.getBuilder()
                 .nest(new JValue<>("type", this.type))
-                .nest(new JObject("ingredient").nest(new JValue<>("item", this.ingredient)))
+                .nest(new JObject("ingredient").nest(new JValue<>(this.ingredientType, this.ingredient)))
                 .nest(new JValue<>("result", this.result))
                 .nest(new JValue<>("experience", experience))
                 .nest(new JValue<>("cookingtime", cookingTime)).build();
     }
-
 }

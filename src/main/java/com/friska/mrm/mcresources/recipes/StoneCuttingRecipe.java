@@ -11,18 +11,23 @@ public class StoneCuttingRecipe extends Recipe{
 
     private String ingredient;
     private int count = 1;
+    protected String ingredientType;
 
     /**
-     * @param ingredient The item ID you input into a stonecutter.
-     * @param result The item ID of the output from a stonecutter.
+     * This class creates a stone cutting recipe for stone cutters.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
+     * @param ingredient The item ID you input into a stone cutter.
+     * @param result The item ID of the output from a stone cutter.
      * **/
     public StoneCuttingRecipe(@Nonnull String ingredient, @Nonnull String result){
         super();
         initialise(ingredient, result);
     }
     /**
-     * @param ingredient The item ID you input into a stonecutter.
-     * @param result The item ID of the output from a stonecutter.
+     * This class creates a stone cutting recipe for stone cutters.
+     * (To indicate that an ID is a tag, prefix it with a hashtag: e.g "#minecraft:logs" or "#coolmod:amogus_woods")
+     * @param ingredient The item ID you input into a stone cutter.
+     * @param result The item ID of the output from a stone cutter.
      * @param count The number of result items.
      * **/
     public StoneCuttingRecipe(@Nonnull String ingredient, @Nonnull String result, int count){
@@ -31,7 +36,13 @@ public class StoneCuttingRecipe extends Recipe{
         this.count = count;
     }
     private void initialise(@NotNull String ingredient, @NotNull String result) {
-        this.ingredient = ingredient;
+        if(checkForTags(ingredient, result)){
+            this.ingredientType = "tag";
+            this.ingredient = ingredient.substring(1);
+        }else{
+            this.ingredientType = "item";
+            this.ingredient = ingredient;
+        }
         this.result = result;
         this.type = "minecraft:stonecutting";
         setName(result);
@@ -44,7 +55,7 @@ public class StoneCuttingRecipe extends Recipe{
     public void build(){
         this.getBuilder()
                 .nest(new JValue<>("type", this.type))
-                .nest(new JObject("ingredient").nest(new JValue<>("item", this.ingredient)))
+                .nest(new JObject("ingredient").nest(new JValue<>(this.ingredientType, this.ingredient)))
                 .nest(new JValue<>("result", this.result))
                 .nest(new JValue<>("count", count)).build();
     }
