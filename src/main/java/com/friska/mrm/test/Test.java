@@ -31,7 +31,10 @@ public class Test {
                 new CampfireRecipe("#minecraft:campfire", ItemIDs.BAKED_POTATO, 0.1F),
                 new BlastingRecipe("#minecraft:blasting", ItemIDs.BLOCK_OF_IRON, 2),
                 new SmeltingRecipe("#minecraft:smelting", ItemIDs.BLOCK_OF_IRON, 2, 25),
-                new SmokingRecipe("#minecraft:smoking", ItemIDs.BLOCK_OF_IRON, 2, 2)
+                new SmokingRecipe("#minecraft:smoking", ItemIDs.BLOCK_OF_IRON, 2, 2),
+                new SmithingRecipe("#minecraft:smithingbase", ItemIDs.BLOCK_OF_IRON, ItemIDs.BAKED_POTATO),
+                new SmithingRecipe(ItemIDs.getModdedID("moditem"), "#minecraft:smithing_addition", ItemIDs.BAKED_POTATO),
+                new SmithingRecipe("#minecraft:smithing_addition", "#minecraft:smithing_addition", ItemIDs.BAKED_POTATO)
         );
 
 
