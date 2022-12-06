@@ -25,8 +25,6 @@ public class Test {
         );
 
         ResourceManager.register(
-
-
                 new StoneCuttingRecipe("#minecraft:stone", ItemIDs.ACACIA_BOAT, 3),
                 new CampfireRecipe("#minecraft:campfire", ItemIDs.BAKED_POTATO, 0.1F),
                 new BlastingRecipe("#minecraft:blasting", ItemIDs.BLOCK_OF_IRON, 2),

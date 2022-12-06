@@ -14,15 +14,19 @@ public class Recipe extends MinecraftJSONResource {
     }
 
     protected static boolean checkForTags(String ingredient, String result){
-        if(result.charAt(0) == '#'){
-            throw new UnexpectedTagException("Result of a recipe cannot be a tag. You must specify an item.");
-        }
+        checkResultForTags(result);
         if(ingredient.charAt(0) == '#'){
             return true;
         }else if(ingredient.contains("#") || result.contains("#")){
             throw new UnexpectedTagException("Hashtags should be used the prefix the tag ID.");
         } else{
             return false;
+        }
+    }
+
+    protected static void checkResultForTags(String result){
+        if(result.charAt(0) == '#'){
+            throw new UnexpectedTagException("Result of a recipe cannot be a tag. You must specify an item.");
         }
     }
 
