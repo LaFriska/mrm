@@ -5,6 +5,7 @@ import com.friska.mrm.config.Config;
 import com.friska.mrm.exceptions.UnexpectedTagException;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 
+
 public class Recipe extends MinecraftJSONResource {
     protected String type;
     protected String result;
@@ -13,21 +14,37 @@ public class Recipe extends MinecraftJSONResource {
         setPath("data/" + Config.getModID() + "/recipes");
     }
 
+    @NeedsRevision("Update tag system to fit with that of Crafting")
     protected static boolean checkForTags(String ingredient, String result){
         checkResultForTags(result);
         if(ingredient.charAt(0) == '#'){
             return true;
         }else if(ingredient.contains("#") || result.contains("#")){
-            throw new UnexpectedTagException("Hashtags should be used the prefix the tag ID.");
+            throw new UnexpectedTagException("Hashtags should only be used the prefix the tag ID.");
         } else{
             return false;
         }
     }
 
+    @NeedsRevision("Update tag system to fit with that of Crafting")
     protected static void checkResultForTags(String result){
         if(result.charAt(0) == '#'){
             throw new UnexpectedTagException("Result of a recipe cannot be a tag. You must specify an item.");
         }
+    }
+
+    protected static String getIDType(String id){
+        if(id.charAt(0) == '#'){
+            return "tag";
+        }else if(id.contains("#")){
+            throw new UnexpectedTagException("Hashtags should only be used the prefix the tag ID.");
+        } else{
+            return "item";
+        }
+    }
+
+    private void checkResultForTag(String result){
+        if(getIDType(result).equals("tag")) throw new UnexpectedTagException("Result of a recipe must be a specific item, not a tag.");
     }
 
     @NeedsRevision("May be messy code")
@@ -54,5 +71,9 @@ public class Recipe extends MinecraftJSONResource {
     public void changeBuilderName(String newName) {
         setName(newName, true);
         getBuilder().setName(newName);
+    }
+
+    protected void build(){
+        checkResultForTag(result);
     }
 }

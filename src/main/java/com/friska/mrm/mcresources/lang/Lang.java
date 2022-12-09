@@ -47,7 +47,7 @@ public class Lang extends MinecraftJSONResource {
         setPath("assets/" + Config.getModID() + "/lang");
         this.languageCode = languageCode;
         setName(languageCode);
-        initiateBuilder();
+        createBuilder();
         getBuilder().setPath(this.path);
 
         blocks = new ArrayList<>();

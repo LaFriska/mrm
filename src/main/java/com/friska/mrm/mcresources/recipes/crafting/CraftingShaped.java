@@ -1,47 +1,173 @@
 package com.friska.mrm.mcresources.recipes.crafting;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.NeedsRevision;
+import com.friska.mrm.exceptions.CraftingRecipeException;
+import com.friska.mrm.serialiser.builder.JArray;
+import com.friska.mrm.serialiser.builder.JObject;
+import com.friska.mrm.serialiser.builder.JValue;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+@NeedsRevision("Inefficient and messy")
 @ExpectModdersToAccess
 public class CraftingShaped extends Crafting {
 
-    private final CraftingRow row1;
-    private final CraftingRow row2;
-    private final CraftingRow row3;
+    private ArrayList<CraftingKey> keys = new ArrayList<>();
+    private String[] rows;
 
     /**
-     * Create instances of the CraftingRow record as params to construct CraftingRecipe. Each CraftingRow can contain 1 - 3 items, to represent a row in a crafting recipe formation.
-     * Parse null if a row should be empty, or use the constructor overload and only parse 1 or 2 params.
-     * @param result item id of the result.
+     * Similar to a crafting JSON recipe, Minecraft Resource Manager uses the crafting grid map, as a string array, which should be parsed into the constructor, and define the key(s) by calling the .addKey or .addKeys method.
+     * <p>
+     * For example, to craft a beacon, we parse in:
+     * ("GGG",
+     *  "GNG",
+     *  "OOO")
+     *  We then define the keys as such, for <b>all</b> the keys used:
+     *  .addKey('G', "ItemIDs.GLASS")
+     *
+     *  We also need to call the .setResult method to set the result.
      * **/
-    public CraftingShaped(CraftingRow row1, CraftingRow row2, CraftingRow row3, String result){
-        super(result);
-        this.row1 = row1;
-        this.row2 = row2;
-        this.row3 = row3;
-    }
-    /**
-     * Create instances of the CraftingRow record as params to construct CraftingRecipe. Each CraftingRow can contain 1 - 3 items, to represent a row in a crafting recipe formation.
-     * Parse null if a row should be empty, or use the constructor overload and only parse 1 or 2 params.
-     * @param result item id of the result.
-     * **/
-    public CraftingShaped(CraftingRow row1, CraftingRow row2, String result){
-        super(result);
-        this.row1 = row1;
-        this.row2 = row2;
-        this.row3 = null;
-    }
-    /**
-     * Create instances of the CraftingRow record as params to construct CraftingRecipe. Each CraftingRow can contain 1 - 3 items, to represent a row in a crafting recipe formation.
-     * Parse null if a row should be empty, or use the constructor overload and only parse 1 or 2 params.
-     * @param result item id of the result.
-     * **/
-    public CraftingShaped(CraftingRow row1, String result){
-        super(result);
-        this.row1 = row1;
-        this.row2 = null;
-        this.row3 = null;
+    public CraftingShaped(@Nonnull String... rows){
+        super(null);
+        checkRows(rows);
+        this.rows = rows;
     }
 
+    /**
+     * Sets the count of result output from the crafting recipe.
+     * @param count The number of results output from the crafting table, do not call this method, or simply parse null through it if you wish to leave the count undefined (which would be defaulted to 1 when Minecraft reads the JSON).
+     * **/
+    public CraftingShaped setCount(@Nullable Integer count) {
+        this.count = count;
+        return this;
+    }
 
+    /**
+     * Sets the result of the recipe.
+     * @param result Item/Tag ID of the result.
+     * **/
+    public CraftingShaped setResult(@Nonnull String result){
+        this.result = result;
+        setName(result);
+        createBuilder();
+        return this;
+    }
+
+    /**
+     * Sets the group of your recipe. For example, all wooden door crafting recipes are grouped under "wooden_door"
+     * @param group parse the String ID of the group.
+     * **/
+    public CraftingShaped setGroup(@Nullable String group) {
+        this.group = group;
+        return this;
+    }
+
+    /**
+     * Defines a key used in the crafting grid.
+     * @param key The char value of the key.
+     * @param id The item/tag ID.
+     * **/
+    public CraftingShaped addKey(char key, String id){
+        if(!toSingleString().contains(String.valueOf(key))){
+            throw new CraftingRecipeException("Crafting grid does not contain the key \'" + key + "\'.");
+        }
+        keys.add(new CraftingKey(key, id));
+        return this;
+    }
+
+    /**
+     * Defines a key used in the crafting grid.
+     * @param keys List of CraftingKey instances.
+     * **/
+    public CraftingShaped addKeys(CraftingKey... keys){
+        List.of(keys).forEach((k) -> addKey(k.key(), k.id()));
+        return this;
+    }
+
+    /**
+     * Builds the JSON file.
+     * **/
+    @Override
+    public void build(){
+        super.build();
+        buildCheck();
+
+        //Key
+        JObject key = new JObject("key");
+        String idType;
+        for (CraftingKey craftingKey : keys) {
+            idType = getIDType(craftingKey.id());
+            key.nest(new JObject(String.valueOf(craftingKey.key())).nest(new JValue<>(idType, idType.equals("tag") ? craftingKey.id().substring(1) : craftingKey.id())));
+        }
+
+        //Pattern
+        JArray pattern = new JArray("pattern");
+        pattern.nest(rows);
+
+        //Results
+        JObject result = new JObject("result");
+        if(count != null){
+            result.nest(new JValue<>("count", count));
+        }
+        result.nest(new JValue<>("item", this.result));
+
+        //Constructing the builder
+        getBuilder().nest(new JValue<>("type", "minecraft:crafting_shaped"));
+        if(this.group != null) getBuilder().nest(new JValue<>("group", group));
+        getBuilder().nest(key);
+        getBuilder().nest(pattern);
+        getBuilder().nest(result);
+
+        getBuilder().build();
+
+    }
+
+    private void buildCheck(){
+        if(result == null){
+            throw new CraftingRecipeException("The result of the crafting recipe must be defined. Please call the .result() method.");
+        }
+        StringBuilder st = new StringBuilder();
+        for (CraftingKey key : keys) {
+            st.append(key.key());
+        }
+        for (Character character : toCharacterArray()) {
+            if(!st.toString().contains(String.valueOf(character)) && character != ' ') throw new CraftingRecipeException("Not all characters used in the crafting grid have been defined.");
+        }
+        checkResultForTags(result);
+    }
+
+    private Character[] toCharacterArray() {
+        String s = toSingleString();
+        int len = s.length();
+        Character[] array = new Character[len];
+        for (int i = 0; i < len ; i++) {
+            array[i] = s.charAt(i);
+        }
+        return array;
+    }
+
+    private String toSingleString(){
+        StringBuilder st = new StringBuilder();
+        for (String row : rows) {
+            st.append(row);
+        }
+        return st.toString();
+    }
+
+    private void checkRows(String[] rows){
+        if(rows.length > 3){
+            throw new CraftingRecipeException("The number of rows must be 3 or under.");
+        }else if (rows.length == 0){
+            throw new CraftingRecipeException("There should be at least 1 row in the crafting grid.");
+        }
+        for (String row : rows) {
+            if(row.length() > 3 || row.length() == 0){
+                throw  new CraftingRecipeException("The length of a row must be 3 or under.");
+            }
+        }
+    }
 }

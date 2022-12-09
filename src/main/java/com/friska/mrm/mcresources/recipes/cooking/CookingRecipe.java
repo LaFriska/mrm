@@ -3,7 +3,6 @@ package com.friska.mrm.mcresources.recipes.cooking;
 import com.friska.mrm.mcresources.recipes.Recipe;
 import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -14,35 +13,20 @@ public class CookingRecipe extends Recipe {
     protected String ingredient;
     protected float experience;
     protected int cookingTime;
-    protected String ingredientType;
 
     protected CookingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, @Nonnull String type){
-        super();
-        initialise(ingredient, result, experience, type);
-        cookingTime = 200;
+        this(ingredient, result, experience, 200, type);
     }
 
     protected CookingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience, int cookingTime, @Nonnull String type){
         super();
-        initialise(ingredient, result, experience, type);
-        this.cookingTime = cookingTime;
-    }
-
-    private void initialise(@NotNull String ingredient, @NotNull String result, float experience, @Nonnull String type) {
+        this.ingredient = ingredient;
         this.type = type;
-
-        if(checkForTags(ingredient, result)){
-            this.ingredientType = "tag";
-            this.ingredient = ingredient.substring(1);
-        }else{
-            this.ingredientType = "item";
-            this.ingredient = ingredient;
-        }
-
         this.result = result;
         this.experience = experience;
         setName(result);
-        initiateBuilder();
+        createBuilder();
+        this.cookingTime = cookingTime;
     }
 
     /**
@@ -55,10 +39,14 @@ public class CookingRecipe extends Recipe {
     /**
      * Should not be directly called from this class, only from child classes.
      **/
+    @Override
     public void build(){
+        super.build();
+        String ingredientType = getIDType(this.ingredient);
+        if(ingredientType.equals("tag")) this.ingredient = this.ingredient.substring(1);
         this.getBuilder()
                 .nest(new JValue<>("type", this.type))
-                .nest(new JObject("ingredient").nest(new JValue<>(this.ingredientType, this.ingredient)))
+                .nest(new JObject("ingredient").nest(new JValue<>(ingredientType, this.ingredient)))
                 .nest(new JValue<>("result", this.result))
                 .nest(new JValue<>("experience", experience))
                 .nest(new JValue<>("cookingtime", cookingTime)).build();

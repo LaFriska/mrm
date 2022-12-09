@@ -8,6 +8,7 @@ import com.friska.mrm.mcresources.recipes.cooking.BlastingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.CampfireRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmeltingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmokingRecipe;
+import com.friska.mrm.mcresources.recipes.crafting.CraftingShaped;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -21,6 +22,7 @@ public class RecipeRegistry {
     private static ArrayList<CampfireRecipe> CAMPFIRING = new ArrayList<>();
     private static ArrayList<StoneCuttingRecipe> STONECUTTING = new ArrayList<>();
     private static ArrayList<SmithingRecipe> SMITHING = new ArrayList<>();
+    private static ArrayList<CraftingShaped> CRAFTING_SHAPED = new ArrayList<>();
 
     /**
      * Registers any recipe objects.
@@ -29,11 +31,12 @@ public class RecipeRegistry {
         addToAppropriateArray(recipe);
     }
 
-    @NeedsRevision("May need to be called in other classes, might need to be moved to an interface with parameters")
+
 
     /**
      *Checks for duplicate names, and edit them, so they do not overwrite each other.
      */
+    @NeedsRevision("May need to be called in other classes, might need to be moved to an interface with parameters")
     private static void updateNames(){
         ArrayList<Recipe> recipes = all();
         String[] names = getAllNames();
@@ -67,6 +70,8 @@ public class RecipeRegistry {
             STONECUTTING.add((StoneCuttingRecipe) recipe);
         }else if(recipe instanceof SmithingRecipe){
             SMITHING.add((SmithingRecipe) recipe);
+        }else if(recipe instanceof CraftingShaped){
+            CRAFTING_SHAPED.add((CraftingShaped) recipe);
         }
     }
 
@@ -78,6 +83,7 @@ public class RecipeRegistry {
         arrayList.addAll(CAMPFIRING);
         arrayList.addAll(STONECUTTING);
         arrayList.addAll(SMITHING);
+        arrayList.addAll(CRAFTING_SHAPED);
         return arrayList;
     }
 
@@ -101,5 +107,6 @@ public class RecipeRegistry {
         CAMPFIRING.forEach(CampfireRecipe::build);
         STONECUTTING.forEach(StoneCuttingRecipe::build);
         SMITHING.forEach(SmithingRecipe::build);
+        CRAFTING_SHAPED.forEach(CraftingShaped::build);
     }
 }
