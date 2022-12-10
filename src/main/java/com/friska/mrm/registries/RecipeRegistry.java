@@ -9,11 +9,12 @@ import com.friska.mrm.mcresources.recipes.cooking.CampfireRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmeltingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmokingRecipe;
 import com.friska.mrm.mcresources.recipes.crafting.CraftingShaped;
+import com.friska.mrm.mcresources.recipes.crafting.CraftingShapeless;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
+@NeedsRevision("Consider changing everything to be in 1 arraylist")
 public class RecipeRegistry {
 
     private static ArrayList<BlastingRecipe> BLASTING = new ArrayList<>();
@@ -23,6 +24,7 @@ public class RecipeRegistry {
     private static ArrayList<StoneCuttingRecipe> STONECUTTING = new ArrayList<>();
     private static ArrayList<SmithingRecipe> SMITHING = new ArrayList<>();
     private static ArrayList<CraftingShaped> CRAFTING_SHAPED = new ArrayList<>();
+    private static ArrayList<CraftingShapeless> CRAFTING_SHAPELESS = new ArrayList<>();
 
     /**
      * Registers any recipe objects.
@@ -50,7 +52,7 @@ public class RecipeRegistry {
                 if(names[b].equals(check)){
                     duplicates++;
                     newName = names[b] + "_" + duplicates;
-                    recipes.get(b).changeBuilderName(newName);
+                    recipes.get(b).setName(newName);
                     names[b] = newName;
                 }
             }
@@ -72,6 +74,8 @@ public class RecipeRegistry {
             SMITHING.add((SmithingRecipe) recipe);
         }else if(recipe instanceof CraftingShaped){
             CRAFTING_SHAPED.add((CraftingShaped) recipe);
+        }else if(recipe instanceof CraftingShapeless){
+            CRAFTING_SHAPELESS.add((CraftingShapeless) recipe);
         }
     }
 
@@ -84,6 +88,7 @@ public class RecipeRegistry {
         arrayList.addAll(STONECUTTING);
         arrayList.addAll(SMITHING);
         arrayList.addAll(CRAFTING_SHAPED);
+        arrayList.addAll(CRAFTING_SHAPELESS);
         return arrayList;
     }
 
@@ -108,5 +113,6 @@ public class RecipeRegistry {
         STONECUTTING.forEach(StoneCuttingRecipe::build);
         SMITHING.forEach(SmithingRecipe::build);
         CRAFTING_SHAPED.forEach(CraftingShaped::build);
+        CRAFTING_SHAPELESS.forEach(CraftingShapeless::build);
     }
 }

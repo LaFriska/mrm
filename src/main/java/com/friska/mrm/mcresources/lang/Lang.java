@@ -47,7 +47,7 @@ public class Lang extends MinecraftJSONResource {
         setPath("assets/" + Config.getModID() + "/lang");
         this.languageCode = languageCode;
         setName(languageCode);
-        createBuilder();
+        //createBuilder();
         getBuilder().setPath(this.path);
 
         blocks = new ArrayList<>();
@@ -129,6 +129,7 @@ public class Lang extends MinecraftJSONResource {
 
     /**Builds the language JSON file.**/
     public void build() {
+        createBuilder();
         all().forEach(this::iterate);
         getBuilder().build();
     }

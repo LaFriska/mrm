@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 public class Crafting extends Recipe {
 
-    //Count is not necessarily defined in crafting recipes.
+    //Count and group are not necessarily defined in crafting recipes.
     protected @Nullable Integer count = null;
     protected @Nullable String group = null;
     protected Crafting(String result){

@@ -11,7 +11,7 @@ public class JArray extends Nestable implements JProperty {
         super(key);
     }
 
-    public JArray nest (@Nullable Object... properties){
+    public JArray setArray(@Nullable Object... properties){
         this.propertiesData = new ArrayList<>();
         if(properties != null) {
             this.properties = List.of(properties);
@@ -28,10 +28,8 @@ public class JArray extends Nestable implements JProperty {
         }else{
             setData(appendNull("[]"));
         }
-
         return this;
     }
-
     protected List<Object> properties;
 
     @Override

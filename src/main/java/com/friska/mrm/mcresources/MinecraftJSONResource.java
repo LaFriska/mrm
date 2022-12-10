@@ -41,12 +41,4 @@ public class MinecraftJSONResource {
     public JBuilder getBuilder(){
         return this.builder;
     }
-
-    /**
-     * SetName is only a mutator for the variable "name", once the builder is added, the SetName method will not change the builders' name. Call this method to change the name of the builder.
-     * **/
-    public void changeBuilderName(String newName){
-        setName(newName);
-        getBuilder().setName(newName);
-    }
 }

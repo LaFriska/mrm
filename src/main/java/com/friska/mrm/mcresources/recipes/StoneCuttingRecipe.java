@@ -32,8 +32,8 @@ public class StoneCuttingRecipe extends Recipe{
         this.ingredient = ingredient;
         this.result = result;
         this.type = "minecraft:stonecutting";
-        setName(result);
-        createBuilder();
+        setAndTruncateName(result);
+        //createBuilder();
         this.count = count;
     }
 

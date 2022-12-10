@@ -24,8 +24,8 @@ public class CookingRecipe extends Recipe {
         this.type = type;
         this.result = result;
         this.experience = experience;
-        setName(result);
-        createBuilder();
+        setAndTruncateName(result);
+        //createBuilder();
         this.cookingTime = cookingTime;
     }
 

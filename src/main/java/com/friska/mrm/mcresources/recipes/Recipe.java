@@ -48,8 +48,7 @@ public class Recipe extends MinecraftJSONResource {
     }
 
     @NeedsRevision("May be messy code")
-    @Override
-    public void setName(String result) {
+    public void setAndTruncateName(String result) {
         try{
             this.name = result.split(":")[1] + "_" + type.split(":")[1];
         }catch (ArrayIndexOutOfBoundsException e){
@@ -58,22 +57,12 @@ public class Recipe extends MinecraftJSONResource {
     }
 
     @NeedsRevision("May be messy code")
-    public void setName(String name, boolean rawName) {
-        if(rawName){
-            this.name = result;
-        }else {
-            setName(name);
-        }
-    }
-
-    @NeedsRevision("May be messy code")
-    @Override
-    public void changeBuilderName(String newName) {
-        setName(newName, true);
-        getBuilder().setName(newName);
+    public void setName(String name) {
+        this.name = name;
     }
 
     protected void build(){
+        createBuilder();
         checkResultForTag(result);
     }
 }

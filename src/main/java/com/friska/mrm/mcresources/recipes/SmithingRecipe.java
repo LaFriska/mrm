@@ -23,8 +23,8 @@ public class SmithingRecipe extends Recipe{
         this.addition = addition;
         this.result = result;
         this.type = "minecraft:smithing";
-        this.setName(result);
-        createBuilder();
+        this.setAndTruncateName(result);
+        //createBuilder();
     }
 
     /**

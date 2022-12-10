@@ -52,8 +52,8 @@ public class CraftingShaped extends Crafting {
      * **/
     public CraftingShaped setResult(@Nonnull String result){
         this.result = result;
-        setName(result);
-        createBuilder();
+        setAndTruncateName(result);
+        //createBuilder();
         return this;
     }
 
@@ -106,7 +106,7 @@ public class CraftingShaped extends Crafting {
 
         //Pattern
         JArray pattern = new JArray("pattern");
-        pattern.nest(rows);
+        pattern.setArray(rows);
 
         //Results
         JObject result = new JObject("result");
