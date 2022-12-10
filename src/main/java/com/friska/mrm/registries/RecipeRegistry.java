@@ -10,8 +10,8 @@ import com.friska.mrm.mcresources.recipes.cooking.SmeltingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmokingRecipe;
 import com.friska.mrm.mcresources.recipes.crafting.CraftingShaped;
 import com.friska.mrm.mcresources.recipes.crafting.CraftingShapeless;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 @NeedsRevision("Consider changing everything to be in 1 arraylist")
@@ -79,7 +79,7 @@ public class RecipeRegistry {
         }
     }
 
-    private static @NotNull ArrayList<Recipe> all(){
+    private static @Nonnull ArrayList<Recipe> all(){
         ArrayList<Recipe> arrayList = new ArrayList<>();
         arrayList.addAll(BLASTING);
         arrayList.addAll(SMOKING);
@@ -92,7 +92,7 @@ public class RecipeRegistry {
         return arrayList;
     }
 
-    private static String @NotNull [] getAllNames(){
+    private static String[] getAllNames(){
         ArrayList<Recipe> recipes = all();
         String[] result = new String[recipes.size()];
         for(int i = 0; i <= result.length - 1; i++){

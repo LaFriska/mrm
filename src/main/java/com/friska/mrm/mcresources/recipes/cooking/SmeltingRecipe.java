@@ -1,8 +1,6 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
-import com.friska.mrm.mcresources.recipes.cooking.CookingRecipe;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 @ExpectModdersToAccess
@@ -15,7 +13,7 @@ public class SmeltingRecipe extends CookingRecipe {
      * @param result The finished product of the furnace.
      * @param experience The amount of experience you get.
      * **/
-    public SmeltingRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
+    public SmeltingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience) {
         super(ingredient, result, experience, "minecraft:smelting");
         this.cookingTime = 200;
     }

@@ -1,7 +1,6 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 @ExpectModdersToAccess
@@ -14,7 +13,7 @@ public class CampfireRecipe extends CookingRecipe{
      * @param result The finished product of the furnace.
      * @param experience The amount of experience you get.
      * **/
-    public CampfireRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
+    public CampfireRecipe(@Nonnull String ingredient, @Nonnull String result, float experience) {
         super(ingredient, result, experience, "minecraft:campfire_cooking");
         this.cookingTime = 600;
     }

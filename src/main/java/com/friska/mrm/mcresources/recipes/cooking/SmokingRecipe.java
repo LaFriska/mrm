@@ -1,8 +1,6 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
-import com.friska.mrm.mcresources.recipes.cooking.CookingRecipe;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 @ExpectModdersToAccess
@@ -15,7 +13,7 @@ public class SmokingRecipe extends CookingRecipe {
      * @param result The finished product of the smoker.
      * @param experience The amount of experience you get. (Most food items have this parameter set to 0.35F).
      * **/
-    public SmokingRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
+    public SmokingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience) {
         super(ingredient, result, experience, "minecraft:smoking");
         this.cookingTime = 100;
     }

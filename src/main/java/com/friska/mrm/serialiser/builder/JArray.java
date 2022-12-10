@@ -1,7 +1,6 @@
 package com.friska.mrm.serialiser.builder;
 
-import org.jetbrains.annotations.Nullable;
-
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 

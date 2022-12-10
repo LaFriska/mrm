@@ -1,9 +1,9 @@
 package com.friska.mrm.registries;
 
 import com.friska.mrm.mcresources.lang.Lang;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class LangRegistry{

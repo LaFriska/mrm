@@ -1,7 +1,7 @@
 package com.friska.mrm.serialiser.builder;
 
-import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class JValue <T> implements JProperty {
 

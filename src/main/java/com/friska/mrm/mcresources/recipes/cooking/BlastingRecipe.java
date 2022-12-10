@@ -1,7 +1,6 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 @ExpectModdersToAccess
@@ -15,7 +14,7 @@ public class BlastingRecipe extends CookingRecipe{
      * @param result The finished product of the blast furnace.
      * @param experience The amount of experience you get.
      * **/
-    public BlastingRecipe(@NotNull String ingredient, @NotNull String result, float experience) {
+    public BlastingRecipe(@Nonnull String ingredient, @Nonnull String result, float experience) {
         super(ingredient, result, experience, "minecraft:blasting");
         cookingTime = 100;
     }

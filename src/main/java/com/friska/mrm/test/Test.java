@@ -2,14 +2,7 @@ package com.friska.mrm.test;
 
 import com.friska.mrm.config.Config;
 import com.friska.mrm.mcresources.data.ItemIDs;
-import com.friska.mrm.mcresources.data.LanguageCodes;
-import com.friska.mrm.mcresources.lang.Lang;
-import com.friska.mrm.mcresources.lang.Translation;
-import com.friska.mrm.mcresources.recipes.StoneCuttingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.BlastingRecipe;
-import com.friska.mrm.mcresources.recipes.cooking.SmeltingRecipe;
-import com.friska.mrm.mcresources.recipes.crafting.CraftingKey;
-import com.friska.mrm.mcresources.recipes.crafting.CraftingShaped;
 import com.friska.mrm.mcresources.recipes.crafting.CraftingShapeless;
 import com.friska.mrm.registries.ResourceManager;
 
