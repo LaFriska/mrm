@@ -1,11 +1,9 @@
 package com.friska.mrm.registries;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
-import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.mcresources.lang.Lang;
 import com.friska.mrm.mcresources.recipes.Recipe;
-import com.friska.mrm.mcresources.recipes.cooking.CookingRecipe;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -30,6 +28,7 @@ public class ResourceManager {
      * Registration of multiple resources.
      * @param resources The resources you wish to register (e.g. SmeltingRecipe objects, or Lang objects). Separate them via commas.
      * **/
+    @SafeVarargs
     public static <T extends MinecraftJSONResource> void register(@Nonnull T... resources){
         List.of(resources).forEach(ResourceManager::register);
     }

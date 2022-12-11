@@ -11,6 +11,7 @@ public class Recipe extends MinecraftJSONResource {
     protected String result;
 
     protected Recipe(){
+        super();
         setPath("data/" + Config.getModID() + "/recipes");
     }
 

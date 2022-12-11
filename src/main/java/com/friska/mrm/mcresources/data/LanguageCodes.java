@@ -94,7 +94,7 @@ public class LanguageCodes {
     public static final String MONGOLIAN = "mn_mn";
     public static final String MALAY = "ms_my";
     public static final String MALTESE = "mt_mt";
-    @Deprecated
+    //@Deprecated()
     public static final String NAHUATL = "nah";
     public static final String LOW_GERMAN = "nds_de";
     public static final String DUTCH_FLEMISH = "nl_be";
@@ -110,7 +110,7 @@ public class LanguageCodes {
     public static final String ROMANIAN = "ro_ro";
     public static final String PRE_REVOLUTIONARY_RUSSIAN = "rpr";
     public static final String RUSSIAN = "ru_ru";
-    @Deprecated
+    //@Deprecated
     public static final String RUSYN = "ry_ua";
     public static final String NORTHERN_SAMI = "se_no";
     public static final String SLOVAK = "sk_sk";

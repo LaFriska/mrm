@@ -30,13 +30,6 @@ public class CookingRecipe extends Recipe {
     }
 
     /**
-     * Sets the cooking time in minecraft ticks (1/20th of a second).
-     * **/
-    protected void setCookingTime(@Nonnull Integer cookingTime) {
-        this.cookingTime = cookingTime;
-    }
-
-    /**
      * Should not be directly called from this class, only from child classes.
      **/
     @Override
