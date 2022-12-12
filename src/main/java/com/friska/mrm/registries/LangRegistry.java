@@ -8,18 +8,18 @@ import java.util.ArrayList;
 
 public class LangRegistry{
 
-    private static ArrayList<Lang> LANGS = new ArrayList<>();
-    private static ArrayList<String> uniqueLanguageCodes = new ArrayList<>();
+    private static final ArrayList<Lang> LANGS = new ArrayList<>();
+    private static final ArrayList<String> UNIQUE_LANGUAGE_CODES = new ArrayList<>();
 
     /**
      * Use the static strings in the LanguageCode class to find the correct language code. Language codes are basically the name for your language JSON file, e.g en_us.json
      * **/
     public static void register(@Nonnull Lang lang){
         String languageCode = lang.getLanguageCode();
-        if(uniqueLanguageCodes.contains(languageCode)){
+        if(UNIQUE_LANGUAGE_CODES.contains(languageCode)){
             langWithLanguageCode(languageCode).inject(lang);
         }else{
-            uniqueLanguageCodes.add(languageCode);
+            UNIQUE_LANGUAGE_CODES.add(languageCode);
             LANGS.add(lang);
         }
     }

@@ -1,6 +1,7 @@
 package com.friska.mrm.mcresources.models;
 
 import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.config.Config;
 import com.friska.mrm.mcresources.data.BlockModelParents;
 import com.friska.mrm.serialiser.builder.JValue;
@@ -26,10 +27,10 @@ public class BlockModel extends Model{
      * <p>
      * Regardlessly, this class provides basic tools and templates that can cover 95% of the blocks you are adding, such as stairs, slabs, signs etc.
      *
-     * @param name Name of the JSON file, should also be the model blockstate.
+     * @param blockId Name of the JSON file, should also be the model blockstate.
      * **/
-    public BlockModel(@Nonnull String name) {
-        super("block", name);
+    public BlockModel(@Nonnull String blockId) {
+        super("block", blockId);
     }
 
     //---------------------------------HIGHER LEVEL ACCESS (Templates etc.)---------------------------------//
@@ -48,8 +49,56 @@ public class BlockModel extends Model{
      * This template creates a normal Minecraft cube used in most blocks, e.g. dirt, stone, diamond ore, etc.
      * @param textureName specify the name of the PNG file for the texture.
      * **/
+    @NeedsRevision
     public BlockModel defaultCube(String textureName){
         return this.setParent(BlockModelParents.CUBE_ALL).addTexture("all", getTextureName(textureName));
+    }
+
+    //Trees
+    /**
+     * <b>Log Models</b>
+     * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
+     * **/
+    public BlockModel log(@Nonnull String sideTexture, @Nonnull String endTexture){
+        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new ModelTexture("end", getTextureName(endTexture)), new ModelTexture("side", getTextureName(sideTexture)));
+    }
+
+    /**
+     * <b>Horizontal Log Models</b>
+     * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
+     * **/
+    public BlockModel logHorizontal(@Nonnull String sideTexture, @Nonnull String endTexture){
+        return this.log(sideTexture, endTexture).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
+    }
+
+    /**
+     * <b>Leaves Models</b>
+     * **/
+    public BlockModel leaves(@Nonnull String textureName){
+        return this.defaultCube(textureName).setRenderType("translucent");
+    }
+
+    /**
+     * <b>Sapling Models</b>
+     * **/
+    public BlockModel sapling(@Nonnull String textureName){
+        return this.setParent(BlockModelParents.CROSS).addTexture("cross", getTextureName(textureName)).setRenderType("cutout");
+    }
+
+    /**
+     * <b>Wood Models</b>
+     * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
+     * **/
+    public BlockModel wood(@Nonnull String textureName){
+        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new ModelTexture("end", getTextureName(textureName)), new ModelTexture("side", getTextureName(textureName)));
+    }
+
+    /**
+     * <b>Wood Models</b>
+     * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
+     * **/
+    public BlockModel woodHorizontal(@Nonnull String textureName){
+        return this.wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
     //---------------------------------LOWER LEVEL ACCESS (Serializer-like methods)---------------------------------//
