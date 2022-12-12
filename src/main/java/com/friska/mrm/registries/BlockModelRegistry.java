@@ -10,7 +10,12 @@ public class BlockModelRegistry {
     private static final ArrayList<BlockModel> MODELS = new ArrayList<>();
 
     public static void register(BlockModel blockModel){
+        MODELS.add(blockModel);
+    }
 
+    public static void build(){
+        RegistryUtil.updateNames(MODELS);
+        MODELS.forEach(BlockModel::build);
     }
 
 }
