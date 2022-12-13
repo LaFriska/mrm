@@ -26,10 +26,7 @@ public class RecipeRegistry {
     private static final ArrayList<CraftingShaped> CRAFTING_SHAPED = new ArrayList<>();
     private static ArrayList<CraftingShapeless> CRAFTING_SHAPELESS = new ArrayList<>();
 
-    /**
-     * Registers any recipe objects.
-     * **/
-    public static <T extends Recipe> void register (T recipe){
+    protected static <T extends Recipe> void register (T recipe){
         addToAppropriateArray(recipe);
     }
 
@@ -66,11 +63,14 @@ public class RecipeRegistry {
         return arrayList;
     }
 
-    /**
-     * Builds all cooking recipes.
-     * **/
-    public static void build(){
+
+    protected static void build(){
+        if(all().isEmpty()){
+            return;
+        }
+        System.out.println("Checking and updating duplicate names for all recipe builders...");
         RegistryUtil.updateNames(all());
+        System.out.println("Building all recipes...");
         SMELTING.forEach(SmeltingRecipe::build);
         BLASTING.forEach(BlastingRecipe::build);
         SMOKING.forEach(SmokingRecipe::build);

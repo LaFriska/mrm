@@ -1,14 +1,15 @@
 package com.friska.mrm.registries;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.mcresources.lang.Lang;
+import com.friska.mrm.mcresources.models.BlockModel;
 import com.friska.mrm.mcresources.recipes.Recipe;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-@ExpectModdersToAccess
+@ExpectAccess
 @SuppressWarnings("unused")
 public class ResourceManager {
 
@@ -21,6 +22,8 @@ public class ResourceManager {
             LangRegistry.register((Lang) resource);
         } else if (resource instanceof Recipe){
             RecipeRegistry.register((Recipe) resource);
+        } else if (resource instanceof BlockModel){
+            BlockModelRegistry.register((BlockModel) resource);
         }
     }
 
@@ -36,8 +39,12 @@ public class ResourceManager {
      * This method builds all registered managers into actual JSON files. This should be called when all resources are registered.
      * **/
     public static void buildAll(){
+        System.out.println("-------------------------Minecraft Resource Manager-------------------------------");
+        System.out.println("Started building all Minecraft resources...");
         LangRegistry.build();
         RecipeRegistry.build();
+        BlockModelRegistry.build();
+        System.out.println("-------------------------Minecraft Resource Manager-------------------------------");
     }
 
 }

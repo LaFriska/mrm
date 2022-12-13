@@ -1,11 +1,11 @@
 package com.friska.mrm.mcresources.recipes;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
-@ExpectModdersToAccess
+@ExpectAccess
 public class StoneCuttingRecipe extends Recipe{
 
     private String ingredient;
@@ -41,8 +41,9 @@ public class StoneCuttingRecipe extends Recipe{
      * Sets the count of result output from the stone cutting recipe.
      * @param count The number of results output from the stone cutter, do not call this method if you wish to default the count as 1.
      * **/
-    public void setCount(int count) {
+    public StoneCuttingRecipe setCount(int count) {
         this.count = count;
+        return this;
     }
 
     /**

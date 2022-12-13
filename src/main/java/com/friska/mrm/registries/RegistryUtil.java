@@ -6,7 +6,7 @@ import com.friska.mrm.mcresources.recipes.Recipe;
 import java.util.ArrayList;
 
 public class RegistryUtil {
-    public static void updateNames(ArrayList<? extends MinecraftJSONResource> resources){
+    protected static void updateNames(ArrayList<? extends MinecraftJSONResource> resources){
         String[] names = getAllNames(resources);
         int duplicates;
         String check;

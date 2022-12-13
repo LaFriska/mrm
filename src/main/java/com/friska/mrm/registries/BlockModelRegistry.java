@@ -9,12 +9,15 @@ public class BlockModelRegistry {
 
     private static final ArrayList<BlockModel> MODELS = new ArrayList<>();
 
-    public static void register(BlockModel blockModel){
+    protected static void register(BlockModel blockModel){
         MODELS.add(blockModel);
     }
 
-    public static void build(){
+    protected static void build(){
+        if(MODELS.isEmpty()){return;}
+        System.out.println("Checking and updating duplicate names for all block model builders...");
         RegistryUtil.updateNames(MODELS);
+        System.out.println("Building block models...");
         MODELS.forEach(BlockModel::build);
     }
 

@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 /**
  * Creates a recipe for furnace, smoker, blast furnace, and campfires, all of which are given their individual classes and inherits this class. DO NOT TRY TO INSTANTIATE THIS CLASS.
  * **/
-public class CookingRecipe extends Recipe {
+public abstract class CookingRecipe extends Recipe {
     protected String ingredient;
     protected float experience;
     protected int cookingTime;

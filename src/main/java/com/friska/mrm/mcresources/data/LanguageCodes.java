@@ -1,12 +1,12 @@
 package com.friska.mrm.mcresources.data;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 
 /**
  *Call any static strings to get the language code of that language. Those labeled with deprecated annotation means that Minecraft 1.19+ no longer offers that language.
  * **/
 @SuppressWarnings({"unused", "SpellCheckingInspection"})
-@ExpectModdersToAccess
+@ExpectAccess
 public class LanguageCodes {
 
     public static final String AFRIKAANS = "af_za";

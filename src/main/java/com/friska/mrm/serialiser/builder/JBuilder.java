@@ -61,7 +61,6 @@ public class JBuilder extends JObject {
                 Files.createDirectories(Path.of(path));
                 createJSON(path, name);
             } catch (IOException e) {
-                System.out.println(path);
                 e.printStackTrace();
             }
         } else {
@@ -75,16 +74,16 @@ public class JBuilder extends JObject {
         File file = new File(path, name);
         if (!file.createNewFile()) {
             if(this.overrideExistingFile){
-                System.out.println(name + " already exists, updating file instead.");
+                System.out.println("    " + name + " already exists, updating file instead.");
                 updateJSON(path, name);
             }else{
-                if(this.nameNumberChain == 0) System.out.println(name + " already exists, creating JSON with another name.");
+                if(this.nameNumberChain == 0) System.out.println("    " + name + " already exists, creating JSON with another name.");
                 this.nameNumberChain++;
                 createJSON(path, getName(false) + "_" + nameNumberChain + ".json");
             }
         } else {
             updateJSON(path, name);
-            System.out.println(name + " successfully created.");
+            System.out.println("    " + name + " successfully created.");
         }
     }
 

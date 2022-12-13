@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 
 import javax.annotation.Nonnull;
-@ExpectModdersToAccess
+@ExpectAccess
 public class SmokingRecipe extends CookingRecipe {
     /**
      * This class creates a smoking recipe, used in minecraft smokers.

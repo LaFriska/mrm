@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.recipes.crafting;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.exceptions.CraftingRecipeException;
 import com.friska.mrm.serialiser.builder.JArray;
 import com.friska.mrm.serialiser.builder.JObject;
@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ExpectModdersToAccess
-public class CraftingShapeless extends Crafting{
+@ExpectAccess
+public class CraftingShapeless extends Crafting<CraftingShapeless>{
 
     ArrayList<String> ingredients = new ArrayList<>();
 
@@ -42,24 +42,6 @@ public class CraftingShapeless extends Crafting{
      * **/
     public CraftingShapeless addIngredient(String id){
         addIngredient(id, 1);
-        return this;
-    }
-
-    /**
-     * Sets the count of result output from the crafting recipe.
-     * @param count The number of results output from the crafting table, do not call this method, or simply parse null through it if you wish to leave the count undefined (which would be defaulted to 1 when Minecraft reads the JSON).
-     * **/
-    public CraftingShapeless setCount(@Nullable Integer count) {
-        this.count = count;
-        return this;
-    }
-
-    /**
-     * Sets the group of your recipe. For example, all wooden door crafting recipes are grouped under "wooden_door"
-     * @param group parse the String ID of the group.
-     * **/
-    public CraftingShapeless setGroup(@Nullable String group) {
-        this.group = group;
         return this;
     }
 

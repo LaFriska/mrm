@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.recipes.crafting;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.exceptions.CraftingRecipeException;
 import com.friska.mrm.serialiser.builder.JArray;
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NeedsRevision("Inefficient and messy")
-@ExpectModdersToAccess
-public class CraftingShaped extends Crafting {
+@ExpectAccess
+public class CraftingShaped extends Crafting<CraftingShaped> {
 
     private ArrayList<CraftingKey> keys = new ArrayList<>();
     private String[] rows;
@@ -38,15 +38,6 @@ public class CraftingShaped extends Crafting {
     }
 
     /**
-     * Sets the count of result output from the crafting recipe.
-     * @param count The number of results output from the crafting table, do not call this method, or simply parse null through it if you wish to leave the count undefined (which would be defaulted to 1 when Minecraft reads the JSON).
-     * **/
-    public CraftingShaped setCount(@Nullable Integer count) {
-        this.count = count;
-        return this;
-    }
-
-    /**
      * Sets the result of the recipe.
      * @param result Item/Tag ID of the result.
      * **/
@@ -54,15 +45,6 @@ public class CraftingShaped extends Crafting {
         this.result = result;
         setAndTruncateName(result);
         //createBuilder();
-        return this;
-    }
-
-    /**
-     * Sets the group of your recipe. For example, all wooden door crafting recipes are grouped under "wooden_door"
-     * @param group parse the String ID of the group.
-     * **/
-    public CraftingShaped setGroup(@Nullable String group) {
-        this.group = group;
         return this;
     }
 

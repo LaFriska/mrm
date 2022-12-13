@@ -1,12 +1,12 @@
 package com.friska.mrm.mcresources.recipes;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
 
-@ExpectModdersToAccess
+@ExpectAccess
 public class SmithingRecipe extends Recipe{
     private String base;
     private String addition;

@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 
 import javax.annotation.Nonnull;
-@ExpectModdersToAccess
+@ExpectAccess
 public class BlastingRecipe extends CookingRecipe{
 
     /**

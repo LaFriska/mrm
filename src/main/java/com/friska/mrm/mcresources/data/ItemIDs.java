@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.data;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.config.Config;
 import com.friska.mrm.exceptions.CannotFindModIDException;
 
@@ -8,7 +8,7 @@ import com.friska.mrm.exceptions.CannotFindModIDException;
  *Call any static strings to get the item ID.
  * **/
 @SuppressWarnings({"unused", "minecraft:SpellCheckingInspection"})
-@ExpectModdersToAccess
+@ExpectAccess
 public class ItemIDs {
     public static final String ACACIA_BOAT = "minecraft:acacia_boat";
     public static final String ACACIA_BOAT_WITH_CHEST = "minecraft:acacia_chest_boat";
@@ -1163,7 +1163,7 @@ public class ItemIDs {
     public static final String ZOMBIFIED_PIGLIN_SPAWN_EGG = "minecraft:zombified_piglin_spawn_egg";
 
     /**
-     * Gets a modded item/tag ID. This method clips the mod ID to the name space of an item/tag ID. For example, inputting "uranium" will output modid:uranium, with "modid" being your mod id.
+     * Gets a modded item/tag ID. This method clips the mod ID to the name space of an item/tag ID. For example, inputting "uranium" will output modid:uranium, with "modid" being your mod key.
      * **/
     public static String getModdedID(String id){
         if(Config.isModIDDefined()){

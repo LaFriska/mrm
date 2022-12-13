@@ -1,9 +1,10 @@
 package com.friska.mrm.mcresources.models;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.config.Config;
 import com.friska.mrm.mcresources.data.BlockModelParents;
+import com.friska.mrm.mcresources.lang.KeyValue;
 import com.friska.mrm.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
@@ -11,8 +12,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 
-@ExpectModdersToAccess
-public class BlockModel extends Model{
+@ExpectAccess
+public class BlockModel extends Model<BlockModel>{
 
     private String renderType = null;
 
@@ -33,7 +34,7 @@ public class BlockModel extends Model{
         super("block", blockId);
     }
 
-    //---------------------------------HIGHER LEVEL ACCESS (Templates etc.)---------------------------------//
+    //---------------------------------HIGHER LEVEL ACCESS---------------------------------//
 
     /**
      * <b>Default Cube</b>
@@ -60,7 +61,7 @@ public class BlockModel extends Model{
      * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
      * **/
     public BlockModel log(@Nonnull String sideTexture, @Nonnull String endTexture){
-        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new ModelTexture("end", getTextureName(endTexture)), new ModelTexture("side", getTextureName(sideTexture)));
+        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(endTexture)), new KeyValue("side", getTextureName(sideTexture)));
     }
 
     /**
@@ -90,7 +91,7 @@ public class BlockModel extends Model{
      * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
      * **/
     public BlockModel wood(@Nonnull String textureName){
-        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new ModelTexture("end", getTextureName(textureName)), new ModelTexture("side", getTextureName(textureName)));
+        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(textureName)), new KeyValue("side", getTextureName(textureName)));
     }
 
     /**
@@ -101,37 +102,7 @@ public class BlockModel extends Model{
         return this.wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
-    //---------------------------------LOWER LEVEL ACCESS (Serializer-like methods)---------------------------------//
-
-    /**
-     * This method sets the parent model. Similarly to java classes, Minecraft model JSON files can "inherit" other model files.
-     * @param parent Path and name of the parent model. Use the static strings defined under BlockModelParents for a list of every parent models used in Minecraft.
-     * An example of this is "minecraft:block/outer_stairs".
-     * **/
-    public BlockModel setParent(@Nonnull String parent){
-        this.parent = parent;
-        return this;
-    }
-
-    /**
-     * Adds a key-value pair for textures used in models.
-     * @param key The key of the texture, for example, "layer0".
-     * @param texture The path and name of the texture file, for example, "minecraft:block/acacia_planks".
-     * **/
-    public BlockModel addTexture(@Nullable String key, @Nonnull String texture){
-        if(key == null) key = "";
-        this.textures.add(new ModelTexture(key, texture));
-        return this;
-    }
-
-    /**
-     * Adds multiple key-value pair for textures used in models.
-     * @param textures Vararg of ModelTextures, which are records with both the key and the value as parameters.
-     * **/
-    public BlockModel addTextures(@Nonnull ModelTexture... textures){
-        List.of(textures).forEach((t) -> addTexture(t.key(), t.texture()));
-        return this;
-    }
+    //---------------------------------LOWER LEVEL ACCESS ---------------------------------//
 
     /**
      * Setting the render type for the block model. Compatibility is unknown with Fabric, this is mainly a forge feature.
@@ -143,6 +114,9 @@ public class BlockModel extends Model{
         return this;
     }
 
+    /**
+     * Builds the JSON file.
+     ***/
     @Override
     public void build() {
         super.build();

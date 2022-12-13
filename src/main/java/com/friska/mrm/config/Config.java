@@ -1,10 +1,10 @@
 package com.friska.mrm.config;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 
 import javax.annotation.Nonnull;
 
-@ExpectModdersToAccess
+@ExpectAccess
 public class Config {
 
     private static String MODID = null;

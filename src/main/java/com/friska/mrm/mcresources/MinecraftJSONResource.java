@@ -4,7 +4,7 @@ import com.friska.mrm.exceptions.ResourcePathException;
 import com.friska.mrm.serialiser.builder.JBuilder;
 import com.friska.mrm.config.Config;
 
-public class MinecraftJSONResource {
+public abstract class MinecraftJSONResource {
     protected JBuilder builder;
     protected String path;
     protected String name;

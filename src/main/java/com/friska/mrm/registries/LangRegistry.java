@@ -11,10 +11,7 @@ public class LangRegistry{
     private static final ArrayList<Lang> LANGS = new ArrayList<>();
     private static final ArrayList<String> UNIQUE_LANGUAGE_CODES = new ArrayList<>();
 
-    /**
-     * Use the static strings in the LanguageCode class to find the correct language code. Language codes are basically the name for your language JSON file, e.g en_us.json
-     * **/
-    public static void register(@Nonnull Lang lang){
+    protected static void register(@Nonnull Lang lang){
         String languageCode = lang.getLanguageCode();
         if(UNIQUE_LANGUAGE_CODES.contains(languageCode)){
             langWithLanguageCode(languageCode).inject(lang);
@@ -33,10 +30,9 @@ public class LangRegistry{
         return null;
     }
 
-    /**
-     * Builds all registered Lang objects.
-     * **/
-    public static void build(){
+    protected static void build(){
+        if(LANGS.isEmpty()){return;}
+        System.out.println("Building language files...");
         LANGS.forEach(Lang::build);
     }
 }

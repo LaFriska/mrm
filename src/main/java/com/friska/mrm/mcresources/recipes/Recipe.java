@@ -6,7 +6,7 @@ import com.friska.mrm.exceptions.UnexpectedTagException;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 
 
-public class Recipe extends MinecraftJSONResource {
+public abstract class Recipe extends MinecraftJSONResource {
     protected String type;
     protected String result;
 

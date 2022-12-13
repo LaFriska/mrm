@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 
 import javax.annotation.Nonnull;
-@ExpectModdersToAccess
+@ExpectAccess
 public class CampfireRecipe extends CookingRecipe{
     /**
      * This class creates a campfire cooking recipe, used in minecraft campfires.

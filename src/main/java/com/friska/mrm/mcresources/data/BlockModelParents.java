@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.data;
 
-import com.friska.mrm.annotations.ExpectModdersToAccess;
+import com.friska.mrm.annotations.ExpectAccess;
 
 @SuppressWarnings("unused")
-@ExpectModdersToAccess
+@ExpectAccess
 public class BlockModelParents {
     public static final String BUTTON = "minecraft:block/button";
     public static final String BUTTON_INVENTORY = "minecraft:block/button_inventory";
