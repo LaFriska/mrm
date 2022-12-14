@@ -15,10 +15,6 @@ import java.util.List;
 @ExpectAccess
 public class BlockModel extends Model<BlockModel>{
 
-    private String renderType = null;
-
-    private static final String texturePath = Config.getModID() + ":block/";
-
     /**
      * This class creates JSON files for block models.
      * Please note that this class does not have enough attributes to support a Block Model creator for all aspects of block models. Even if it does, it would be a complete mess to
@@ -32,9 +28,8 @@ public class BlockModel extends Model<BlockModel>{
      * **/
     public BlockModel(@Nonnull String blockId) {
         super("block", blockId);
+        texturePath = Config.getModID() + ":block/";
     }
-
-    //---------------------------------HIGHER LEVEL ACCESS---------------------------------//
 
     /**
      * <b>Default Cube</b>
@@ -102,18 +97,6 @@ public class BlockModel extends Model<BlockModel>{
         return this.wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
-    //---------------------------------LOWER LEVEL ACCESS ---------------------------------//
-
-    /**
-     * Setting the render type for the block model. Compatibility is unknown with Fabric, this is mainly a forge feature.
-     * The render type indicates how the block should be rendered, whether it is transparent or translucent.
-     * @param renderType To specify a render type, there is a list of render type strings like "translucent" or "transparent".
-     * **/
-    public BlockModel setRenderType(String renderType) {
-        this.renderType = renderType;
-        return this;
-    }
-
     /**
      * Builds the JSON file.
      ***/
@@ -123,11 +106,4 @@ public class BlockModel extends Model<BlockModel>{
         if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
         getBuilder().build();
     }
-
-    //---------------------------------UTIL METHODS---------------------------------//
-
-    private static String getTextureName(String name){
-        return texturePath + name;
-    }
-
 }

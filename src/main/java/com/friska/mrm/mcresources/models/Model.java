@@ -17,6 +17,10 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
     protected String parent = null;
     protected ArrayList<KeyValue> textures = new ArrayList<>();
 
+    protected static String texturePath;
+
+    protected String renderType = null;
+
     protected Model(@Nonnull String type, @Nonnull String name){
         super();
         setPath("assets/" + Config.getModID() + "/models/" + type);
@@ -57,9 +61,41 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
      * Adds multiple key-value pair for textures used in models.
      * @param textures Vararg of ModelTextures, which are records with both the key and the value as parameters.
      * **/
-
     public T addTextures(@Nonnull KeyValue... textures){
         List.of(textures).forEach((t) -> addTexture(t.key(), t.value()));
         return (T) this;
     }
+
+    /**
+     * Edits the KeyValue holding the textures with a certain key by replacing it with a new texture.
+     * Keep in mind that all textures that share the same key will be editted. Note that this method is computational expensive.
+     * @param key The key pointing to the KeyValue.
+     * @param newTexture The new texture.
+     * **/
+    public T editTexture(@Nonnull String key, @Nonnull String newTexture){
+
+        for (int i = 0; i <= textures.size() - 1; i++) {
+            KeyValue t = textures.get(i);
+            if(t.key().equals(key)){
+                textures.remove(i);
+                textures.add(i, new KeyValue(key, newTexture));
+            }
+        }
+        return (T) this;
+    }
+
+    /**
+     * Setting the render type for the block model. Compatibility is unknown with Fabric, this is mainly a forge feature.
+     * The render type indicates how the block should be rendered, whether it is transparent or translucent.
+     * @param renderType To specify a render type, there is a list of render type strings like "translucent" or "transparent".
+     * **/
+    public T setRenderType(String renderType) {
+        this.renderType = renderType;
+        return (T) this;
+    }
+
+    protected static String getTextureName(String name){
+        return texturePath + name;
+    }
+
 }
