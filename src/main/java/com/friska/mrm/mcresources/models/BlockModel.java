@@ -28,7 +28,6 @@ public class BlockModel extends Model<BlockModel>{
      * **/
     public BlockModel(@Nonnull String blockId) {
         super("block", blockId);
-        texturePath = Config.getModID() + ":block/";
     }
 
     /**
@@ -37,7 +36,7 @@ public class BlockModel extends Model<BlockModel>{
      * This template creates a normal Minecraft cube used in most blocks, e.g. dirt, stone, diamond ore, etc. Texture is defaulted to be the name of the JSON file.
      * **/
     public BlockModel defaultCube(){
-        return this.setParent(BlockModelParents.CUBE_ALL).addTexture("all", getTextureName(name));
+        return this.defaultCube(name);
     }
     /**
      * <b>Default Cube</b> (Specific texture)
@@ -47,16 +46,16 @@ public class BlockModel extends Model<BlockModel>{
      * **/
     @NeedsRevision
     public BlockModel defaultCube(String textureName){
-        return this.setParent(BlockModelParents.CUBE_ALL).addTexture("all", getTextureName(textureName));
+        return new BlockModel(name).setParent(BlockModelParents.CUBE_ALL).addTexture("all", getTextureName(textureName));
     }
 
-    //Trees
+    //----------------------------------------------------------Trees----------------------------------------------------------//
     /**
      * <b>Log Models</b>
      * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
      * **/
     public BlockModel log(@Nonnull String sideTexture, @Nonnull String endTexture){
-        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(endTexture)), new KeyValue("side", getTextureName(sideTexture)));
+        return new BlockModel(name).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(endTexture)), new KeyValue("side", getTextureName(sideTexture)));
     }
 
     /**
@@ -64,21 +63,21 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
      * **/
     public BlockModel logHorizontal(@Nonnull String sideTexture, @Nonnull String endTexture){
-        return this.log(sideTexture, endTexture).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
+        return new BlockModel(name).log(sideTexture, endTexture).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
     /**
      * <b>Leaves Models</b>
      * **/
     public BlockModel leaves(@Nonnull String textureName){
-        return this.defaultCube(textureName).setRenderType("translucent");
+        return new BlockModel(name).defaultCube(textureName).setRenderType("translucent");
     }
 
     /**
      * <b>Sapling Models</b>
      * **/
     public BlockModel sapling(@Nonnull String textureName){
-        return this.setParent(BlockModelParents.CROSS).addTexture("cross", getTextureName(textureName)).setRenderType("cutout");
+        return new BlockModel(name).setParent(BlockModelParents.CROSS).addTexture("cross", getTextureName(textureName)).setRenderType("cutout");
     }
 
     /**
@@ -86,7 +85,7 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
      * **/
     public BlockModel wood(@Nonnull String textureName){
-        return this.setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(textureName)), new KeyValue("side", getTextureName(textureName)));
+        return new BlockModel(name).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(textureName)), new KeyValue("side", getTextureName(textureName)));
     }
 
     /**
@@ -94,16 +93,8 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
      * **/
     public BlockModel woodHorizontal(@Nonnull String textureName){
-        return this.wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
+        return new BlockModel(name).wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
-    /**
-     * Builds the JSON file.
-     ***/
-    @Override
-    public void build() {
-        super.build();
-        if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
-        getBuilder().build();
-    }
+    //--------------------------------------------------------------------------------------------------------------------//
 }

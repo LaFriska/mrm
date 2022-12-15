@@ -1,6 +1,7 @@
 package com.friska.mrm.config;
 
 import com.friska.mrm.annotations.ExpectAccess;
+import com.friska.mrm.exceptions.CannotFindModIDException;
 
 import javax.annotation.Nonnull;
 
@@ -52,6 +53,7 @@ public class Config {
      * Returns the mod ID. Use setModID to define it.
      * **/
     public static String getModID() {
+        if(MODID == null) throw new CannotFindModIDException("Define your Mod ID before running any other code, call the method Config.setModID().");
         return MODID;
     }
 

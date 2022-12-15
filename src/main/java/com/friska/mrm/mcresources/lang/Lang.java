@@ -42,7 +42,7 @@ public class Lang extends MinecraftJSONResource {
      *                     <b>Use the LanguageCodes class and call the static strings for the sake of convenience</b>
      * **/
     public Lang(@Nonnull String languageCode){
-        super();
+        super("language");
         setPath("assets/" + Config.getModID() + "/lang");
         this.languageCode = languageCode;
         setName(languageCode);
@@ -130,6 +130,7 @@ public class Lang extends MinecraftJSONResource {
     public Lang addMiscs(KeyValue... translations){misc.addAll(List.of(translations));return this;}
 
     /**Builds the language JSON file.**/
+    @Override
     public void build() {
         createBuilder();
         all().forEach(this::iterate);
@@ -155,21 +156,6 @@ public class Lang extends MinecraftJSONResource {
         meta.add(biomes);
         meta.add(misc);
         return meta;
-    }
-
-
-    /**
-     * Absorbing another Lang object to combine it into one. This should only be done when the two objects have the same language code.
-     * @param lang The Lang object.
-     * **/
-    @NeedsRevision("Should be done in a more abstract way, and should be done in registries, not the Lang class itself.")
-    public void inject(Lang lang){
-        System.out.println("Combining two instances of " + lang.getLanguageCode() + " language files...");
-        ArrayList<ArrayList<KeyValue>> all = this.all();
-        ArrayList<ArrayList<KeyValue>> needle = lang.all();
-        for(int i = 0; i <= all.size() - 1; i++){
-            all.get(i).addAll(needle.get(i));
-        }
     }
 
     /**Gets the language code.**/

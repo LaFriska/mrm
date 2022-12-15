@@ -21,12 +21,20 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
 
     protected String renderType = null;
 
+    protected final String type;
+
     protected Model(@Nonnull String type, @Nonnull String name){
-        super();
+        super(type + " model");
         setPath("assets/" + Config.getModID() + "/models/" + type);
         setName(name);
+        texturePath = Config.getModID() + ":" + type +"/";
+
+        this.type = type;
     }
-    protected void build(){
+
+    /**Builds the JSON file.**/
+    @Override
+    public void build(){
         createBuilder();
         if(parent != null) getBuilder().nest(new JValue<>("parent", parent));
         if(!textures.isEmpty()) {
@@ -34,6 +42,8 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
             textures.forEach((mt) -> texturesJObject.nest(mt.toJValue()));
             getBuilder().nest(texturesJObject);
         }
+        if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
+        getBuilder().build();
     }
 
     /**

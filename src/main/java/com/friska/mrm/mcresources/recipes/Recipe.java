@@ -11,7 +11,7 @@ public abstract class Recipe extends MinecraftJSONResource {
     protected String result;
 
     protected Recipe(){
-        super();
+        super("recipe");
         setPath("data/" + Config.getModID() + "/recipes");
     }
 
@@ -62,7 +62,8 @@ public abstract class Recipe extends MinecraftJSONResource {
         this.name = name;
     }
 
-    protected void build(){
+    @Override
+    public void build(){
         createBuilder();
         checkResultForTag(result);
     }

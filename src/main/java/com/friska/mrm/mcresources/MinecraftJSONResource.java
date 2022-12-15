@@ -4,12 +4,17 @@ import com.friska.mrm.exceptions.ResourcePathException;
 import com.friska.mrm.serialiser.builder.JBuilder;
 import com.friska.mrm.config.Config;
 
+import javax.annotation.Nonnull;
+
 public abstract class MinecraftJSONResource {
     protected JBuilder builder;
     protected String path;
     protected String name;
 
-    public MinecraftJSONResource(){
+    private String resourceType;
+
+    public MinecraftJSONResource(@Nonnull String resourceType){
+        this.resourceType = resourceType;
         if(!Config.isModIDDefined()){
             throw new ResourcePathException("The Mod ID is null, define by calling Config.setModID().");
         }
@@ -31,9 +36,6 @@ public abstract class MinecraftJSONResource {
         return name;
     }
 
-    /**
-     * Initiates JBuilder;
-     * **/
     protected void createBuilder(){
         this.builder = new JBuilder(path, name);
     }
@@ -41,4 +43,10 @@ public abstract class MinecraftJSONResource {
     public JBuilder getBuilder(){
         return this.builder;
     }
+
+    public String getResourceType() {
+        return resourceType;
+    }
+
+    public abstract void build();
 }

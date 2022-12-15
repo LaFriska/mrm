@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 
 /**
- * Targets labeled with this means that the code needs to be revised, and reworked, meaning that it might not work as intended.
+ * Targets labeled with this means that the code needs to be revised, and reworked, meaning that it might not function as intended.
  * **/
 @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, MODULE})
 @Retention(RetentionPolicy.SOURCE)

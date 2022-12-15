@@ -10,9 +10,7 @@ import com.friska.mrm.mcresources.recipes.cooking.BlastingRecipe;
 import com.friska.mrm.mcresources.recipes.cooking.SmeltingRecipe;
 import com.friska.mrm.mcresources.recipes.crafting.CraftingShaped;
 import com.friska.mrm.mcresources.recipes.crafting.CraftingShapeless;
-import com.friska.mrm.registries.BlockModelRegistry;
 import com.friska.mrm.registries.ResourceManager;
-import com.friska.mrm.templates.TreeBlocks;
 
 public class Main {
 
@@ -34,6 +32,11 @@ public class Main {
                 new KeyValue("cup", "The Cup")
         );
 
+        Lang lang1 = new Lang(LanguageCodes.AMERICAN_ENGLISH);
+        lang1.addBiome("bruh", "The Bruh").addItem("lmao", "Lmao").addBlocks(
+                new KeyValue("Pebis", "Pebis Ore")
+        );
+
         ResourceManager.register(
                 new SmeltingRecipe(ItemIDs.SADDLE, ItemIDs.BEACON, 2, 3),
                 new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
@@ -42,8 +45,9 @@ public class Main {
                 new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
                 new CraftingShaped("xxx", "xox","xxx").setCount(3).addKey('x', ItemIDs.NETHER_STAR).addKey('o', ItemIDs.REDSTONE_DUST).setResult(ItemIDs.OBSIDIAN).setGroup("lmao"),
                 new CraftingShapeless(ItemIDs.NOTE_BLOCK).addIngredient(ItemIDs.REDSTONE_DUST).setCount(3).addIngredient(ItemIDs.OBSIDIAN),
-                new BlockModel("uranium_block").defaultCube(),
-                lang
+                new BlockModel("uranium_block").defaultCube().log("uranium_end", "uranium_side"),
+                lang,
+                lang1
         );
 
         ResourceManager.buildAll();

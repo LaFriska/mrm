@@ -1,11 +1,17 @@
 package com.friska.mrm.registries;
 
+import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
+import com.friska.mrm.mcresources.lang.KeyValue;
+import com.friska.mrm.mcresources.lang.Lang;
 import com.friska.mrm.mcresources.recipes.Recipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RegistryUtil {
+
+    //UTIL
     protected static void updateNames(ArrayList<? extends MinecraftJSONResource> resources){
         String[] names = getAllNames(resources);
         int duplicates;
@@ -24,6 +30,28 @@ public class RegistryUtil {
             }
         }
     }
+
+    @NeedsRevision
+    //THIS METHOD DOES NOT CHECK WHETHER ALL THE LANGUAGE CODES ARE THE SAME, IN RETURN FOR BETTER EFFICIENCY.
+    public static Lang combineLang(ArrayList<Lang> candidates){
+
+        System.out.println("Combining multiple instances of " + candidates.get(0).getLanguageCode() + " language files...");
+
+        ArrayList<ArrayList<KeyValue>> all = candidates.get(0).all();
+        ArrayList<ArrayList<KeyValue>> needle;
+
+        for(int o = 1; o <= candidates.size() - 1; o++) {
+            needle = candidates.get(o).all();
+            for (int i = 0; i <= all.size() - 1; i++) {
+                all.get(i).addAll(needle.get(i));
+            }
+        }
+        return candidates.get(0);
+    }
+
+
+    //PRIVATE METHODS
+
     private static String[] getAllNames(ArrayList<? extends MinecraftJSONResource> resources){
         String[] result = new String[resources.size()];
         for(int i = 0; i <= result.length - 1; i++){
