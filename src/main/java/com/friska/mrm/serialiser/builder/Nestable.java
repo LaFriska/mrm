@@ -7,6 +7,15 @@ import java.util.ArrayList;
 
 public abstract class Nestable {
 
+
+    protected String data;
+    protected String key;
+
+    protected ArrayList<JProperty> properties;
+    protected ArrayList<String> propertiesData;
+
+    protected StringBuilder propertyDataClip;
+
     public Nestable(@Nullable String key){
 
         String check;
@@ -23,13 +32,6 @@ public abstract class Nestable {
         this.properties = new ArrayList<>();
         this.propertiesData = new ArrayList<>();
     }
-    protected String data;
-    protected String key;
-
-    protected ArrayList<JProperty> properties;
-    protected ArrayList<String> propertiesData;
-
-    protected StringBuilder propertyDataClip;
 
     public void appendPropertyData(){
         this.propertyDataClip = new StringBuilder();
@@ -67,5 +69,9 @@ public abstract class Nestable {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

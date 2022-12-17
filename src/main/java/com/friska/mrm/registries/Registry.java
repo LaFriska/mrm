@@ -16,23 +16,29 @@ public class Registry<T extends MinecraftJSONResource> {
 
     protected void build(){
         if(RESOURCES.isEmpty()) return;
-
         T sample = RESOURCES.get(0);
-
-        if(sample instanceof Lang){
-            Set<String> uniqueNames = new HashSet<>();
-            RESOURCES.forEach((r) -> uniqueNames.add(r.getName()));
-            ArrayList<Lang> newlangs = new ArrayList<>();
-            ArrayList<Lang> search = new ArrayList<>();
-            uniqueNames.forEach((n) -> {
-
-            });
-            //TODO
-        }
-
+        if(sample instanceof Lang) checkLangs();
         System.out.println("Checking and updating duplicate names for all " + sample.getResourceType() + " resource builders...");
         RegistryUtil.updateNames(RESOURCES);
         System.out.println("Building " + RESOURCES.get(0).getResourceType() + "...");
         RESOURCES.forEach(T::build);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void checkLangs(){
+        Set<String> uniqueNames = new HashSet<>();
+        RESOURCES.forEach((r) -> uniqueNames.add(r.getName()));
+        System.out.println("Found the following unique language codes: " + uniqueNames);
+        ArrayList<Lang> newlangs = new ArrayList<>();
+        ArrayList<Lang> search = new ArrayList<>();
+        uniqueNames.forEach((n) -> {
+            RESOURCES.forEach((r) -> {
+                if(r.getName().equals(n)) search.add((Lang)r);
+            });
+            newlangs.add(RegistryUtil.combineLang(search));
+            search.clear();
+        });
+        RESOURCES.clear();
+        newlangs.forEach((l) -> RESOURCES.add((T) l));
     }
 }

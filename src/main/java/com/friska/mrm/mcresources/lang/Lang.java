@@ -23,17 +23,17 @@ public class Lang extends MinecraftJSONResource {
 
 
     //KeyValues
-    private ArrayList<KeyValue> blocks;
-    private ArrayList<KeyValue> items;
-    private ArrayList<KeyValue> instruments;
-    private ArrayList<KeyValue> entities;
-    private ArrayList<KeyValue> effects;
-    private ArrayList<KeyValue> events;
-    private ArrayList<KeyValue> enchantments;
-    private ArrayList<KeyValue> statTypes;
-    private ArrayList<KeyValue> stats;
-    private ArrayList<KeyValue> biomes;
-    private ArrayList<KeyValue> misc;
+    private final ArrayList<KeyValue> blocks;
+    private final ArrayList<KeyValue> items;
+    private final ArrayList<KeyValue> instruments;
+    private final ArrayList<KeyValue> entities;
+    private final ArrayList<KeyValue> effects;
+    private final ArrayList<KeyValue> events;
+    private final ArrayList<KeyValue> enchantments;
+    private final ArrayList<KeyValue> statTypes;
+    private final ArrayList<KeyValue> stats;
+    private final ArrayList<KeyValue> biomes;
+    private final ArrayList<KeyValue> misc;
 
 
     /**
@@ -42,10 +42,9 @@ public class Lang extends MinecraftJSONResource {
      *                     <b>Use the LanguageCodes class and call the static strings for the sake of convenience</b>
      * **/
     public Lang(@Nonnull String languageCode){
-        super("language");
-        setPath("assets/" + Config.getModID() + "/lang");
+        super("language", "assets/" + Config.getModID() + "/lang", languageCode);
+
         this.languageCode = languageCode;
-        setName(languageCode);
 
         blocks = new ArrayList<>();
         items = new ArrayList<>();
@@ -142,8 +141,7 @@ public class Lang extends MinecraftJSONResource {
         getBuilder().nest(new JBreak());
     }
 
-    /**Constructs an ArrayList of all ArrayLists used in the object, i.e. items, blocks, etc. This is used to merge multiple instances of Lang instantiations in LangRegistry.**/
-   @NeedsRevision("May be messy")
+    @NeedsRevision("May be messy")
     public ArrayList<ArrayList<KeyValue>> all(){
         ArrayList<ArrayList<KeyValue>> meta = new ArrayList<>();
         meta.add(blocks);
@@ -155,6 +153,8 @@ public class Lang extends MinecraftJSONResource {
         meta.add(enchantments);
         meta.add(biomes);
         meta.add(misc);
+        meta.add(statTypes);
+        meta.add(stats);
         return meta;
     }
 

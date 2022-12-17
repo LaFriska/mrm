@@ -2,14 +2,10 @@ package com.friska.mrm.mcresources.models;
 
 import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.annotations.NeedsRevision;
-import com.friska.mrm.config.Config;
 import com.friska.mrm.mcresources.data.BlockModelParents;
 import com.friska.mrm.mcresources.lang.KeyValue;
-import com.friska.mrm.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
 
 
 @ExpectAccess
@@ -24,10 +20,26 @@ public class BlockModel extends Model<BlockModel>{
      * <p>
      * Regardlessly, this class provides basic tools and templates that can cover 95% of the blocks you are adding, such as stairs, slabs, signs etc.
      *
-     * @param blockId Name of the JSON file, should also be the model blockstate.
+     * @param blockId Name of the model JSON file, which should be pointed by the block state.
      * **/
     public BlockModel(@Nonnull String blockId) {
-        super("block", blockId);
+        super("block", blockId, true);
+    }
+
+    /**
+     * This class creates JSON files for block models.
+     * Please note that this class does not have enough attributes to support a Block Model creator for all aspects of block models. Even if it does, it would be a complete mess to
+     * create complex models in Java.
+     * For complicated block models, apps like Blockbench is recommended, as they have a full development team creating an app to let you create Minecraft models for free.
+     * <a href="https://www.blockbench.net/">Click here to go to Blockbench.</a> (Minecraft Resource Manager's developer is not sponsored by Blockbench.)
+     * <p>
+     * Regardlessly, this class provides basic tools and templates that can cover 95% of the blocks you are adding, such as stairs, slabs, signs etc.
+     *
+     * @param blockId Name of the model JSON file, which should be pointed by the block state.
+     * @param isModded Whether the block is modded. This will determine whether to use the mod ID or "minecraft" as the namespace.
+     * **/
+    public BlockModel(@Nonnull String blockId, boolean isModded) {
+        super("block", blockId, isModded);
     }
 
     /**
@@ -55,7 +67,7 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
      * **/
     public BlockModel log(@Nonnull String sideTexture, @Nonnull String endTexture){
-        return new BlockModel(name).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(endTexture)), new KeyValue("side", getTextureName(sideTexture)));
+        return new BlockModel(name, isModded).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(endTexture)), new KeyValue("side", getTextureName(sideTexture)));
     }
 
     /**
@@ -63,21 +75,21 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
      * **/
     public BlockModel logHorizontal(@Nonnull String sideTexture, @Nonnull String endTexture){
-        return new BlockModel(name).log(sideTexture, endTexture).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
+        return new BlockModel(name, isModded).log(sideTexture, endTexture).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
     /**
      * <b>Leaves Models</b>
      * **/
     public BlockModel leaves(@Nonnull String textureName){
-        return new BlockModel(name).defaultCube(textureName).setRenderType("translucent");
+        return new BlockModel(name, isModded).defaultCube(textureName).setRenderType("translucent");
     }
 
     /**
      * <b>Sapling Models</b>
      * **/
     public BlockModel sapling(@Nonnull String textureName){
-        return new BlockModel(name).setParent(BlockModelParents.CROSS).addTexture("cross", getTextureName(textureName)).setRenderType("cutout");
+        return new BlockModel(name, isModded).setParent(BlockModelParents.CROSS).addTexture("cross", getTextureName(textureName)).setRenderType("cutout");
     }
 
     /**
@@ -85,7 +97,7 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
      * **/
     public BlockModel wood(@Nonnull String textureName){
-        return new BlockModel(name).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(textureName)), new KeyValue("side", getTextureName(textureName)));
+        return new BlockModel(name, isModded).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(textureName)), new KeyValue("side", getTextureName(textureName)));
     }
 
     /**
@@ -93,7 +105,7 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
      * **/
     public BlockModel woodHorizontal(@Nonnull String textureName){
-        return new BlockModel(name).wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
+        return new BlockModel(name, isModded).wood(textureName).setParent(BlockModelParents.CUBE_COLUMN_HORIZONTAL);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//

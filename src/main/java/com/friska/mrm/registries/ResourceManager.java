@@ -17,6 +17,7 @@ public class ResourceManager {
 
     public static Registry<Recipe> RECIPE_REG = new Registry<>();
     public static Registry<Model<?>> MODEL_REG = new Registry<>();
+    public static Registry<Lang> LANG_REG = new Registry<>();
 
     /**
      * Registration of one resource.
@@ -25,7 +26,7 @@ public class ResourceManager {
     @NeedsRevision("Generics bullshit")
     public static <T extends MinecraftJSONResource> void register(@Nonnull T resource){
         if(resource instanceof Lang){
-            LangRegistry.register((Lang) resource);
+            LANG_REG.register((Lang) resource);
         } else if (resource instanceof Recipe){
             RECIPE_REG.register((Recipe) resource);
         } else if (resource instanceof Model<?>){
@@ -47,7 +48,7 @@ public class ResourceManager {
     public static void buildAll(){
         System.out.println("-------------------------Minecraft Resource Manager-------------------------------");
         System.out.println("Started building all Minecraft resources...");
-        LangRegistry.build();
+        LANG_REG.build();
         RECIPE_REG.build();
         MODEL_REG.build();
         System.out.println("-------------------------Minecraft Resource Manager-------------------------------");

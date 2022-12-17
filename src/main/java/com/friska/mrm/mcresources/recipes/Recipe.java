@@ -5,14 +5,15 @@ import com.friska.mrm.config.Config;
 import com.friska.mrm.exceptions.UnexpectedTagException;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 
+import javax.annotation.Nonnull;
+
 
 public abstract class Recipe extends MinecraftJSONResource {
     protected String type;
     protected String result;
 
     protected Recipe(){
-        super("recipe");
-        setPath("data/" + Config.getModID() + "/recipes");
+        super("recipe", "data/" + Config.getModID() + "/recipes");
     }
 
     @NeedsRevision("Update tag system to fit with that of Crafting")

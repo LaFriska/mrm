@@ -1,6 +1,8 @@
 package com.friska.mrm.mcresources.recipes;
 
 import com.friska.mrm.annotations.ExpectAccess;
+import com.friska.mrm.config.Config;
+import com.friska.mrm.exceptions.ResourcePathException;
 import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
 
@@ -24,7 +26,6 @@ public class SmithingRecipe extends Recipe{
         this.result = result;
         this.type = "minecraft:smithing";
         this.setAndTruncateName(result);
-        //createBuilder();
     }
 
     /**

@@ -17,8 +17,22 @@ public class ItemModel extends Model<ItemModel>{
      * **/
 
     protected ItemModel(@Nonnull String itemID) {
-        super("item", itemID);
+        super("item", itemID, true);
     }
+    /**
+     * This class creates JSON files for item models.
+     * Please note that this class does not have enough attributes to support an Item Model creator for all aspects of item models. Even if it does, it would be a complete mess to
+     * create complex models in Java.
+     * Regardlessly, this class provides basic tools and templates that can cover 95% of the items you are adding.
+     *
+     * @param itemID Name of the JSON file as well as the item ID.
+     * @param isModded Whether the item is modded. This will determine whether to use the mod ID or "minecraft" as the namespace.
+     * **/
+
+    protected ItemModel(@Nonnull String itemID, boolean isModded) {
+        super("item", itemID, isModded);
+    }
+
 
     /**
      * <b>Default Item</b>
@@ -27,7 +41,7 @@ public class ItemModel extends Model<ItemModel>{
      * @param textureName Name of the texture PNG file.
      * **/
     public ItemModel defaultItem(String textureName){
-        return this.setParent(ItemModelParents.GENERATED).addTexture("layer0", getTextureName(textureName));
+        return new ItemModel(name, isModded).setParent(ItemModelParents.GENERATED).addTexture("layer0", getTextureName(textureName));
     }
     /**
      * <b>Default Item</b>
@@ -35,7 +49,7 @@ public class ItemModel extends Model<ItemModel>{
      * This template creates a normal Minecraft item model (non-block-items), e.g. potato, diamond, etc. Texture is defaulted to be the name of the JSON file. Use the method overload to define the texture.
      * **/
     public ItemModel defaultItem(){
-        return new ItemModel(name).defaultItem(name);
+        return new ItemModel(name, isModded).defaultItem(name);
     }
 
     /**
@@ -45,7 +59,7 @@ public class ItemModel extends Model<ItemModel>{
      * @param blockID Block ID needed to set the parent block ID.
      * **/
     public ItemModel blockItem(String blockID){
-        return new ItemModel(name).setParent(getModBlockParentStr(blockID));
+        return new ItemModel(name, isModded).setParent(getModBlockParentStr(blockID));
     }
 
     /**
@@ -55,9 +69,9 @@ public class ItemModel extends Model<ItemModel>{
      * This is because the default block model does not work well when forced into the inventory. 99% of the inventory specific block items are: fences, walls, buttons.
      * @param blockID Block ID needed to set the parent block ID.
      * **/
-    public ItemModel inventorySpecificBlockItem(String blockID){return new ItemModel(name).setParent(getModBlockParentStr(blockID + "_inventory"));}
+    public ItemModel inventorySpecificBlockItem(String blockID){return new ItemModel(name, isModded).setParent(getModBlockParentStr(blockID + "_inventory"));}
 
     private String getModBlockParentStr(String blockID){
-        return Config.getModID() + ":block/" + blockID;
+        return isModded ? Config.getModID() + ":block/" + blockID : "minecraft:block/" + blockID;
     }
 }

@@ -13,11 +13,17 @@ public abstract class MinecraftJSONResource {
 
     private String resourceType;
 
-    public MinecraftJSONResource(@Nonnull String resourceType){
+    public MinecraftJSONResource(@Nonnull String resourceType, @Nonnull String path, @Nonnull String name){
         this.resourceType = resourceType;
+        setPath(path);
+        setName(name);
         if(!Config.isModIDDefined()){
             throw new ResourcePathException("The Mod ID is null, define by calling Config.setModID().");
         }
+    }
+
+    public MinecraftJSONResource(@Nonnull String resourceType, @Nonnull String path){
+        this(resourceType, path, "null");
     }
 
     public void setPath(String path) {

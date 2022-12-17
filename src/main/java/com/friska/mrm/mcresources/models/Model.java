@@ -23,12 +23,12 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
 
     protected final String type;
 
-    protected Model(@Nonnull String type, @Nonnull String name){
-        super(type + " model");
-        setPath("assets/" + Config.getModID() + "/models/" + type);
-        setName(name);
-        texturePath = Config.getModID() + ":" + type +"/";
+    protected final boolean isModded;
 
+    protected Model(@Nonnull String type, @Nonnull String name, /*By default, should be true*/ boolean isModded){
+        super(type + " model", "assets/" + Config.getModID() + "/models/" + type, name);
+        this.isModded = isModded;
+        setTexturePath(isModded ? Config.getModID() + ":" + type +"/" : "minecraft:" + type +"/");
         this.type = type;
     }
 
@@ -108,4 +108,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
         return texturePath + name;
     }
 
+    private static void setTexturePath(String texturePath) {
+        Model.texturePath = texturePath;
+    }
 }
