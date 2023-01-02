@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.data;
 
-import com.friska.mrm.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.ExpectAccess;
 
 @SuppressWarnings("unused")
 @ExpectAccess

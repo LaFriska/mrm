@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.blockstates.properties;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.util.KeyValue;
-import com.friska.mrm.serialiser.builder.JArray;
-import com.friska.mrm.serialiser.builder.JObject;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.util.KeyValue;
+import com.friska.mrm.system.serialiser.builder.JArray;
+import com.friska.mrm.system.serialiser.builder.JObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,7 +31,7 @@ public class Case {
     }
 
     public <T> Case addCondition(String key, T value){
-        return this.addCondition(new KeyValue(key, value));
+        return this.addCondition(new KeyValue<>(key, value.toString()));
     }
 
     public Case addCondition(Condition condition){

@@ -1,15 +1,15 @@
 package com.friska.mrm.mcresources.blockstates;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.annotations.BlockStateOnly;
-import com.friska.mrm.config.Config;
-import com.friska.mrm.exceptions.BlockStateTypeMismatchException;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.BlockStateOnly;
+import com.friska.mrm.system.config.Config;
+import com.friska.mrm.system.exceptions.BlockStateTypeMismatchException;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.mcresources.blockstates.properties.Case;
 import com.friska.mrm.mcresources.blockstates.properties.ModelPointer;
 import com.friska.mrm.mcresources.blockstates.properties.Variant;
-import com.friska.mrm.serialiser.builder.JArray;
-import com.friska.mrm.serialiser.builder.JObject;
+import com.friska.mrm.system.serialiser.builder.JArray;
+import com.friska.mrm.system.serialiser.builder.JObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

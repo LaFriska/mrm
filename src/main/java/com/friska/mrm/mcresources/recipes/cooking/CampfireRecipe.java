@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
-import com.friska.mrm.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.ExpectAccess;
 
 import javax.annotation.Nonnull;
 @ExpectAccess

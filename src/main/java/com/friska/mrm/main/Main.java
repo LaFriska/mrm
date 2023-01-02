@@ -1,6 +1,6 @@
 package com.friska.mrm.main;
 
-import com.friska.mrm.config.Config;
+import com.friska.mrm.system.config.Config;
 import com.friska.mrm.mcresources.blockstates.BlockState;
 import com.friska.mrm.mcresources.blockstates.BlockStateType;
 import com.friska.mrm.mcresources.blockstates.properties.Case;

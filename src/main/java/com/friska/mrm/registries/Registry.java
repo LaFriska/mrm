@@ -1,6 +1,5 @@
 package com.friska.mrm.registries;
 
-import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.mcresources.lang.Lang;
 

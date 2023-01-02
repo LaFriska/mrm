@@ -1,8 +1,10 @@
 package com.friska.mrm.mcresources.blockstates.properties;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.annotations.NeedsRevision;
-import com.friska.mrm.serialiser.builder.*;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.NeedsRevision;
+import com.friska.mrm.system.serialiser.builder.JArray;
+import com.friska.mrm.system.serialiser.builder.JObject;
+import com.friska.mrm.system.serialiser.builder.JProperty;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -49,8 +51,6 @@ public class Variant {
         }
 
         String name = nameBuilder.toString();
-
-        System.out.println("TEST " + name);
 
         if(modelPointers.size() == 1){
             return modelPointers.get(0).build(name);

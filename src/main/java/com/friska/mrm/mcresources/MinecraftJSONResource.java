@@ -1,8 +1,8 @@
 package com.friska.mrm.mcresources;
 
-import com.friska.mrm.exceptions.ResourcePathException;
-import com.friska.mrm.serialiser.builder.JBuilder;
-import com.friska.mrm.config.Config;
+import com.friska.mrm.system.exceptions.ResourcePathException;
+import com.friska.mrm.system.serialiser.builder.JBuilder;
+import com.friska.mrm.system.config.Config;
 
 import javax.annotation.Nonnull;
 

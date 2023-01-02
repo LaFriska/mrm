@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.blockstates.properties;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.config.Config;
-import com.friska.mrm.serialiser.builder.JObject;
-import com.friska.mrm.serialiser.builder.JValue;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.config.Config;
+import com.friska.mrm.system.serialiser.builder.JObject;
+import com.friska.mrm.system.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
 

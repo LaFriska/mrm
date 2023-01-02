@@ -1,8 +1,8 @@
 package com.friska.mrm.mcresources.recipes.cooking;
 
 import com.friska.mrm.mcresources.recipes.Recipe;
-import com.friska.mrm.serialiser.builder.JObject;
-import com.friska.mrm.serialiser.builder.JValue;
+import com.friska.mrm.system.serialiser.builder.JObject;
+import com.friska.mrm.system.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
 

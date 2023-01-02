@@ -1,7 +1,7 @@
 package com.friska.mrm.mcresources.blockstates.properties;
 
-import com.friska.mrm.util.KeyValue;
-import com.friska.mrm.serialiser.builder.JObject;
+import com.friska.mrm.system.util.KeyValue;
+import com.friska.mrm.system.serialiser.builder.JObject;
 
 import javax.annotation.Nullable;
 //TODO javadoc

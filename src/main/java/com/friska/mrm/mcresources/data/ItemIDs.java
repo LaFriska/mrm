@@ -1,8 +1,8 @@
 package com.friska.mrm.mcresources.data;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.config.Config;
-import com.friska.mrm.exceptions.CannotFindModIDException;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.config.Config;
+import com.friska.mrm.system.exceptions.CannotFindModIDException;
 
 /**
  *Call any static strings to get the item ID.

@@ -1,8 +1,8 @@
 package com.friska.mrm.registries;
 
-import com.friska.mrm.annotations.NeedsRevision;
+import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
-import com.friska.mrm.util.KeyValue;
+import com.friska.mrm.system.util.KeyValue;
 import com.friska.mrm.mcresources.lang.Lang;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class RegistryUtil {
 
         System.out.println("Combining multiple instances of " + candidates.get(0).getLanguageCode() + " language files...");
 
-        ArrayList<ArrayList<KeyValue>> all = candidates.get(0).all();
-        ArrayList<ArrayList<KeyValue>> needle;
+        ArrayList<ArrayList<KeyValue<String>>> all = candidates.get(0).all();
+        ArrayList<ArrayList<KeyValue<String>>> needle;
 
         for(int o = 1; o <= candidates.size() - 1; o++) {
             needle = candidates.get(o).all();

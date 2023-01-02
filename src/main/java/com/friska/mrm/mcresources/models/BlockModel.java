@@ -1,9 +1,9 @@
 package com.friska.mrm.mcresources.models;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.annotations.NeedsRevision;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.data.BlockModelParents;
-import com.friska.mrm.util.KeyValue;
+import com.friska.mrm.system.util.KeyValue;
 
 import javax.annotation.Nonnull;
 
@@ -67,7 +67,7 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped logs. Both logHorizontal and log block models need to be created for a log to work properly in game.
      * **/
     public BlockModel log(@Nonnull String sideTexture, @Nonnull String endTexture){
-        return new BlockModel(name, isModded).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(endTexture)), new KeyValue("side", getTextureName(sideTexture)));
+        return new BlockModel(name, isModded).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue<>("end", getTextureName(endTexture)), new KeyValue<>("side", getTextureName(sideTexture)));
     }
 
     /**
@@ -97,7 +97,7 @@ public class BlockModel extends Model<BlockModel>{
      * Call the same method for stripped wood. Both woodHorizontal and wood block models need to be created for a wood to work properly in game.
      * **/
     public BlockModel wood(@Nonnull String textureName){
-        return new BlockModel(name, isModded).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue("end", getTextureName(textureName)), new KeyValue("side", getTextureName(textureName)));
+        return new BlockModel(name, isModded).setParent(BlockModelParents.CUBE_COLUMN).addTextures(new KeyValue<>("end", getTextureName(textureName)), new KeyValue<>("side", getTextureName(textureName)));
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.data;
 
-import com.friska.mrm.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.ExpectAccess;
 
 /**
  *Call any static strings to get the language code of that language. Those labeled with deprecated annotation means that Minecraft 1.19+ no longer offers that language.

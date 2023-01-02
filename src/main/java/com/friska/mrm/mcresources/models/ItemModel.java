@@ -1,6 +1,6 @@
 package com.friska.mrm.mcresources.models;
 
-import com.friska.mrm.config.Config;
+import com.friska.mrm.system.config.Config;
 import com.friska.mrm.mcresources.data.ItemModelParents;
 
 import javax.annotation.Nonnull;

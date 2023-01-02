@@ -1,7 +1,7 @@
 package com.friska.mrm.registries;
 
-import com.friska.mrm.annotations.ExpectAccess;
-import com.friska.mrm.annotations.NeedsRevision;
+import com.friska.mrm.system.annotations.ExpectAccess;
+import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.mcresources.lang.Lang;
 import com.friska.mrm.mcresources.models.BlockModel;
