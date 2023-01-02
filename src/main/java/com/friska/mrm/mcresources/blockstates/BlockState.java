@@ -31,8 +31,7 @@ public class BlockState extends MinecraftJSONResource {
     }
 
     public BlockState(@Nonnull String name) {
-        super("block state", "assets/" + Config.getModID() + "/blockstates", name);
-        this.blockStateType = null;
+        this(name, null);
     }
 
     //----------------------------------------------VARIANTS------------------------------------------------
@@ -48,6 +47,16 @@ public class BlockState extends MinecraftJSONResource {
         onlyAllow(BlockStateType.VARIANTS);
         this.variants.addAll(List.of(variants));
         return this;
+    }
+
+    //----------------------------------------------VARIANTS TEMPLATES------------------------------------------------
+
+    public BlockState defaultBlock(String texture, boolean isModded){
+        return new BlockState(name, BlockStateType.VARIANTS).addVariant(new Variant((String) null).addModelPointer(texture, isModded));
+    }
+
+    public BlockState defaultBlock(String texture){
+        return this.defaultBlock(texture, true);
     }
 
     //----------------------------------------------MULTIPARTS------------------------------------------------
