@@ -1,5 +1,6 @@
 package com.friska.mrm.serialiser.builder;
 
+import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.exceptions.InvalidJSONStringException;
 
 import javax.annotation.Nullable;
@@ -71,6 +72,8 @@ public abstract class Nestable {
         this.data = data;
     }
 
+    @Deprecated
+    @NeedsRevision("Doesn't fucking work")
     public void setKey(String key) {
         this.key = key;
     }

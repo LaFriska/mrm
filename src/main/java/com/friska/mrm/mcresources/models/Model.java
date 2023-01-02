@@ -2,7 +2,7 @@ package com.friska.mrm.mcresources.models;
 
 import com.friska.mrm.config.Config;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
-import com.friska.mrm.mcresources.lang.KeyValue;
+import com.friska.mrm.util.KeyValue;
 import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
 
@@ -72,7 +72,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
      * @param textures Vararg of ModelTextures, which are records with both the key and the value as parameters.
      * **/
     public T addTextures(@Nonnull KeyValue... textures){
-        List.of(textures).forEach((t) -> addTexture(t.key(), t.value()));
+        List.of(textures).forEach((t) -> addTexture(t.getKey(), t.getValueString()));
         return (T) this;
     }
 
@@ -86,7 +86,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
 
         for (int i = 0; i <= textures.size() - 1; i++) {
             KeyValue t = textures.get(i);
-            if(t.key().equals(key)){
+            if(t.getKey().equals(key)){
                 textures.remove(i);
                 textures.add(i, new KeyValue(key, newTexture));
             }

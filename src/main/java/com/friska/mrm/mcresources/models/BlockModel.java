@@ -3,7 +3,7 @@ package com.friska.mrm.mcresources.models;
 import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.data.BlockModelParents;
-import com.friska.mrm.mcresources.lang.KeyValue;
+import com.friska.mrm.util.KeyValue;
 
 import javax.annotation.Nonnull;
 

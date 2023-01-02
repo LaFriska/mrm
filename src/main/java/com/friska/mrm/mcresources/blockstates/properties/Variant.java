@@ -2,10 +2,7 @@ package com.friska.mrm.mcresources.blockstates.properties;
 
 import com.friska.mrm.annotations.ExpectAccess;
 import com.friska.mrm.annotations.NeedsRevision;
-import com.friska.mrm.serialiser.builder.JArray;
-import com.friska.mrm.serialiser.builder.JObject;
-import com.friska.mrm.serialiser.builder.JValue;
-import com.friska.mrm.serialiser.builder.Nestable;
+import com.friska.mrm.serialiser.builder.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -32,13 +29,18 @@ public class Variant {
         return this;
     }
 
+    public Variant addModelPointer(@Nonnull String textureName, boolean isModded){
+        this.modelPointers.add(new ModelPointer(textureName, isModded));
+        return this;
+    }
+
     public Variant addModelPointers(ModelPointer... modelPointers){
         this.modelPointers.addAll(List.of(modelPointers));
         return this;
     }
 
     @NeedsRevision("Inefficient")
-    public Nestable build(){
+    public JProperty build(){
         StringBuilder nameBuilder = new StringBuilder();
 
         for(int i = 0; i <= conditions.size() - 1; i++){
@@ -48,14 +50,14 @@ public class Variant {
 
         String name = nameBuilder.toString();
 
+        System.out.println("TEST " + name);
+
         if(modelPointers.size() == 1){
-            JObject jObject = modelPointers.get(0).build();
-            jObject.setKey(name);
-            return jObject;
+            return modelPointers.get(0).build(name);
         }else{
             JArray jArray = new JArray(name);
             ArrayList<JObject> modelPointerBuilds = new ArrayList<>();
-            this.modelPointers.forEach((m) -> modelPointerBuilds.add(m.build()));
+            this.modelPointers.forEach((m) -> modelPointerBuilds.add(m.build(name)));
             jArray.setArray(List.of(modelPointerBuilds).toArray());
             return jArray;
         }

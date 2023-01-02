@@ -2,12 +2,10 @@ package com.friska.mrm.registries;
 
 import com.friska.mrm.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
-import com.friska.mrm.mcresources.lang.KeyValue;
+import com.friska.mrm.util.KeyValue;
 import com.friska.mrm.mcresources.lang.Lang;
-import com.friska.mrm.mcresources.recipes.Recipe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RegistryUtil {
 

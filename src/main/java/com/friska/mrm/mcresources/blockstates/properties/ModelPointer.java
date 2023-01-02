@@ -6,6 +6,7 @@ import com.friska.mrm.serialiser.builder.JObject;
 import com.friska.mrm.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
+
 //TODO javadoc
 @ExpectAccess
 public class ModelPointer {
@@ -20,9 +21,9 @@ public class ModelPointer {
         this.isModded = isModded;
 
         if(isModded){
-            this.pointer = "assets/" + Config.getModID() + "/models/block/" + textureName;
+            this.pointer = Config.getModID() + "block/" + textureName;
         }else{
-            this.pointer = "assets/minecraft/models/block/" + textureName;
+            this.pointer = "minecraft:block/" + textureName;
         }
     }
 
@@ -41,8 +42,8 @@ public class ModelPointer {
         return this;
     }
 
-    public JObject build(){
-        JObject jObject = new JObject(null);
+    public JObject build(String key){
+        JObject jObject = new JObject(key);
         jObject.nest(new JValue<>("model", pointer));
         if(uvlock != null) jObject.nest(new JValue<>("uvlock", uvlock));
         if(x != null) jObject.nest(new JValue<>("x", x));

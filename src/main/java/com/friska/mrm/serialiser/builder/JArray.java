@@ -1,13 +1,18 @@
 package com.friska.mrm.serialiser.builder;
 
+import com.friska.mrm.util.Util;
+
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JArray extends Nestable implements JProperty {
 
+    protected List<Object> properties;
+
     public JArray(@Nullable String key) {
         super(key);
+        this.propertiesData = new ArrayList<>();
     }
 
     public JArray setArray(@Nullable Object[] properties){
@@ -19,6 +24,7 @@ public class JArray extends Nestable implements JProperty {
                     this.propertiesData.add(JSONBuilderUtils.wrapInString((String) o));
                 } else if (o instanceof JProperty){
                     this.propertiesData.add(((JProperty) o).getData());
+                    System.out.println(((JProperty) o).getData() + "123123");
                 }else{
                     this.propertiesData.add(o.toString());
                 }
@@ -29,7 +35,10 @@ public class JArray extends Nestable implements JProperty {
         }
         return this;
     }
-    protected List<Object> properties;
+
+    public JArray setArray(@Nullable ArrayList<JObject> jObjectsArrayList){
+        return this.setArray(Util.getJObjectArray(jObjectsArrayList));
+    }
 
     @Override
     public void construct() {
