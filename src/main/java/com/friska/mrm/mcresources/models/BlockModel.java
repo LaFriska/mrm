@@ -9,6 +9,7 @@ import javax.annotation.Nonnull;
 
 
 @ExpectAccess
+@SuppressWarnings("unchecked")
 public class BlockModel extends Model<BlockModel>{
 
     /**

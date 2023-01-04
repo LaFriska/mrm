@@ -5,6 +5,7 @@ import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.system.serialiser.builder.JArray;
 import com.friska.mrm.system.serialiser.builder.JObject;
 import com.friska.mrm.system.serialiser.builder.JProperty;
+import com.friska.mrm.system.util.Util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -18,6 +19,11 @@ public class Variant {
     private final ArrayList<String> conditions = new ArrayList<>();
     private final ArrayList<ModelPointer> modelPointers = new ArrayList<>();
 
+    /**
+     * A variant in terms of block states contains one or a set of conditions, and if the conditions are true, a block model will be pointed to.
+     * @param conditions These conditions are named in your java code for your mod, they are likely to be block state variables. For example, "LIT=true" may be a valid condition for a redstone lamp.
+     *                   <b>Leave this param as an empty string, or null casted as a string array in case that no conditions are needed. </b>
+     * **/
     public Variant(@Nullable String... conditions){
         if(conditions == null){
             this.conditions.add("");
@@ -26,22 +32,31 @@ public class Variant {
         }
     }
 
+    /**
+     * This method adds a model pointer. It is needed to specify at least one model pointer in the case that the conditions are met.
+     * **/
     public Variant addModelPointer(ModelPointer modelPointer){
         this.modelPointers.add(modelPointer);
         return this;
     }
 
+    /**
+     * This method adds a model pointer. It is needed to specify at least one model pointer in the case that the conditions are met.
+     * **/
     public Variant addModelPointer(@Nonnull String textureName, boolean isModded){
         this.modelPointers.add(new ModelPointer(textureName, isModded));
         return this;
     }
 
+    /**
+     * This method adds multiple model pointers. It is needed to specify at least one model pointer in the case that the conditions are met.
+     * **/
     public Variant addModelPointers(ModelPointer... modelPointers){
         this.modelPointers.addAll(List.of(modelPointers));
         return this;
     }
 
-    @NeedsRevision("Inefficient")
+    @NeedsRevision("Inefficient, messy as fuck")
     public JProperty build(){
         StringBuilder nameBuilder = new StringBuilder();
 
@@ -53,12 +68,10 @@ public class Variant {
         String name = nameBuilder.toString();
 
         if(modelPointers.size() == 1){
-            return modelPointers.get(0).build(name);
+            return modelPointers.get(0).toJObject(name);
         }else{
             JArray jArray = new JArray(name);
-            ArrayList<JObject> modelPointerBuilds = new ArrayList<>();
-            this.modelPointers.forEach((m) -> modelPointerBuilds.add(m.build(name)));
-            jArray.setArray(List.of(modelPointerBuilds).toArray());
+            jArray.setArray(Util.getJObjectArray(this.modelPointers));
             return jArray;
         }
     }

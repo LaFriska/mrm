@@ -1,7 +1,9 @@
 package com.friska.mrm.system.serialiser.builder;
 
+import com.friska.mrm.system.interfaces.JObjectBuildable;
 import com.friska.mrm.system.util.Util;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +37,12 @@ public class JArray extends Nestable implements JProperty {
         return this;
     }
 
-    public JArray setArray(@Nullable ArrayList<JObject> jObjectsArrayList){
-        return this.setArray(Util.getJObjectArray(jObjectsArrayList));
+    public JArray setArray(@Nonnull ArrayList<? extends JObjectBuildable> jObjectBuildables){
+        JObject[] result = new JObject[jObjectBuildables.size()];
+        for(int i = 0; i <= jObjectBuildables.size() - 1; i++){
+            result[i] = jObjectBuildables.get(i).toJObject(null);
+        }
+        return this.setArray(result);
     }
 
     @Override

@@ -30,7 +30,13 @@ public class Main {
 
 
         BlockState redstoneLamp = new BlockState("redstone_lamp", BlockStateType.VARIANTS);
-        redstoneLamp.addVariant(new Variant("lit=false").addModelPointer("redstone_lamp", false))
+        redstoneLamp.addVariant(new Variant("lit=false")
+                        .addModelPointers(
+                                new ModelPointer("redstone_lamp", false).x(90),
+                                new ModelPointer("redston325e_lamp", false).x(234),
+                                new ModelPointer("redstone_l32amp", false).x(923)
+                                )
+                )
                         .addVariant(new Variant("lit=true").addModelPointer("redstone_lamp_on", false));
 
         BlockState redStoneWire = new BlockState("oak_fence_post", BlockStateType.MULTIPART)
@@ -41,6 +47,9 @@ public class Main {
         redStoneWire.build();
 
         redstoneLamp.build();
+
+        BlockState test = new BlockState("spruce_log").log("spruce_log", "spruce_log_horizontal", false);
+        test.build();
 
 
         ResourceManager.register(

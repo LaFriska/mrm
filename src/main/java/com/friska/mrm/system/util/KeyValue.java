@@ -19,6 +19,10 @@ public record KeyValue<T>(String key, T value) {
         this.value = value;
     }
 
+    public KeyValue<String> forceToString(){
+        return new KeyValue<>(key, value.toString());
+    }
+
     public String getValueString() {
         if (value instanceof String) return (String) value;
         return value.toString();

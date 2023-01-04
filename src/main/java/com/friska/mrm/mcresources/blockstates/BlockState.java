@@ -16,8 +16,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO javadoc
-
 @ExpectAccess
 public class BlockState extends MinecraftJSONResource {
 
@@ -25,16 +23,41 @@ public class BlockState extends MinecraftJSONResource {
 
     private final ArrayList<Case> cases = new ArrayList<>();
     public BlockStateType blockStateType;
+
+    /**
+     * This class builds a JSON file for block states, which are used in Minecraft to point to different block models given different conditions.
+     * There are two types of block state JSON files, <b>variants</b> and <b>multipart</b>, and methods in this class denoted with @BlockStateOnly means that the method
+     * may only be called on the specified type of block state, breaking this rule will cause an exception.
+     *
+     * <a href="https://minecraft.fandom.com/el/wiki/Model">Click here for more information on block states.</a>
+     *
+     * @param name Name of the JSON file.
+     * @param blockStateType Type of block state, variants or multipart, denote using the BlockStateType enumerator.
+     * <p>
+     * You may leave choose not to specify the blockStateType, but that means only templated methods could be called from this class.
+     * **/
     public BlockState(@Nonnull String name, @Nullable BlockStateType blockStateType) {
         super("block state", "assets/" + Config.getModID() + "/blockstates", name);
         this.blockStateType = blockStateType;
     }
 
+    /**
+     * This class builds a JSON file for block states, which are used in Minecraft to point to different block models given different conditions.
+     * There are two types of block state JSON files, <b>variants</b> and <b>multipart</b>, and methods in this class denoted with @BlockStateOnly means that the method
+     * may only be called on the specified type of block state, breaking this rule will cause an exception.
+     *
+     * @param name Name of the JSON file.
+     * <p>
+     * You may leave choose not to specify the blockStateType, but that means only templated methods could be called from this class.
+     * **/
     public BlockState(@Nonnull String name) {
         this(name, null);
     }
 
     //----------------------------------------------VARIANTS------------------------------------------------
+    /**
+     * Adds a variant to your block state JSON file.
+     * **/
     @BlockStateOnly.Variants
     public BlockState addVariant(Variant variant){
         onlyAllow(BlockStateType.VARIANTS);
@@ -42,24 +65,20 @@ public class BlockState extends MinecraftJSONResource {
         return this;
     }
 
+    /**
+     * Adds multiple variants to your block state JSON file.
+     * **/
     @BlockStateOnly.Variants
     public BlockState addVariants(Variant... variants){
         onlyAllow(BlockStateType.VARIANTS);
         this.variants.addAll(List.of(variants));
         return this;
     }
-
-    //----------------------------------------------VARIANTS TEMPLATES------------------------------------------------
-
-    public BlockState defaultBlock(String texture, boolean isModded){
-        return new BlockState(name, BlockStateType.VARIANTS).addVariant(new Variant((String) null).addModelPointer(texture, isModded));
-    }
-
-    public BlockState defaultBlock(String texture){
-        return this.defaultBlock(texture, true);
-    }
-
     //----------------------------------------------MULTIPARTS------------------------------------------------
+
+    /**
+     * Adds a custom case to a multipart block state JSON file.
+     * **/
 
     @BlockStateOnly.Multipart
     public BlockState addCase(@Nonnull Case case_){
@@ -68,17 +87,73 @@ public class BlockState extends MinecraftJSONResource {
         return this;
     }
 
+    /**
+     * Adds an unconditional case to a multipart block state JSON file, by only specifying the ModelPointer. Use the method with the Case parameter to add conditions to it.
+     * **/
     @BlockStateOnly.Multipart
     public BlockState addCase(@Nonnull ModelPointer modelPointer){
         return this.addCase(new Case(modelPointer));
     }
 
+    /**
+     * Adds multiple custom cases to a multipart block state JSON file.
+     * **/
     @BlockStateOnly.Multipart
     public BlockState addCases(Case... cases){
         onlyAllow(BlockStateType.MULTIPART);
         this.cases.addAll(List.of(cases));
         return this;
     }
+
+    //----------------------------------------------TEMPLATES------------------------------------------------
+
+    /**
+     * <b>Default Block States</b>
+     *<p>
+     * This template creates a default block block state file, with a single unconditional variant pointing to the block model.
+     * **/
+    public BlockState defaultBlock(String model, boolean isModded){
+        return new BlockState(name, BlockStateType.VARIANTS).addVariant(new Variant("").addModelPointer(model, isModded));
+    }
+
+    /**
+     * <b>Default Block States</b>
+     *  <p>
+     * This template creates a default block block state file, with a single unconditional variant pointing to the block model.
+     * **/
+    public BlockState defaultBlock(String model){
+        return this.defaultBlock(model, true);
+    }
+
+    //TREE
+    /**
+     * <b>Log Block States</b>
+     * <p>
+     * This template creates the block states file for a log block, use this also for stripped logs, wood and stripped wood.
+     * **/
+    public BlockState log(String model, String modelHorizontal, boolean isModded){
+        return new BlockState(name, BlockStateType.VARIANTS).addVariants(
+                new Variant("axis=x")
+                        .addModelPointer(new ModelPointer(modelHorizontal, isModded).x(90).y(90)),
+                new Variant("axis=y")
+                        .addModelPointer(new ModelPointer(model, isModded)),
+                new Variant("axis=z")
+                        .addModelPointer(new ModelPointer(modelHorizontal, isModded).x(90))
+        );
+    }
+    /**
+     * <b>Log Block States</b>
+     * <p>
+     * This template creates the block states file for a log block, use this also for stripped logs, wood and stripped wood.
+     * **/
+    public BlockState log(String model, String modelHorizontal){
+        return this.log(model, modelHorizontal, true);
+    }
+
+    //Plank blocks
+
+    //public BlockState slab(String slabModel, String plankModel, String slabTopModel)
+
 
     //----------------------------------------------ALL------------------------------------------------
 
@@ -94,6 +169,9 @@ public class BlockState extends MinecraftJSONResource {
         }
     }
 
+    /**
+     * Builds the JSON file.
+     * **/
     @Override
     public void build() {
         createBuilder();
@@ -111,10 +189,6 @@ public class BlockState extends MinecraftJSONResource {
     }
 
     private void buildMultipart(){
-        JArray jArray = new JArray("multipart");
-        ArrayList<JObject> casesJObject = new ArrayList<>();
-        this.cases.forEach((c) -> casesJObject.add(c.build()));
-        jArray.setArray(casesJObject);
-        getBuilder().nest(jArray);
+        getBuilder().nest(new JArray("multipart").setArray(this.cases));
     }
 }

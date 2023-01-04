@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
 
     protected String parent = null;
-    protected ArrayList<KeyValue> textures = new ArrayList<>();
+    protected ArrayList<KeyValue<String>> textures = new ArrayList<>();
 
     protected static String texturePath;
 
@@ -30,20 +30,6 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
         this.isModded = isModded;
         setTexturePath(isModded ? Config.getModID() + ":" + type +"/" : "minecraft:" + type +"/");
         this.type = type;
-    }
-
-    /**Builds the JSON file.**/
-    @Override
-    public void build(){
-        createBuilder();
-        if(parent != null) getBuilder().nest(new JValue<>("parent", parent));
-        if(!textures.isEmpty()) {
-            JObject texturesJObject = new JObject("textures");
-            textures.forEach((mt) -> texturesJObject.nest(mt.toJValue()));
-            getBuilder().nest(texturesJObject);
-        }
-        if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
-        getBuilder().build();
     }
 
     /**
@@ -72,7 +58,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
      * @param textures Vararg of ModelTextures, which are records with both the key and the value as parameters.
      * **/
     public T addTextures(@Nonnull KeyValue<String>... textures){
-        List.of(textures).forEach((t) -> addTexture(t.key(), t.getValueString()));
+        List.of(textures).forEach((t) -> addTexture(t.key(), t.value()));
         return (T) this;
     }
 
@@ -88,7 +74,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
             KeyValue t = textures.get(i);
             if(t.key().equals(key)){
                 textures.remove(i);
-                textures.add(i, new KeyValue(key, newTexture));
+                textures.add(i, new KeyValue<>(key, newTexture));
             }
         }
         return (T) this;
@@ -102,6 +88,20 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
     public T setRenderType(String renderType) {
         this.renderType = renderType;
         return (T) this;
+    }
+
+    /**Builds the JSON file.**/
+    @Override
+    public void build(){
+        createBuilder();
+        if(parent != null) getBuilder().nest(new JValue<>("parent", parent));
+        if(!textures.isEmpty()) {
+            JObject texturesJObject = new JObject("textures");
+            textures.forEach((mt) -> texturesJObject.nest(mt.toJValue()));
+            getBuilder().nest(texturesJObject);
+        }
+        if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
+        getBuilder().build();
     }
 
     protected static String getTextureName(String name){
