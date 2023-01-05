@@ -60,7 +60,8 @@ public class Main {
                 new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
                 new CraftingShaped("xxx", "xox","xxx").setCount(3).addKey('x', ItemIDs.NETHER_STAR).addKey('o', ItemIDs.REDSTONE_DUST).setResult(ItemIDs.OBSIDIAN).setGroup("lmao"),
                 new CraftingShapeless(ItemIDs.NOTE_BLOCK).addIngredient(ItemIDs.REDSTONE_DUST).setCount(3).addIngredient(ItemIDs.OBSIDIAN),
-                new BlockModel("uranium_block").defaultCube().log("lmaomod:block/uranium_end", "@uranium_side")
+                new BlockModel("uranium_block").defaultCube().log("lmaomod:block/uranium_end", "@uranium_side"),
+                new BlockState("acacia_button").button("@acacia_button", "@acacia_button_pressed")
         );
 
         ResourceManager.buildAll();

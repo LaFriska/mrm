@@ -7,6 +7,7 @@ import com.friska.mrm.mcresources.MinecraftJSONResource;
 
 
 public abstract class Recipe extends MinecraftJSONResource {
+
     protected String type;
     protected String result;
 

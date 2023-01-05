@@ -1,5 +1,7 @@
 package com.friska.mrm.mcresources;
 
+import com.friska.mrm.mcresources.models.Model;
+import com.friska.mrm.registries.Registry;
 import com.friska.mrm.system.exceptions.ResourcePathException;
 import com.friska.mrm.system.serialiser.builder.JBuilder;
 import com.friska.mrm.system.config.Config;
@@ -7,6 +9,8 @@ import com.friska.mrm.system.config.Config;
 import javax.annotation.Nonnull;
 
 public abstract class MinecraftJSONResource {
+
+
     protected JBuilder builder;
     protected String path;
     protected String name;

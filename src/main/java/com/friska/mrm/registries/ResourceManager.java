@@ -1,5 +1,6 @@
 package com.friska.mrm.registries;
 
+import com.friska.mrm.mcresources.blockstates.BlockState;
 import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftJSONResource;
@@ -19,18 +20,23 @@ public class ResourceManager {
     public static Registry<Model<?>> MODEL_REG = new Registry<>();
     public static Registry<Lang> LANG_REG = new Registry<>();
 
+    public static Registry<BlockState> BLOCKSTATE_REG = new Registry<>();
+
     /**
      * Registration of one resource.
      * @param resource The resource you wish to register (e.g. SmeltingRecipe object).
      * **/
     @NeedsRevision("Generics bullshit")
     public static <T extends MinecraftJSONResource> void register(@Nonnull T resource){
+
         if(resource instanceof Lang){
             LANG_REG.register((Lang) resource);
         } else if (resource instanceof Recipe){
             RECIPE_REG.register((Recipe) resource);
         } else if (resource instanceof Model<?>){
             MODEL_REG.register((BlockModel) resource);
+        } else if (resource instanceof BlockState){
+            BLOCKSTATE_REG.register((BlockState) resource);
         }
     }
 
@@ -51,6 +57,7 @@ public class ResourceManager {
         LANG_REG.build();
         RECIPE_REG.build();
         MODEL_REG.build();
+        BLOCKSTATE_REG.build();
         System.out.println("-------------------------Minecraft Resource Manager-------------------------------");
     }
 

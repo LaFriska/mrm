@@ -135,7 +135,59 @@ public class BlockState extends MinecraftJSONResource {
 
     //Plank blocks
 
-    //public BlockState slab(String slabModel, String plankModel, String slabTopModel)
+    public BlockState slab(String slabModel, String plankModel, String slabTopModel){
+        return new BlockState(name, BlockStateType.VARIANTS).addVariants(
+                new Variant("type=bottom").addModelPointer(slabModel),
+                new Variant("type=double").addModelPointer(plankModel),
+                new Variant("type=top").addModelPointer(slabTopModel)
+        );
+    }
+
+    public BlockState button(String buttonModel, String buttonModelPressed){
+
+        String t = "powered=true";
+        String f = "powered=false";
+        String ceiling = "face=ceiling";
+        String floor = "face=floor";
+        String wall = "face=wall";
+        String south = "facing=south";
+        String west = "facing=west";
+        String east = "facing=east";
+        String north = "facing=north";
+
+        return new BlockState(name, BlockStateType.VARIANTS).addVariants(
+                new Variant(ceiling, east, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(270)),
+                new Variant(ceiling, east, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(270)),
+                new Variant(ceiling, north, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(180)),
+                new Variant(ceiling, north, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(180)),
+                new Variant(ceiling, south, f).addModelPointer(new ModelPointer(buttonModel).x(180)),
+                new Variant(ceiling, south, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180)),
+                new Variant(ceiling, west, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(90)),
+                new Variant(ceiling, west, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(90)),
+
+                new Variant(floor, east, f).addModelPointer(new ModelPointer(buttonModel).y(90)),
+                new Variant(floor, east, t).addModelPointer(new ModelPointer(buttonModelPressed).y(90)),
+                new Variant(floor, north, f).addModelPointer(new ModelPointer(buttonModel)),
+                new Variant(floor, north, t).addModelPointer(new ModelPointer(buttonModelPressed)),
+                new Variant(floor, south, f).addModelPointer(new ModelPointer(buttonModel).y(180)),
+                new Variant(floor, south, t).addModelPointer(new ModelPointer(buttonModelPressed).y(180)),
+                new Variant(floor, west, f).addModelPointer(new ModelPointer(buttonModel).y(270)),
+                new Variant(floor, west, t).addModelPointer(new ModelPointer(buttonModelPressed).y(270)),
+
+                new Variant(wall, east, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90).y(90)),
+                new Variant(wall, east, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(90)),
+                new Variant(wall, north, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90)),
+                new Variant(wall, north, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90)),
+                new Variant(wall, south, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90).y(180)),
+                new Variant(wall, south, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(180)),
+                new Variant(wall, west, f).addModelPointer(new ModelPointer(buttonModel).y(270).uvlock(true).x(90)),
+                new Variant(wall, west, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(270))
+        );
+
+    }
+
+
+
 
 
     //----------------------------------------------ALL------------------------------------------------
