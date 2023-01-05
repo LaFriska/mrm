@@ -2,7 +2,7 @@ package com.friska.mrm.mcresources.data;
 
 import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.config.Config;
-import com.friska.mrm.system.exceptions.CannotFindModIDException;
+import com.friska.mrm.system.exceptions.CannotFindNamespaceException;
 
 /**
  *Call any static strings to get the item ID.
@@ -1166,10 +1166,6 @@ public class ItemIDs {
      * Gets a modded item/tag ID. This method clips the mod ID to the name space of an item/tag ID. For example, inputting "uranium" will output modid:uranium, with "modid" being your mod key.
      * **/
     public static String getModdedID(String id){
-        if(Config.isModIDDefined()){
-            return Config.getModID() + ":" + id;
-        }else{
-            throw new CannotFindModIDException("Set the Mod ID using Config.setModID().");
-        }
+        return Config.getDefaultNamespace() + ":" + id;
     }
 }

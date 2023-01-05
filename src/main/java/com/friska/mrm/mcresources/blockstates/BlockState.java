@@ -37,7 +37,7 @@ public class BlockState extends MinecraftJSONResource {
      * You may leave choose not to specify the blockStateType, but that means only templated methods could be called from this class.
      * **/
     public BlockState(@Nonnull String name, @Nullable BlockStateType blockStateType) {
-        super("block state", "assets/" + Config.getModID() + "/blockstates", name);
+        super("block state", "assets/" + Config.getDefaultNamespace() + "/blockstates", name);
         this.blockStateType = blockStateType;
     }
 
@@ -112,17 +112,8 @@ public class BlockState extends MinecraftJSONResource {
      *<p>
      * This template creates a default block block state file, with a single unconditional variant pointing to the block model.
      * **/
-    public BlockState defaultBlock(String model, boolean isModded){
-        return new BlockState(name, BlockStateType.VARIANTS).addVariant(new Variant("").addModelPointer(model, isModded));
-    }
-
-    /**
-     * <b>Default Block States</b>
-     *  <p>
-     * This template creates a default block block state file, with a single unconditional variant pointing to the block model.
-     * **/
     public BlockState defaultBlock(String model){
-        return this.defaultBlock(model, true);
+        return new BlockState(name, BlockStateType.VARIANTS).addVariant(new Variant("").addModelPointer(model));
     }
 
     //TREE
@@ -131,23 +122,15 @@ public class BlockState extends MinecraftJSONResource {
      * <p>
      * This template creates the block states file for a log block, use this also for stripped logs, wood and stripped wood.
      * **/
-    public BlockState log(String model, String modelHorizontal, boolean isModded){
+    public BlockState log(String model, String modelHorizontal){
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
                 new Variant("axis=x")
-                        .addModelPointer(new ModelPointer(modelHorizontal, isModded).x(90).y(90)),
+                        .addModelPointer(new ModelPointer(modelHorizontal).x(90).y(90)),
                 new Variant("axis=y")
-                        .addModelPointer(new ModelPointer(model, isModded)),
+                        .addModelPointer(new ModelPointer(model)),
                 new Variant("axis=z")
-                        .addModelPointer(new ModelPointer(modelHorizontal, isModded).x(90))
+                        .addModelPointer(new ModelPointer(modelHorizontal).x(90))
         );
-    }
-    /**
-     * <b>Log Block States</b>
-     * <p>
-     * This template creates the block states file for a log block, use this also for stripped logs, wood and stripped wood.
-     * **/
-    public BlockState log(String model, String modelHorizontal){
-        return this.log(model, modelHorizontal, true);
     }
 
     //Plank blocks

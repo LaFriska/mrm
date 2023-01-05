@@ -11,7 +11,7 @@ public abstract class Recipe extends MinecraftJSONResource {
     protected String result;
 
     protected Recipe(){
-        super("recipe", "data/" + Config.getModID() + "/recipes");
+        super("recipe", "data/" + Config.getDefaultNamespace() + "/recipes");
     }
 
     @NeedsRevision("Update tag system to fit with that of Crafting")

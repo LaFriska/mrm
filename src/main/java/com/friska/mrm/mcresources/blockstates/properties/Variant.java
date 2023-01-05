@@ -43,8 +43,8 @@ public class Variant {
     /**
      * This method adds a model pointer. It is needed to specify at least one model pointer in the case that the conditions are met.
      * **/
-    public Variant addModelPointer(@Nonnull String textureName, boolean isModded){
-        this.modelPointers.add(new ModelPointer(textureName, isModded));
+    public Variant addModelPointer(@Nonnull String textureName){
+        this.modelPointers.add(new ModelPointer(textureName));
         return this;
     }
 

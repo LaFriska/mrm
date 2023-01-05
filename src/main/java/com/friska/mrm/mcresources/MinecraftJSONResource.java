@@ -17,7 +17,7 @@ public abstract class MinecraftJSONResource {
         this.resourceType = resourceType;
         setPath(path);
         setName(name);
-        if(!Config.isModIDDefined()){
+        if(!Config.isDefaultNamespaceDefined()){
             throw new ResourcePathException("The Mod ID is null, define by calling Config.setModID().");
         }
     }

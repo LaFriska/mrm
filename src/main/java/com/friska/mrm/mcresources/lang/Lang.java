@@ -43,7 +43,7 @@ public class Lang extends MinecraftJSONResource {
      *                     <b>Use the LanguageCodes class and call the static strings for the sake of convenience</b>
      * **/
     public Lang(@Nonnull String languageCode){
-        super("language", "assets/" + Config.getModID() + "/lang", languageCode);
+        super("language", "assets/" + Config.getDefaultNamespace() + "/lang", languageCode);
 
         this.languageCode = languageCode;
 

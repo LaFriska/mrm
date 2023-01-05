@@ -5,6 +5,7 @@ import com.friska.mrm.mcresources.MinecraftJSONResource;
 import com.friska.mrm.system.util.KeyValue;
 import com.friska.mrm.system.serialiser.builder.JObject;
 import com.friska.mrm.system.serialiser.builder.JValue;
+import com.friska.mrm.system.util.Util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,21 +16,17 @@ import java.util.List;
 public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
 
     protected String parent = null;
+
+    protected String parentType;
     protected ArrayList<KeyValue<String>> textures = new ArrayList<>();
-
-    protected static String texturePath;
-
     protected String renderType = null;
 
     protected final String type;
 
-    protected final boolean isModded;
-
-    protected Model(@Nonnull String type, @Nonnull String name, /*By default, should be true*/ boolean isModded){
-        super(type + " model", "assets/" + Config.getModID() + "/models/" + type, name);
-        this.isModded = isModded;
-        setTexturePath(isModded ? Config.getModID() + ":" + type +"/" : "minecraft:" + type +"/");
+    protected Model(@Nonnull String type, @Nonnull String name, @Nonnull String parentType){
+        super(type + " model", "assets/" + Config.getDefaultNamespace() + "/models/" + type, name);
         this.type = type;
+        this.parentType = parentType;
     }
 
     /**
@@ -45,7 +42,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
     /**
      * Adds a key-value pair for textures used in models.
      * @param key The key of the texture, for example, "layer0".
-     * @param texture The path and name of the texture file, for example, "minecraft:block/acacia_planks".
+     * @param texture The texture location.
      * **/
     public T addTexture(@Nullable String key, @Nonnull String texture){
         if(key == null) key = "";
@@ -55,7 +52,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
 
     /**
      * Adds multiple key-value pair for textures used in models.
-     * @param textures Vararg of ModelTextures, which are records with both the key and the value as parameters.
+     * @param textures Vararg of KeyValue pairs.
      * **/
     public T addTextures(@Nonnull KeyValue<String>... textures){
         List.of(textures).forEach((t) -> addTexture(t.key(), t.value()));
@@ -94,21 +91,13 @@ public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
     @Override
     public void build(){
         createBuilder();
-        if(parent != null) getBuilder().nest(new JValue<>("parent", parent));
+        if(parent != null) getBuilder().nest(new JValue<>("parent", Util.getResourceLocation(parentType, parent)));
         if(!textures.isEmpty()) {
             JObject texturesJObject = new JObject("textures");
-            textures.forEach((mt) -> texturesJObject.nest(mt.toJValue()));
+            textures.forEach((mt) -> texturesJObject.nest(mt.toJValue(type)));
             getBuilder().nest(texturesJObject);
         }
         if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
         getBuilder().build();
-    }
-
-    protected static String getTextureName(String name){
-        return texturePath + name;
-    }
-
-    private static void setTexturePath(String texturePath) {
-        Model.texturePath = texturePath;
     }
 }

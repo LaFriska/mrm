@@ -40,7 +40,7 @@ public class Case implements JObjectBuildable {
     @SafeVarargs
     @SuppressWarnings("unchecked")
     public final <T> Case addCondition(KeyValue<T>... keyValues){
-        KeyValue<String>[] keyValueStrings = new KeyValue<>[keyValues.length];
+        KeyValue<String>[] keyValueStrings = new KeyValue[keyValues.length];
         for (int i = 0; i <= keyValues.length - 1; i++) {
             keyValueStrings[i] = keyValues[i].forceToString();
         }

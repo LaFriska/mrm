@@ -5,6 +5,7 @@ import com.friska.mrm.system.config.Config;
 import com.friska.mrm.system.interfaces.JObjectBuildable;
 import com.friska.mrm.system.serialiser.builder.JObject;
 import com.friska.mrm.system.serialiser.builder.JValue;
+import com.friska.mrm.system.util.Util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,7 +14,6 @@ import javax.annotation.Nullable;
 @ExpectAccess
 public class ModelPointer implements JObjectBuildable {
 
-    private final boolean isModded;
     private final String pointer;
     private Boolean uvlock = null;
     private Integer x = null;
@@ -22,17 +22,10 @@ public class ModelPointer implements JObjectBuildable {
     /**
      * A model pointer points to the block model by specifying the texture path. More things could be specified too compatible with Minecraft.
      *
-     * @param textureName Name of the texture png file.
-     * @param isModded Whether it is in your modded namespace or the default Minecraft namespace.
+     * @param model Name of the model JSON file.
      * **/
-    public ModelPointer(@Nonnull String textureName, boolean isModded){
-        this.isModded = isModded;
-
-        if(isModded){
-            this.pointer = Config.getModID() + ":block/" + textureName;
-        }else{
-            this.pointer = "minecraft:block/" + textureName;
-        }
+    public ModelPointer(@Nonnull String model){
+        this.pointer = Util.getResourceLocation("block", model);
     }
 
     /**

@@ -5,6 +5,7 @@ import com.friska.mrm.system.config.Config;
 import com.friska.mrm.system.serialiser.builder.JValue;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 //TODO javadoc
 
@@ -29,11 +30,15 @@ public record KeyValue<T>(String key, T value) {
     }
 
     public KeyValue<String> buildSimpleTranslationKey(String type) {
-        return new KeyValue<>(type + "." + Config.getModID() + "." + this.key, this.value.toString());
+        return new KeyValue<>(type + "." + Config.getDefaultNamespace() + "." + this.key, this.value.toString());
     }
 
     public JValue<T> toJValue() {
         return new JValue<>(this.key, this.value);
     }
+    public JValue<String> toJValue(@Nonnull String resourceLocationPath) {
+        return new JValue<>(this.key, Util.getResourceLocation(resourceLocationPath, this.getValueString()));
+    }
+
 
 }
