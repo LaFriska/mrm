@@ -61,7 +61,8 @@ public class Main {
                 new CraftingShaped("xxx", "xox","xxx").setCount(3).addKey('x', ItemIDs.NETHER_STAR).addKey('o', ItemIDs.REDSTONE_DUST).setResult(ItemIDs.OBSIDIAN).setGroup("lmao"),
                 new CraftingShapeless(ItemIDs.NOTE_BLOCK).addIngredient(ItemIDs.REDSTONE_DUST).setCount(3).addIngredient(ItemIDs.OBSIDIAN),
                 new BlockModel("uranium_block").defaultCube().log("lmaomod:block/uranium_end", "@uranium_side"),
-                new BlockState("acacia_button").button("@acacia_button", "@acacia_button_pressed")
+                new BlockState("acacia_door").door("@acacia_door_bottom_left", "@acacia_door_bottom_left_open", "@acacia_door_bottom_right", "@acacia_door_bottom_right_open", "@acacia_door_top_left", "@acacia_door_top_left_open", "@acacia_door_top_right", "@acacia_door_top_right_open"),
+                new BlockState("acacia_fence").fence("@acacia_fence_side","@acacia_fence_post" )
         );
 
         ResourceManager.buildAll();
