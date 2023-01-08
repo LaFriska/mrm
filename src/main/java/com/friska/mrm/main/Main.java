@@ -62,7 +62,11 @@ public class Main {
                 new CraftingShapeless(ItemIDs.NOTE_BLOCK).addIngredient(ItemIDs.REDSTONE_DUST).setCount(3).addIngredient(ItemIDs.OBSIDIAN),
                 new BlockModel("uranium_block").defaultCube().log("lmaomod:block/uranium_end", "@uranium_side"),
                 new BlockState("acacia_door").door("@acacia_door_bottom_left", "@acacia_door_bottom_left_open", "@acacia_door_bottom_right", "@acacia_door_bottom_right_open", "@acacia_door_top_left", "@acacia_door_top_left_open", "@acacia_door_top_right", "@acacia_door_top_right_open"),
-                new BlockState("acacia_fence").fence("@acacia_fence_side","@acacia_fence_post" )
+                new BlockState("acacia_fence").fence("@acacia_fence_side","@acacia_fence_post" ),
+                new BlockState("acacia_pressure_plate").pressurePlate("@acacia_pressure_plate", "@acacia_pressure_plate_down"),
+                new BlockState("acacia_fence_gate").fenceGate("@acacia_fence_gate", "@acacia_fence_gate_wall", "@acacia_fence_gate_open", "@acacia_fence_gate_wall_open"),
+                new BlockState("acacia_stairs").stairs("@acacia_stairs", "@acacia_stairs_inner", "@acacia_stairs_outer"),
+                new BlockState("acacia_trapdoor").trapdoor("@acacia_trapdoor_bottom", "@acacia_trapdoor_top", "@acacia_trapdoor_open")
         );
 
         ResourceManager.buildAll();

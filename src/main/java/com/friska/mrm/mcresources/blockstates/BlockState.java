@@ -24,6 +24,19 @@ public class BlockState extends MinecraftJSONResource {
     private final ArrayList<Case> cases = new ArrayList<>();
     public BlockStateType blockStateType;
 
+    //Template conditions
+
+    private static final String SOUTH = "facing=south";
+    private static final String WEST = "facing=west";
+    private static final String EAST = "facing=east";
+    private static final String NORTH = "facing=north";
+
+    private final static String BOTTOM = "half=bottom";
+    private final static String TOP = "half=top";
+
+    private static final String CLOSED = "open=false";
+    private static final String OPEN = "open=true";
+
     /**
      * This class builds a JSON file for block states, which are used in Minecraft to point to different block models given different conditions.
      * There are two types of block state JSON files, <b>variants</b> and <b>multipart</b>, and methods in this class denoted with @BlockStateOnly means that the method
@@ -152,45 +165,37 @@ public class BlockState extends MinecraftJSONResource {
         final String floor = "face=floor";
         final String wall = "face=wall";
 
-        final String south = "facing=south";
-        final String west = "facing=west";
-        final String east = "facing=east";
-        final String north = "facing=north";
-
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
-                new Variant(ceiling, east, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(270)),
-                new Variant(ceiling, east, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(270)),
-                new Variant(ceiling, north, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(180)),
-                new Variant(ceiling, north, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(180)),
-                new Variant(ceiling, south, f).addModelPointer(new ModelPointer(buttonModel).x(180)),
-                new Variant(ceiling, south, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180)),
-                new Variant(ceiling, west, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(90)),
-                new Variant(ceiling, west, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(90)),
+                new Variant(ceiling, EAST, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(270)),
+                new Variant(ceiling, EAST, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(270)),
+                new Variant(ceiling, NORTH, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(180)),
+                new Variant(ceiling, NORTH, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(180)),
+                new Variant(ceiling, SOUTH, f).addModelPointer(new ModelPointer(buttonModel).x(180)),
+                new Variant(ceiling, SOUTH, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180)),
+                new Variant(ceiling, WEST, f).addModelPointer(new ModelPointer(buttonModel).x(180).y(90)),
+                new Variant(ceiling, WEST, t).addModelPointer(new ModelPointer(buttonModelPressed).x(180).y(90)),
 
-                new Variant(floor, east, f).addModelPointer(new ModelPointer(buttonModel).y(90)),
-                new Variant(floor, east, t).addModelPointer(new ModelPointer(buttonModelPressed).y(90)),
-                new Variant(floor, north, f).addModelPointer(new ModelPointer(buttonModel)),
-                new Variant(floor, north, t).addModelPointer(new ModelPointer(buttonModelPressed)),
-                new Variant(floor, south, f).addModelPointer(new ModelPointer(buttonModel).y(180)),
-                new Variant(floor, south, t).addModelPointer(new ModelPointer(buttonModelPressed).y(180)),
-                new Variant(floor, west, f).addModelPointer(new ModelPointer(buttonModel).y(270)),
-                new Variant(floor, west, t).addModelPointer(new ModelPointer(buttonModelPressed).y(270)),
+                new Variant(floor, EAST, f).addModelPointer(new ModelPointer(buttonModel).y(90)),
+                new Variant(floor, EAST, t).addModelPointer(new ModelPointer(buttonModelPressed).y(90)),
+                new Variant(floor, NORTH, f).addModelPointer(new ModelPointer(buttonModel)),
+                new Variant(floor, NORTH, t).addModelPointer(new ModelPointer(buttonModelPressed)),
+                new Variant(floor, SOUTH, f).addModelPointer(new ModelPointer(buttonModel).y(180)),
+                new Variant(floor, SOUTH, t).addModelPointer(new ModelPointer(buttonModelPressed).y(180)),
+                new Variant(floor, WEST, f).addModelPointer(new ModelPointer(buttonModel).y(270)),
+                new Variant(floor, WEST, t).addModelPointer(new ModelPointer(buttonModelPressed).y(270)),
 
-                new Variant(wall, east, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90).y(90)),
-                new Variant(wall, east, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(90)),
-                new Variant(wall, north, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90)),
-                new Variant(wall, north, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90)),
-                new Variant(wall, south, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90).y(180)),
-                new Variant(wall, south, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(180)),
-                new Variant(wall, west, f).addModelPointer(new ModelPointer(buttonModel).y(270).uvlock(true).x(90)),
-                new Variant(wall, west, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(270))
+                new Variant(wall, EAST, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90).y(90)),
+                new Variant(wall, EAST, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(90)),
+                new Variant(wall, NORTH, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90)),
+                new Variant(wall, NORTH, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90)),
+                new Variant(wall, SOUTH, f).addModelPointer(new ModelPointer(buttonModel).uvlock(true).x(90).y(180)),
+                new Variant(wall, SOUTH, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(180)),
+                new Variant(wall, WEST, f).addModelPointer(new ModelPointer(buttonModel).y(270).uvlock(true).x(90)),
+                new Variant(wall, WEST, t).addModelPointer(new ModelPointer(buttonModelPressed).uvlock(true).x(90).y(270))
         );
     }
 
     public BlockState door(String botLeft, String botLeftOpen, String botRight, String botRightOpen, String topLeft, String topLeftOpen, String topRight, String topRightOpen){
-
-        final String f = "open=false";
-        final String t = "open=true";
 
         final String left = "hinge=left";
         final String right = "hinge=right";
@@ -198,47 +203,42 @@ public class BlockState extends MinecraftJSONResource {
         final String lower = "half=lower";
         final String upper = "half=upper";
 
-        final String south = "facing=south";
-        final String west = "facing=west";
-        final String east = "facing=east";
-        final String north = "facing=north";
-
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
-                new Variant(east, lower, left, f).addModelPointer(new ModelPointer(botLeft)),
-                new Variant(east, lower, left, t).addModelPointer(new ModelPointer(botLeftOpen).y(90)),
-                new Variant(east, lower, right, f).addModelPointer(new ModelPointer(botRight)),
-                new Variant(east, lower, right, t).addModelPointer(new ModelPointer(botRightOpen).y(270)),
-                new Variant(east, upper, left, f).addModelPointer(new ModelPointer(topLeft)),
-                new Variant(east, upper, left, t).addModelPointer(new ModelPointer(topLeftOpen).y(90)),
-                new Variant(east, upper, right, f).addModelPointer(new ModelPointer(topRight)),
-                new Variant(east, upper, right, t).addModelPointer(new ModelPointer(topRightOpen).y(270)),
+                new Variant(EAST, lower, left, CLOSED).addModelPointer(new ModelPointer(botLeft)),
+                new Variant(EAST, lower, left, OPEN).addModelPointer(new ModelPointer(botLeftOpen).y(90)),
+                new Variant(EAST, lower, right, CLOSED).addModelPointer(new ModelPointer(botRight)),
+                new Variant(EAST, lower, right, OPEN).addModelPointer(new ModelPointer(botRightOpen).y(270)),
+                new Variant(EAST, upper, left, CLOSED).addModelPointer(new ModelPointer(topLeft)),
+                new Variant(EAST, upper, left, OPEN).addModelPointer(new ModelPointer(topLeftOpen).y(90)),
+                new Variant(EAST, upper, right, CLOSED).addModelPointer(new ModelPointer(topRight)),
+                new Variant(EAST, upper, right, OPEN).addModelPointer(new ModelPointer(topRightOpen).y(270)),
 
-                new Variant(north, lower, left, f).addModelPointer(new ModelPointer(botLeft).y(270)),
-                new Variant(north, lower, left, t).addModelPointer(new ModelPointer(botLeftOpen)),
-                new Variant(north, lower, right, f).addModelPointer(new ModelPointer(botRight).y(270)),
-                new Variant(north, lower, right, t).addModelPointer(new ModelPointer(botRightOpen).y(180)),
-                new Variant(north, upper, left, f).addModelPointer(new ModelPointer(topLeft).y(270)),
-                new Variant(north, upper, left, t).addModelPointer(new ModelPointer(topLeftOpen)),
-                new Variant(north, upper, right, f).addModelPointer(new ModelPointer(topRight).y(270)),
-                new Variant(north, upper, right, t).addModelPointer(new ModelPointer(topRightOpen).y(180)),
+                new Variant(NORTH, lower, left, CLOSED).addModelPointer(new ModelPointer(botLeft).y(270)),
+                new Variant(NORTH, lower, left, OPEN).addModelPointer(new ModelPointer(botLeftOpen)),
+                new Variant(NORTH, lower, right, CLOSED).addModelPointer(new ModelPointer(botRight).y(270)),
+                new Variant(NORTH, lower, right, OPEN).addModelPointer(new ModelPointer(botRightOpen).y(180)),
+                new Variant(NORTH, upper, left, CLOSED).addModelPointer(new ModelPointer(topLeft).y(270)),
+                new Variant(NORTH, upper, left, OPEN).addModelPointer(new ModelPointer(topLeftOpen)),
+                new Variant(NORTH, upper, right, CLOSED).addModelPointer(new ModelPointer(topRight).y(270)),
+                new Variant(NORTH, upper, right, OPEN).addModelPointer(new ModelPointer(topRightOpen).y(180)),
 
-                new Variant(south, lower, left, f).addModelPointer(new ModelPointer(botLeft).y(90)),
-                new Variant(south, lower, left, t).addModelPointer(new ModelPointer(botLeftOpen).y(180)),
-                new Variant(south, lower, right, f).addModelPointer(new ModelPointer(botRight).y(90)),
-                new Variant(south, lower, right, t).addModelPointer(new ModelPointer(botRightOpen)),
-                new Variant(south, upper, left, f).addModelPointer(new ModelPointer(topLeft).y(90)),
-                new Variant(south, upper, left, t).addModelPointer(new ModelPointer(topLeftOpen).y(180)),
-                new Variant(south, upper, right, f).addModelPointer(new ModelPointer(topRight).y(90)),
-                new Variant(south, upper, right, t).addModelPointer(new ModelPointer(topRightOpen)),
+                new Variant(SOUTH, lower, left, CLOSED).addModelPointer(new ModelPointer(botLeft).y(90)),
+                new Variant(SOUTH, lower, left, OPEN).addModelPointer(new ModelPointer(botLeftOpen).y(180)),
+                new Variant(SOUTH, lower, right, CLOSED).addModelPointer(new ModelPointer(botRight).y(90)),
+                new Variant(SOUTH, lower, right, OPEN).addModelPointer(new ModelPointer(botRightOpen)),
+                new Variant(SOUTH, upper, left, CLOSED).addModelPointer(new ModelPointer(topLeft).y(90)),
+                new Variant(SOUTH, upper, left, OPEN).addModelPointer(new ModelPointer(topLeftOpen).y(180)),
+                new Variant(SOUTH, upper, right, CLOSED).addModelPointer(new ModelPointer(topRight).y(90)),
+                new Variant(SOUTH, upper, right, OPEN).addModelPointer(new ModelPointer(topRightOpen)),
 
-                new Variant(west, lower, left, f).addModelPointer(new ModelPointer(botLeft).y(180)),
-                new Variant(west, lower, left, t).addModelPointer(new ModelPointer(botLeftOpen).y(270)),
-                new Variant(west, lower, right, f).addModelPointer(new ModelPointer(botRight).y(180)),
-                new Variant(west, lower, right, t).addModelPointer(new ModelPointer(botRightOpen).y(90)),
-                new Variant(west, upper, left, f).addModelPointer(new ModelPointer(topLeft).y(180)),
-                new Variant(west, upper, left, t).addModelPointer(new ModelPointer(topLeftOpen).y(270)),
-                new Variant(west, upper, right, f).addModelPointer(new ModelPointer(topRight).y(180)),
-                new Variant(west, upper, right, t).addModelPointer(new ModelPointer(topRightOpen).y(90))
+                new Variant(WEST, lower, left, CLOSED).addModelPointer(new ModelPointer(botLeft).y(180)),
+                new Variant(WEST, lower, left, OPEN).addModelPointer(new ModelPointer(botLeftOpen).y(270)),
+                new Variant(WEST, lower, right, CLOSED).addModelPointer(new ModelPointer(botRight).y(180)),
+                new Variant(WEST, lower, right, OPEN).addModelPointer(new ModelPointer(botRightOpen).y(90)),
+                new Variant(WEST, upper, left, CLOSED).addModelPointer(new ModelPointer(topLeft).y(180)),
+                new Variant(WEST, upper, left, OPEN).addModelPointer(new ModelPointer(topLeftOpen).y(270)),
+                new Variant(WEST, upper, right, CLOSED).addModelPointer(new ModelPointer(topRight).y(180)),
+                new Variant(WEST, upper, right, OPEN).addModelPointer(new ModelPointer(topRightOpen).y(90))
         );
 
     }
@@ -252,8 +252,6 @@ public class BlockState extends MinecraftJSONResource {
                 new Case(new ModelPointer(fenceSide).uvlock(true).y(270)).addCondition("west", true)
         );
     }
-
-    //TODO test the method
     public BlockState pressurePlate(String pressurePlate, String pressurePlateDown){
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
                 new Variant("powered=false").addModelPointer(pressurePlate),
@@ -261,6 +259,122 @@ public class BlockState extends MinecraftJSONResource {
         );
     }
 
+    public BlockState fenceGate(String gate, String gateWall, String gateOpen, String gateWallOpen){
+        final String iwt = "in_wall=true";
+        final String iwf = "in_wall=false";
+        final String ot = "open=true";
+        final String of = "open=false";
+
+        return new BlockState(name, BlockStateType.VARIANTS).addVariants(
+                new Variant(EAST, iwf, of).addModelPointer(new ModelPointer(gate).uvlock(true).y(270)),
+                new Variant(EAST, iwf, ot).addModelPointer(new ModelPointer(gateOpen).uvlock(true).y(270)),
+                new Variant(EAST, iwt, of).addModelPointer(new ModelPointer(gateWall).uvlock(true).y(270)),
+                new Variant(EAST, iwt, ot).addModelPointer(new ModelPointer(gateWallOpen).uvlock(true).y(270)),
+
+                new Variant(NORTH, iwf, of).addModelPointer(new ModelPointer(gate).uvlock(true).y(180)),
+                new Variant(NORTH, iwf, ot).addModelPointer(new ModelPointer(gateOpen).uvlock(true).y(180)),
+                new Variant(NORTH, iwt, of).addModelPointer(new ModelPointer(gateWall).uvlock(true).y(180)),
+                new Variant(NORTH, iwt, ot).addModelPointer(new ModelPointer(gateWallOpen).uvlock(true).y(180)),
+
+                new Variant(SOUTH, iwf, of).addModelPointer(new ModelPointer(gate).uvlock(true)),
+                new Variant(SOUTH, iwf, ot).addModelPointer(new ModelPointer(gateOpen).uvlock(true)),
+                new Variant(SOUTH, iwt, of).addModelPointer(new ModelPointer(gateWall).uvlock(true)),
+                new Variant(SOUTH, iwt, ot).addModelPointer(new ModelPointer(gateWallOpen).uvlock(true)),
+
+                new Variant(WEST, iwf, of).addModelPointer(new ModelPointer(gate).uvlock(true).y(90)),
+                new Variant(WEST, iwf, ot).addModelPointer(new ModelPointer(gateOpen).uvlock(true).y(90)),
+                new Variant(WEST, iwt, of).addModelPointer(new ModelPointer(gateWall).uvlock(true).y(90)),
+                new Variant(WEST, iwt, ot).addModelPointer(new ModelPointer(gateWallOpen).uvlock(true).y(90))
+        );
+
+    }
+
+    public BlockState stairs(String stairs, String inner, String outer){
+
+
+
+        final String innerLeft = "shape=inner_left";
+        final String innerRight = "shape=inner_right";
+        final String outerLeft = "shape=outer_left";
+        final String outerRight = "shape=outer_right";
+        final String straight = "shape=straight";
+
+        return new BlockState(name, BlockStateType.VARIANTS).addVariants(
+                new Variant(EAST, BOTTOM, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).y(270)),
+                new Variant(EAST, BOTTOM, innerRight).addModelPointer(new ModelPointer(inner)),
+                new Variant(EAST, BOTTOM, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).y(270)),
+                new Variant(EAST, BOTTOM, outerRight).addModelPointer(new ModelPointer(outer)),
+                new Variant(EAST, BOTTOM, straight).addModelPointer(new ModelPointer(stairs)),
+
+                new Variant(EAST, TOP, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).x(180)),
+                new Variant(EAST, TOP, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).x(180).y(90)),
+                new Variant(EAST, TOP, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).x(180)),
+                new Variant(EAST, TOP, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).x(180).y(90)),
+                new Variant(EAST, TOP, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).x(180)),
+
+                new Variant(NORTH, BOTTOM, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).y(180)),
+                new Variant(NORTH, BOTTOM, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).y(270)),
+                new Variant(NORTH, BOTTOM, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).y(180)),
+                new Variant(NORTH, BOTTOM, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).y(270)),
+                new Variant(NORTH, BOTTOM, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).y(270)),
+
+                new Variant(NORTH, TOP, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).x(180).y(270)),
+                new Variant(NORTH, TOP, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).x(180)),
+                new Variant(NORTH, TOP, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).x(180).y(270)),
+                new Variant(NORTH, TOP, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).x(180)),
+                new Variant(NORTH, TOP, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).x(180).y(270)),
+
+                new Variant(SOUTH, BOTTOM, innerLeft).addModelPointer(new ModelPointer(inner)),
+                new Variant(SOUTH, BOTTOM, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).y(90)),
+                new Variant(SOUTH, BOTTOM, outerLeft).addModelPointer(new ModelPointer(outer)),
+                new Variant(SOUTH, BOTTOM, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).y(90)),
+                new Variant(SOUTH, BOTTOM, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).y(90)),
+
+                new Variant(SOUTH, TOP, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).x(180).y(90)),
+                new Variant(SOUTH, TOP, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).x(180).y(180)),
+                new Variant(SOUTH, TOP, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).x(180).y(90)),
+                new Variant(SOUTH, TOP, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).x(180).y(180)),
+                new Variant(SOUTH, TOP, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).x(180).y(90)),
+
+                new Variant(WEST, BOTTOM, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).y(90)),
+                new Variant(WEST, BOTTOM, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).y(180)),
+                new Variant(WEST, BOTTOM, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).y(90)),
+                new Variant(WEST, BOTTOM, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).y(180)),
+                new Variant(WEST, BOTTOM, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).y(180)),
+
+                new Variant(WEST, TOP, innerLeft).addModelPointer(new ModelPointer(inner).uvlock(true).x(180).y(180)),
+                new Variant(WEST, TOP, innerRight).addModelPointer(new ModelPointer(inner).uvlock(true).x(180).y(270)),
+                new Variant(WEST, TOP, outerLeft).addModelPointer(new ModelPointer(outer).uvlock(true).x(180).y(180)),
+                new Variant(WEST, TOP, outerRight).addModelPointer(new ModelPointer(outer).uvlock(true).x(180).y(270)),
+                new Variant(WEST, TOP, straight).addModelPointer(new ModelPointer(stairs).uvlock(true).x(180).y(180))
+        );
+    }
+
+    public BlockState trapdoor(String bottom, String top, String open){
+
+        return new BlockState(name, BlockStateType.VARIANTS).addVariants(
+                new Variant(EAST, BOTTOM, CLOSED).addModelPointer(new ModelPointer(bottom).y(90)),
+                new Variant(EAST, BOTTOM, OPEN).addModelPointer(new ModelPointer(open).y(90)),
+                new Variant(EAST, TOP, CLOSED).addModelPointer(new ModelPointer(top).y(90)),
+                new Variant(EAST, TOP, OPEN).addModelPointer(new ModelPointer(open).x(180).y(270)),
+
+                new Variant(NORTH, BOTTOM, CLOSED).addModelPointer(new ModelPointer(bottom)),
+                new Variant(NORTH, BOTTOM, OPEN).addModelPointer(new ModelPointer(open)),
+                new Variant(NORTH, TOP, CLOSED).addModelPointer(new ModelPointer(top)),
+                new Variant(NORTH, TOP, OPEN).addModelPointer(new ModelPointer(open).x(180).y(180)),
+
+                new Variant(SOUTH, BOTTOM, CLOSED).addModelPointer(new ModelPointer(bottom).y(180)),
+                new Variant(SOUTH, BOTTOM, OPEN).addModelPointer(new ModelPointer(open).y(180)),
+                new Variant(SOUTH, TOP, CLOSED).addModelPointer(new ModelPointer(top).y(180)),
+                new Variant(SOUTH, TOP, OPEN).addModelPointer(new ModelPointer(open).x(180).y(0)),
+
+                new Variant(WEST, BOTTOM, CLOSED).addModelPointer(new ModelPointer(bottom).y(270)),
+                new Variant(WEST, BOTTOM, OPEN).addModelPointer(new ModelPointer(open).y(270)),
+                new Variant(WEST, TOP, CLOSED).addModelPointer(new ModelPointer(top).y(270)),
+                new Variant(WEST, TOP, OPEN).addModelPointer(new ModelPointer(open).x(180).y(90))
+        );
+
+    }
 
 
     //----------------------------------------------ALL------------------------------------------------
