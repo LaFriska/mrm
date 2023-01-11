@@ -18,6 +18,14 @@ public class Main {
 
     public static void main(String... args) {
         Config.setDefaultNamespace("bourgeoismod");
+        test();
+
+    }
+
+    public static void test(){
+
+        ResourceManager manager = new ResourceManager("minecraft");
+        ResourceManager managerLmao = new ResourceManager("lmao");
 
         CraftingShapeless craftingShapeless = new CraftingShapeless(ItemIDs.BEACON).addIngredient(ItemIDs.OBSIDIAN, 3).addIngredient(ItemIDs.NETHER_STAR);
 
@@ -35,9 +43,9 @@ public class Main {
                                 new ModelPointer("redstone_lamp").x(90),
                                 new ModelPointer("@redston325e_lamp").x(234),
                                 new ModelPointer("namespace:block/redstone_l32amp").x(923)
-                                )
+                        )
                 )
-                        .addVariant(new Variant("lit=true").addModelPointer("redstone_lamp_on"));
+                .addVariant(new Variant("lit=true").addModelPointer("redstone_lamp_on"));
 
         BlockState redStoneWire = new BlockState("oak_fence_post", BlockStateType.MULTIPART)
                 .addCases(
@@ -52,7 +60,7 @@ public class Main {
         test.build();
 
 
-        ResourceManager.register(
+        manager.register(
                 new SmeltingRecipe(ItemIDs.SADDLE, ItemIDs.BEACON, 2, 3),
                 new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
                 new BlastingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
@@ -69,6 +77,15 @@ public class Main {
                 new BlockState("acacia_trapdoor").trapdoor("@acacia_trapdoor_bottom", "@acacia_trapdoor_top", "@acacia_trapdoor_open")
         );
 
-        ResourceManager.buildAll();
+        managerLmao.register(
+                new SmeltingRecipe(ItemIDs.SADDLE, ItemIDs.BEACON, 2, 3),
+                new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
+                new BlastingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
+                new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3),
+                new SmeltingRecipe(ItemIDs.CACTUS, ItemIDs.BEACON, 2, 3)
+        );
+
+        managerLmao.build();
+        manager.build();
     }
 }

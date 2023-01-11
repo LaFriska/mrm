@@ -1,45 +1,52 @@
 package com.friska.mrm.mcresources;
 
-import com.friska.mrm.mcresources.models.Model;
-import com.friska.mrm.registries.Registry;
 import com.friska.mrm.system.exceptions.ResourcePathException;
 import com.friska.mrm.system.serialiser.builder.JBuilder;
 import com.friska.mrm.system.config.Config;
+import com.friska.mrm.system.util.ResourcePath;
 
 import javax.annotation.Nonnull;
 
-public abstract class MinecraftJSONResource {
+public abstract class MinecraftResource {
 
 
     protected JBuilder builder;
-    protected String path;
+    protected ResourcePath path;
     protected String name;
 
-    private String resourceType;
+    private final String resourceType;
 
-    public MinecraftJSONResource(@Nonnull String resourceType, @Nonnull String path, @Nonnull String name){
+    public MinecraftResource(@Nonnull String resourceType, @Nonnull String path, @Nonnull String name){
         this.resourceType = resourceType;
         setPath(path);
         setName(name);
-        if(!Config.isDefaultNamespaceDefined()){
+        /*if(!Config.isDefaultNamespaceDefined()){
             throw new ResourcePathException("The Mod ID is null, define by calling Config.setModID().");
-        }
+        }*/
     }
 
-    public MinecraftJSONResource(@Nonnull String resourceType, @Nonnull String path){
+    public MinecraftResource(@Nonnull String resourceType, @Nonnull ResourcePath path, @Nonnull String name){
+        this(resourceType, path.toString(), name);
+    }
+
+    public MinecraftResource(@Nonnull String resourceType, @Nonnull String path){
         this(resourceType, path, "null");
     }
 
     public void setPath(String path) {
-        this.path = path;
+        this.path = ResourcePath.toPath(path);
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public void setNamespace(String newNamespace){
+        this.path = new ResourcePath(path.type(), newNamespace, path.subPath());
+    }
+
     public String getPath() {
-        return path;
+        return path.toString();
     }
 
     public String getName() {
@@ -47,7 +54,7 @@ public abstract class MinecraftJSONResource {
     }
 
     protected void createBuilder(){
-        this.builder = new JBuilder(path, name);
+        this.builder = new JBuilder(path.toString(), name);
     }
 
     public JBuilder getBuilder(){

@@ -3,7 +3,7 @@ package com.friska.mrm.mcresources.lang;
 import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.system.config.Config;
-import com.friska.mrm.mcresources.MinecraftJSONResource;
+import com.friska.mrm.mcresources.MinecraftResource;
 import com.friska.mrm.mcresources.data.TranslationTypes;
 import com.friska.mrm.system.serialiser.builder.JBreak;
 import com.friska.mrm.system.util.KeyValue;
@@ -19,7 +19,7 @@ import java.util.List;
         "-Colors" +
         "-Translation record override.")
 @ExpectAccess
-public class Lang extends MinecraftJSONResource {
+public class Lang extends MinecraftResource {
     private final String languageCode;
 
 
@@ -84,7 +84,7 @@ public class Lang extends MinecraftJSONResource {
     /**
      * Adding an enchantment value, key formatted as enchantment.MODID.ID.
      * **/
-    public Lang addEnchantment(String enchantmentID, String translation){enchantments.add((new KeyValue(enchantmentID, translation)).buildSimpleTranslationKey(TranslationTypes.ENCHANTMENT));return this;}
+    public Lang addEnchantment(String enchantmentID, String translation){enchantments.add((new KeyValue<>(enchantmentID, translation)).buildSimpleTranslationKey(TranslationTypes.ENCHANTMENT));return this;}
     @SafeVarargs
     public final Lang addEnchantments(KeyValue<String>... translations){List.of(translations).forEach((t) -> enchantments.add(t.buildSimpleTranslationKey(TranslationTypes.ENCHANTMENT)));return this;}
 

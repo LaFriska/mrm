@@ -3,10 +3,10 @@ package com.friska.mrm.mcresources.recipes;
 import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.system.config.Config;
 import com.friska.mrm.system.exceptions.UnexpectedTagException;
-import com.friska.mrm.mcresources.MinecraftJSONResource;
+import com.friska.mrm.mcresources.MinecraftResource;
 
 
-public abstract class Recipe extends MinecraftJSONResource {
+public abstract class Recipe extends MinecraftResource {
 
     protected String type;
     protected String result;

@@ -1,7 +1,7 @@
 package com.friska.mrm.registries;
 
 import com.friska.mrm.system.annotations.NeedsRevision;
-import com.friska.mrm.mcresources.MinecraftJSONResource;
+import com.friska.mrm.mcresources.MinecraftResource;
 import com.friska.mrm.system.util.KeyValue;
 import com.friska.mrm.mcresources.lang.Lang;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class RegistryUtil {
 
     //UTIL
-    protected static void updateNames(ArrayList<? extends MinecraftJSONResource> resources){
+    protected static void updateNames(ArrayList<? extends MinecraftResource> resources){
         String[] names = getAllNames(resources);
         int duplicates;
         String check;
@@ -50,7 +50,7 @@ public class RegistryUtil {
 
     //PRIVATE METHODS
 
-    private static String[] getAllNames(ArrayList<? extends MinecraftJSONResource> resources){
+    private static String[] getAllNames(ArrayList<? extends MinecraftResource> resources){
         String[] result = new String[resources.size()];
         for(int i = 0; i <= result.length - 1; i++){
             result[i] = resources.get(i).getName();

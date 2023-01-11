@@ -20,5 +20,4 @@ public class ItemModelParents {
     public static final String FISHING_ROD = "item/fishing_rod";
     public static final String GENERATED_BUILTIN = "builtin/generated";
     public static final String AMETHYST_BUD = "item/amethyst_bud";
-
 }

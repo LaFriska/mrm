@@ -4,7 +4,7 @@ import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.annotations.BlockStateOnly;
 import com.friska.mrm.system.config.Config;
 import com.friska.mrm.system.exceptions.BlockStateTypeMismatchException;
-import com.friska.mrm.mcresources.MinecraftJSONResource;
+import com.friska.mrm.mcresources.MinecraftResource;
 import com.friska.mrm.mcresources.blockstates.properties.Case;
 import com.friska.mrm.mcresources.blockstates.properties.ModelPointer;
 import com.friska.mrm.mcresources.blockstates.properties.Variant;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExpectAccess
-public class BlockState extends MinecraftJSONResource {
+public class BlockState extends MinecraftResource {
 
     private final ArrayList<Variant> variants = new ArrayList<>();
 

@@ -1,7 +1,7 @@
 package com.friska.mrm.mcresources.models;
 
 import com.friska.mrm.system.config.Config;
-import com.friska.mrm.mcresources.MinecraftJSONResource;
+import com.friska.mrm.mcresources.MinecraftResource;
 import com.friska.mrm.system.util.KeyValue;
 import com.friska.mrm.system.serialiser.builder.JObject;
 import com.friska.mrm.system.serialiser.builder.JValue;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
-public abstract class Model<T extends Model<T>> extends MinecraftJSONResource {
+public abstract class Model<T extends Model<T>> extends MinecraftResource {
 
     protected String parent = null;
 
