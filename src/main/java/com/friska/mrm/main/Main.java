@@ -19,6 +19,7 @@ public class Main {
     public static void main(String... args) {
         Config.setDefaultNamespace("bourgeoismod");
         test();
+        test1();
 
     }
 
@@ -87,5 +88,9 @@ public class Main {
 
         managerLmao.build();
         manager.build();
+    }
+
+    public static void test1(){
+
     }
 }

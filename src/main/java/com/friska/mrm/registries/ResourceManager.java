@@ -20,7 +20,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class ResourceManager {
 
-    public static HashSet<String> NAMESPACE_POOL = new HashSet<>();
+    private static final HashSet<String> NAMESPACE_POOL = new HashSet<>();
 
     private final String namespace;
     public Registry<Recipe> regRecipe;

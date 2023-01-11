@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO JAVADOC REE
 @ExpectAccess
 public class BlockState extends MinecraftResource {
 
