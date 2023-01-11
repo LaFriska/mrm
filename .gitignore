@@ -1,2 +1,4 @@
 /src/main/resources
 /.idea/
+/src/main/java/com/friska/mrm/main/
+/.gradle/
