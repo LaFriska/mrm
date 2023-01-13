@@ -30,7 +30,7 @@ public abstract class CookingRecipe extends Recipe {
     }
 
     /**
-     * Should not be directly called from this class, only from child classes.
+     * Should not be directly called from this class, only from child classes. <b>Calling this method directly from resources is very risky and unsafe, please instantiate a ResourceManager object and register resource there.</b>
      **/
     @Override
     public void build(){

@@ -1,12 +1,15 @@
 package com.friska.mrm.mcresources.recipes;
 
+import com.friska.mrm.mcresources.Registrable;
+import com.friska.mrm.registries.Registry;
+import com.friska.mrm.registries.ResourceManager;
 import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.system.config.Config;
 import com.friska.mrm.system.exceptions.UnexpectedTagException;
 import com.friska.mrm.mcresources.MinecraftResource;
 
 
-public abstract class Recipe extends MinecraftResource {
+public abstract class Recipe extends MinecraftResource implements Registrable<Recipe> {
 
     protected String type;
     protected String result;
@@ -66,5 +69,10 @@ public abstract class Recipe extends MinecraftResource {
     public void build(){
         createBuilder();
         checkResultForTag(result);
+    }
+
+    @Override
+    public Registry<Recipe> getRegistry(ResourceManager resourceManager) {
+        return resourceManager.regRecipe;
     }
 }

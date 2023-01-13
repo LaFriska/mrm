@@ -1,5 +1,8 @@
 package com.friska.mrm.mcresources.blockstates;
 
+import com.friska.mrm.mcresources.Registrable;
+import com.friska.mrm.registries.Registry;
+import com.friska.mrm.registries.ResourceManager;
 import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.annotations.BlockStateOnly;
 import com.friska.mrm.system.config.Config;
@@ -18,7 +21,7 @@ import java.util.List;
 
 //TODO JAVADOC REE
 @ExpectAccess
-public class BlockState extends MinecraftResource {
+public class BlockState extends MinecraftResource implements Registrable<BlockState> {
 
     private final ArrayList<Variant> variants = new ArrayList<>();
 
@@ -134,7 +137,7 @@ public class BlockState extends MinecraftResource {
     /**
      * <b>Log Block States</b>
      * <p>
-     * This template creates the block states file for a log block, use this also for stripped logs, wood and stripped wood.
+     * This template creates the block states object for a log block, use this also for stripped logs, wood and stripped wood.
      * **/
     public BlockState log(String model, String modelHorizontal){
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
@@ -149,6 +152,11 @@ public class BlockState extends MinecraftResource {
 
     //Plank blocks
 
+    /**
+     * <b>Slab Block States</b>
+     * <p>
+     * This template creates the block states object for a slab block.
+     * **/
     public BlockState slab(String slabModel, String plankModel, String slabTopModel){
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
                 new Variant("type=bottom").addModelPointer(slabModel),
@@ -157,6 +165,11 @@ public class BlockState extends MinecraftResource {
         );
     }
 
+    /**
+     * <b>Button Block States</b>
+     * <p>
+     * This template creates the block states file for a button.
+     * **/
     public BlockState button(String buttonModel, String buttonModelPressed){
 
         final String t = "powered=true";
@@ -196,6 +209,11 @@ public class BlockState extends MinecraftResource {
         );
     }
 
+    /**
+     * <b>Door Block States</b>
+     * <p>
+     * This template creates the block states file for a door.
+     * **/
     public BlockState door(String botLeft, String botLeftOpen, String botRight, String botRightOpen, String topLeft, String topLeftOpen, String topRight, String topRightOpen){
 
         final String left = "hinge=left";
@@ -244,6 +262,11 @@ public class BlockState extends MinecraftResource {
 
     }
 
+    /**
+     * <b>Fence Block States</b>
+     * <p>
+     * This template creates the block states file for a fence.
+     * **/
     public BlockState fence(String fenceSide, String fencePost){
         return new BlockState(name, BlockStateType.MULTIPART).addCases(
                 new Case(new ModelPointer(fencePost)),
@@ -253,6 +276,12 @@ public class BlockState extends MinecraftResource {
                 new Case(new ModelPointer(fenceSide).uvlock(true).y(270)).addCondition("west", true)
         );
     }
+
+    /**
+     * <b>Pressure Plate Block States</b>
+     * <p>
+     * This template creates the block states file for a pressure plate.
+     * **/
     public BlockState pressurePlate(String pressurePlate, String pressurePlateDown){
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
                 new Variant("powered=false").addModelPointer(pressurePlate),
@@ -260,6 +289,11 @@ public class BlockState extends MinecraftResource {
         );
     }
 
+    /**
+     * <b>Fence Gate Block States</b>
+     * <p>
+     * This template creates the block states file for a fence gate.
+     * **/
     public BlockState fenceGate(String gate, String gateWall, String gateOpen, String gateWallOpen){
         final String iwt = "in_wall=true";
         final String iwf = "in_wall=false";
@@ -290,6 +324,11 @@ public class BlockState extends MinecraftResource {
 
     }
 
+    /**
+     * <b>Slab Block States</b>
+     * <p>
+     * This template creates the block states file for stairs.
+     * **/
     public BlockState stairs(String stairs, String inner, String outer){
 
 
@@ -351,6 +390,11 @@ public class BlockState extends MinecraftResource {
         );
     }
 
+    /**
+     * <b>Slab Block States</b>
+     * <p>
+     * This template creates the block states file for trapdoors.
+     * **/
     public BlockState trapdoor(String bottom, String top, String open){
 
         return new BlockState(name, BlockStateType.VARIANTS).addVariants(
@@ -393,7 +437,7 @@ public class BlockState extends MinecraftResource {
     }
 
     /**
-     * Builds the JSON file.
+     * Builds the JSON file. <b>Calling this method directly from resources is very risky and unsafe, please instantiate a ResourceManager object and register resource there.</b>
      * **/
     @Override
     public void build() {
@@ -413,5 +457,10 @@ public class BlockState extends MinecraftResource {
 
     private void buildMultipart(){
         getBuilder().nest(new JArray("multipart").setArray(this.cases));
+    }
+
+    @Override
+    public Registry<BlockState> getRegistry(ResourceManager resourceManager) {
+        return resourceManager.regBlockState;
     }
 }

@@ -1,5 +1,8 @@
 package com.friska.mrm.mcresources.models;
 
+import com.friska.mrm.mcresources.Registrable;
+import com.friska.mrm.registries.Registry;
+import com.friska.mrm.registries.ResourceManager;
 import com.friska.mrm.system.config.Config;
 import com.friska.mrm.mcresources.MinecraftResource;
 import com.friska.mrm.system.util.KeyValue;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
-public abstract class Model<T extends Model<T>> extends MinecraftResource {
+public abstract class Model<T extends Model<T>> extends MinecraftResource implements Registrable<Model<?>> {
 
     protected String parent = null;
 
@@ -87,7 +90,7 @@ public abstract class Model<T extends Model<T>> extends MinecraftResource {
         return (T) this;
     }
 
-    /**Builds the JSON file.**/
+    /**Builds the JSON file. <b>Calling this method directly from resources is very risky and unsafe, please instantiate a ResourceManager object and register resource there.</b>**/
     @Override
     public void build(){
         createBuilder();
@@ -99,5 +102,10 @@ public abstract class Model<T extends Model<T>> extends MinecraftResource {
         }
         if(renderType != null) getBuilder().nest(new JValue<>("render_type", renderType));
         getBuilder().build();
+    }
+
+    @Override
+    public Registry<Model<?>> getRegistry(ResourceManager resourceManager) {
+        return resourceManager.regModel;
     }
 }

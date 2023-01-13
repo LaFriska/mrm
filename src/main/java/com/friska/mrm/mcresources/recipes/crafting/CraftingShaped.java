@@ -70,7 +70,7 @@ public class CraftingShaped extends Crafting<CraftingShaped> {
     }
 
     /**
-     * Builds the JSON file.
+     * Builds the JSON file. <b>Calling this method directly from resources is very risky and unsafe, please instantiate a ResourceManager object and register resource there.</b>
      * **/
     @Override
     public void build(){

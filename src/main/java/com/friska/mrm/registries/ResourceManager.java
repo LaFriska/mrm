@@ -1,6 +1,8 @@
 package com.friska.mrm.registries;
 
+import com.friska.mrm.mcresources.Registrable;
 import com.friska.mrm.mcresources.blockstates.BlockState;
+import com.friska.mrm.mcresources.tags.Tag;
 import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.mcresources.MinecraftResource;
@@ -23,16 +25,22 @@ public class ResourceManager {
     private static final HashSet<String> NAMESPACE_POOL = new HashSet<>();
 
     private final String namespace;
-    public Registry<Recipe> regRecipe;
-    public Registry<Model<?>> regModel;
-    public Registry<Lang> regLang;
 
-    public Registry<BlockState> regBlockState;
+    public final Registry<Recipe> regRecipe;
+    public final Registry<Model<?>> regModel;
+    public final Registry<Lang> regLang;
+    public final Registry<BlockState> regBlockState;
+    public final Registry<Tag> regTag;
 
     public ResourceManager(){
         this(null);
     }
 
+    /**
+     * Instantiate a Resource Manager object, and call the register methods in order to safely build resources. <b>Calling the .build() method directly from resources is very risky and unsafe.</b>
+     *
+     * @param namespace The namespace of the resource, i.e. the folder nested inside either assets or data in the resource root directory.
+     * **/
     public ResourceManager(@Nullable /*If null, should be defaulted to default namespace in Config*/ String namespace){
         this.namespace = namespace == null ? Config.getDefaultNamespace() : namespace;
 
@@ -43,6 +51,7 @@ public class ResourceManager {
         regModel = new Registry<>(namespace);
         regLang = new Registry<>(namespace);
         regBlockState = new Registry<>(namespace);
+        regTag = new Registry<>(namespace);
     }
 
     /**
@@ -50,18 +59,8 @@ public class ResourceManager {
      * @param resource The resource you wish to register (e.g. SmeltingRecipe object).
      * **/
     @NeedsRevision("Generics bullshit")
-    public <T extends MinecraftResource> ResourceManager register(@Nonnull T resource){
-
-        if(resource instanceof Lang){
-            regLang.register((Lang) resource);
-        } else if (resource instanceof Recipe){
-            regRecipe.register((Recipe) resource);
-        } else if (resource instanceof Model<?>){
-            regModel.register((BlockModel) resource);
-        } else if (resource instanceof BlockState){
-            regBlockState.register((BlockState) resource);
-        }
-
+    public <T extends MinecraftResource & Registrable<?>> ResourceManager register(@Nonnull T resource) {
+        resource.getRegistry(this).register(resource);
         return this;
     }
 
@@ -70,7 +69,7 @@ public class ResourceManager {
      * @param resources The resources you wish to register (e.g. SmeltingRecipe objects, or Lang objects). Separate them via commas.
      * **/
     @SafeVarargs
-    public final <T extends MinecraftResource> ResourceManager register(@Nonnull T... resources){
+    public final <T extends MinecraftResource & Registrable<?>> ResourceManager register(@Nonnull T... resources){
         List.of(resources).forEach(this::register);
         return this;
     }
@@ -84,6 +83,7 @@ public class ResourceManager {
         regRecipe.build();
         regModel.build();
         regBlockState.build();
+        regTag.build();
         //System.out.println("-------------------------Minecraft Resource Manager-------------------------------");
         return this;
     }

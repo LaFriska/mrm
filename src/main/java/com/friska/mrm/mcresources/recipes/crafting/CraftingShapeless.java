@@ -45,7 +45,7 @@ public class CraftingShapeless extends Crafting<CraftingShapeless>{
     }
 
     /**
-     * Builds the JSON recipe.
+     * Builds the JSON recipe. <b>Calling this method directly from resources is very risky and unsafe, please instantiate a ResourceManager object and register resource there.</b>
      * **/
     @Override
     public void build() {

@@ -1,5 +1,9 @@
 package com.friska.mrm.mcresources.lang;
 
+import com.friska.mrm.mcresources.Combinable;
+import com.friska.mrm.mcresources.Registrable;
+import com.friska.mrm.registries.Registry;
+import com.friska.mrm.registries.ResourceManager;
 import com.friska.mrm.system.annotations.ExpectAccess;
 import com.friska.mrm.system.annotations.NeedsRevision;
 import com.friska.mrm.system.config.Config;
@@ -19,7 +23,7 @@ import java.util.List;
         "-Colors" +
         "-Translation record override.")
 @ExpectAccess
-public class Lang extends MinecraftResource {
+public class Lang extends MinecraftResource implements Combinable<Lang>, Registrable<Lang> {
     private final String languageCode;
 
 
@@ -140,7 +144,7 @@ public class Lang extends MinecraftResource {
     @SafeVarargs
     public final Lang addMiscs(KeyValue<String>... translations){misc.addAll(List.of(translations));return this;}
 
-    /**Builds the language JSON file.**/
+    /**Builds the language JSON file. <b>Calling this method directly from resources is very risky and unsafe, please instantiate a ResourceManager object and register resource there.</b> **/
     @Override
     public void build() {
         createBuilder();
@@ -173,5 +177,20 @@ public class Lang extends MinecraftResource {
     /**Gets the language code.**/
     public String getLanguageCode() {
         return languageCode;
+    }
+
+    @Override
+    public Lang combine(Lang object) {
+        if(this == object) return this;
+        ArrayList<ArrayList<KeyValue<String>>> all = this.all();
+        ArrayList<ArrayList<KeyValue<String>>> needle = object.all();
+        for(int i = 0; i <= all.size() - 1; i++){
+            all.get(i).addAll(needle.get(i));
+        }
+        return this;
+    }
+    @Override
+    public Registry<Lang> getRegistry(ResourceManager resourceManager) {
+        return resourceManager.regLang;
     }
 }

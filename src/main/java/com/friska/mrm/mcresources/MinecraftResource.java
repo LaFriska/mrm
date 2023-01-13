@@ -1,5 +1,6 @@
 package com.friska.mrm.mcresources;
 
+import com.friska.mrm.registries.Registry;
 import com.friska.mrm.system.exceptions.ResourcePathException;
 import com.friska.mrm.system.serialiser.builder.JBuilder;
 import com.friska.mrm.system.config.Config;
@@ -8,7 +9,6 @@ import com.friska.mrm.system.util.ResourcePath;
 import javax.annotation.Nonnull;
 
 public abstract class MinecraftResource {
-
 
     protected JBuilder builder;
     protected ResourcePath path;
@@ -23,6 +23,7 @@ public abstract class MinecraftResource {
         /*if(!Config.isDefaultNamespaceDefined()){
             throw new ResourcePathException("The Mod ID is null, define by calling Config.setModID().");
         }*/
+
     }
 
     public MinecraftResource(@Nonnull String resourceType, @Nonnull ResourcePath path, @Nonnull String name){
